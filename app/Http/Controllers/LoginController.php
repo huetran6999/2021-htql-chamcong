@@ -15,7 +15,7 @@ class LoginController extends Controller
         $username=$request->username;
         $password=$request->password;
         if(Auth::attempt(['tk_tendangnhap' => $username, 'password' => $password])){
-            return view('home');
+            return view('home'); //thành công
         }
         else {
             return redirect('login')->with('thongbao', 'Tài khoản hoặc mật khẩu không chính xác.');
