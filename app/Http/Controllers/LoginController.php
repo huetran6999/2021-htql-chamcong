@@ -12,10 +12,13 @@ class LoginController extends Controller
         return view('welcome');
     }
     public function PostLogin(LoginRequest $request){
-
-
-        if(Auth::attemp(['tk_tendangnhap'=>$username, 'tk_matkhau'=>$password])){
-            echo 'ok';
+        $username=$request->username;
+        $password=$request->password;
+        if(Auth::attempt(['tk_tendangnhap' => $username, 'password' => $password])){
+            return view('home');
+        }
+        else {
+            return redirect('login')->with('thongbao', 'Tài khoản hoặc mật khẩu không chính xác.');
         }
     }
 }

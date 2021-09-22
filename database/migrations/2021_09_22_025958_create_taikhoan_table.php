@@ -14,12 +14,13 @@ class CreateTaikhoanTable extends Migration
     public function up()
     {
         Schema::create('taikhoan', function (Blueprint $table) {
-            $table->increments('tk_id');
+            $table->increments('id');
             $table->string('tk_tendangnhap',15);
-            $table->string('tk_matkhau',8);
-            $table->foreign('tk_id')->references('nv_id')->on('nhanvien');
+            $table->string('tk_matkhau',6);
             $table->timestamps();
         });
+
+
     }
 
     /**

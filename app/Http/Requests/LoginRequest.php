@@ -25,7 +25,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'username'=>'required|min:5',
-            'password'=>'required|min:8'
+            'password'=>'required|min:6'
         ];
     }
     public function messages()
@@ -34,7 +34,7 @@ class LoginRequest extends FormRequest
             'username.required'=>'Vui lòng nhập tên người dùng.',
             'username.min'=>'Tên người dùng phải chứa trên 5 ký tự.',
             'password.required'=>'Vui lòng nhập mật khẩu.',
-            'password.min'=>'Mật khẩu phải chứa trên 8 ký tự.'
+            'password.min'=>'Mật khẩu phải chứa trên 6 ký tự.'
         ];
     }
 }

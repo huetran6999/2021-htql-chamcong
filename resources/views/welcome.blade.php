@@ -32,14 +32,14 @@
     <div class="limiter">
         <div class="container-login100" style="background-image: url('assets/images/bg-01.jpg')";>
             <div class="wrap-login100 p-l-110 p-r-110 p-t-30 p-b-33">
-                {{-- @if (count($errors)>0)           
+                @if (session('thongbao'))           
 
-                    @foreach ($errors->all() as $error)
+                   
                         <div class="alert alert-danger" role="alert">
-                            <strong>{{$error}}</strong>
+                            <strong>{{session('thongbao')}}</strong>
                         </div>
-                    @endforeach
-                @endif --}}
+                    
+                @endif
                 <form class="login100-form validate-form flex-sb flex-w" method="post">
                     @csrf
                     <span class="login100-form-title p-b-53">

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route:get('converse','');
+// Route::prefix('model')->group(function () {
+//     Route::get('insert', function () {
+//         $user=new App\Models\taikhoan;
+//         $user->tk_tendangnhap='quanghung';
+//         $user->tk_matkhau='12345678';
+//         $user->save();
+//     });
+// });
+
+Route::get('remane-collunm-table', function () {
+    Schema::table('taikhoan', function($table){
+        $table->renameColumn('tk_matkhau', 'password');
+    });
+});
+
+Route::get('converse', function () {
+    $taikhoan = App\Models\taikhoan::all();
+    foreach($taikhoan as $tk){
+        $a=App\Models\taikhoan::find($tk->id);
+        $a->password=bcrypt('123456');
+        $a->save();
+    }
+});
 Route::get('/login', 'App\Http\Controllers\LoginController@GetLogin');
 Route::post('/login', 'App\Http\Controllers\LoginController@PostLogin');
