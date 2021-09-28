@@ -22,6 +22,7 @@
                 <td>
                     <a href="/update-account/{{ $user->id }}">Update</a> <br> 
                     <a href="/delete-account/{{ $user->id }}">Delete</a>
+                    
                 <td>
             </tr>
         @endforeach
