@@ -14,7 +14,7 @@ class LoginController extends Controller
     public function PostLogin(LoginRequest $request){
         $username=$request->username;
         $password=$request->password;
-        if(Auth::attempt(['tk_tendangnhap' => $username, 'password' => $password])){
+        if(Auth::attempt(['username' => $username, 'password' => $password])){
             return view('home'); //thành công
         }
         else {

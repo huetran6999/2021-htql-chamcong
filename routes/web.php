@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Schema;
 
 Route::get('remane-collunm-table', function () {
     Schema::table('taikhoan', function($table){
-        $table->renameColumn('tk_matkhau', 'password');
+        $table->renameColumn('tk_tendangnhap', 'username');
     });
 });
 
@@ -39,3 +39,13 @@ Route::get('converse', function () {
 });
 Route::get('/login', 'App\Http\Controllers\LoginController@GetLogin');
 Route::post('/login', 'App\Http\Controllers\LoginController@PostLogin');
+
+Route::get('/create-account', [App\Http\Controllers\UserController::class, 'Create']);
+Route::post('/create-account', [App\Http\Controllers\UserController::class, 'Store']);
+
+Route::get('/update-account/{id}', [App\Http\Controllers\UserController::class, 'Edit']);
+Route::post('/update-account/{id}', [App\Http\Controllers\UserController::class, 'Update']);
+
+Route::get('/delete-account/{id}', [App\Http\Controllers\UserController::class, 'Delete']);
+
+Route::get('/index', [App\Http\Controllers\UserController::class, 'Index']);
