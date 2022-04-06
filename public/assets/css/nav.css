@@ -1,0 +1,48 @@
+.navbar-dark .nav-item .nav-link {
+    color: #fff;
+}
+
+.navbar-dark .nav-item .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 0.25rem;
+    color: #fff;
+}
+
+.fa-li {
+    position: relative;
+    left: 0;
+}
+
+.active {
+    background-color: #454545;
+    border-radius: 5%;
+}
+
+.navbar-brand {
+    font-family: Palatino Linotype;
+    font-size: 150%;
+}
+
+body {
+    position: relative;
+    padding-top: 56px;
+}
+
+#align-form {
+    float: left;
+    width: 15%;
+    overflow-y: scroll;
+}
+
+#align-table {
+    float: right;
+    width: 85%;
+    overflow-x: scroll;
+}
+
+.card-img-top {
+    width: 100px;
+    height: 100px;
+    border-radius: 0%;
+}

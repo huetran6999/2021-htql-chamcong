@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    protected $table='taikhoan';
+    protected $table='user';
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -19,10 +19,24 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        // 'name',
-        // 'email',
-        // 'password',
         'id',
+        'u_name',
+        'u_gender',
+        'u_dob',
+        'u_pob',
+        'u_IDcode',
+        'u_IDcodedate',
+        'u_IDcodeplace',
+        'u_household',
+        'u_address',
+        'u_phone',
+        'u_email',
+        'u_nationality',
+        'u_ethnic',
+        'u_religion',
+        'u_checkindate',
+        'u_status',
+        'u_avatar',
         'username',
         'password',
     ];
@@ -43,6 +57,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        // 'email_verified_at' => 'datetime',
     ];
 }
