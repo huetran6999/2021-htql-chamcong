@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TimeKeepingController;
+use App\Http\Controllers\SalaryReportController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\UserController;
@@ -95,6 +97,8 @@ Route::get('department-management', function(){
 })->name('department');
 
 
-
+Route::get('/time-keeping', [TimeKeepingController::class, 'index'])->name('timeKeeping.index');
+Route::post('/time-keeping/import', [TimeKeepingController::class, 'import'])->name('timeKeeping.import');
+Route::get('/salary-report', [SalaryReportController::class, 'index'])->name('salaryReport.index');
 
 //Route::resource('/user', App\Http\Controllers\UserController::class);

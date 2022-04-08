@@ -57,8 +57,8 @@
           Báo cáo
           </a>
           <div class="dropdown-menu">
-             <a class="dropdown-item" href="#">Báo cáo lương</a>
-             <a class="dropdown-item" href="#">Báo cáo chấm công</a>
+             <a class="dropdown-item" href="{{ route('salaryReport.index') }}">Báo cáo lương</a>
+             <a class="dropdown-item" href="{{ route('timeKeeping.index') }}">Báo cáo chấm công</a>
           </div>
        </li>
       </ul>
