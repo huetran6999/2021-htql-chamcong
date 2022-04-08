@@ -68,7 +68,7 @@ Route::get('employee-management', [App\Http\Controllers\UserController::class, '
 // Route::get('/index', [App\Http\Controllers\UserController::class, 'Index']);
 route::middleware('auth')->group(function(){
     Route::get('index-home', function () {
-        return view('layout.index');
+        return view('show');
     })->name('index');
     
     //tạo đường dẫn đến trang quản lý nhân viên

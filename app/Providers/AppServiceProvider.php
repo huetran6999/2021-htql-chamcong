@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Department;
+use App\Models\Enterprise;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $enterprises = Enterprise::all();
+        View::share('enterprises', $enterprises);
+
+        $deps = Department::all();
+        View::share('deps', $deps);
     }
 }

@@ -16,6 +16,7 @@ class EnterpriseController extends Controller
 
         // trả về view hiển thị danh sách tài khoản
         return view('ent_manage.enterprise', compact([ 'enterprises']));
+       
     }
 
     // $x = Enterprise::find(1) -> department->toArray();
