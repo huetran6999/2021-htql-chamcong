@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2022 at 08:33 AM
+-- Generation Time: Apr 08, 2022 at 10:02 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -306,6 +306,8 @@ CREATE TABLE `time_keeping` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `u_id` int(11) NOT NULL,
   `total` int(11) NOT NULL,
+  `month` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -314,14 +316,21 @@ CREATE TABLE `time_keeping` (
 -- Dumping data for table `time_keeping`
 --
 
-INSERT INTO `time_keeping` (`id`, `u_id`, `total`, `created_at`, `updated_at`) VALUES
-(102, 1, 26, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
-(103, 2, 26, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
-(104, 3, 25, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
-(105, 4, 23, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
-(106, 5, 26, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
-(107, 6, 26, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
-(108, 7, 26, '2022-03-07 02:14:02', '2022-03-07 02:14:02');
+INSERT INTO `time_keeping` (`id`, `u_id`, `total`, `month`, `year`, `created_at`, `updated_at`) VALUES
+(102, 1, 26, 2, 2022, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
+(103, 2, 26, 2, 2022, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
+(104, 3, 25, 2, 2022, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
+(105, 4, 23, 2, 2022, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
+(106, 5, 26, 2, 2021, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
+(107, 6, 26, 2, 2022, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
+(108, 7, 26, 2, 2022, '2022-03-07 02:14:02', '2022-03-07 02:14:02'),
+(158, 1, 26, 4, 2022, '2022-04-08 00:41:42', '2022-04-08 00:41:42'),
+(159, 2, 26, 4, 2022, '2022-04-08 00:41:42', '2022-04-08 00:41:42'),
+(160, 3, 25, 4, 2022, '2022-04-08 00:41:42', '2022-04-08 00:41:42'),
+(161, 4, 23, 4, 2022, '2022-04-08 00:41:42', '2022-04-08 00:41:42'),
+(162, 5, 26, 4, 2022, '2022-04-08 00:41:42', '2022-04-08 00:41:42'),
+(163, 6, 26, 4, 2022, '2022-04-08 00:41:42', '2022-04-08 00:41:42'),
+(164, 7, 26, 4, 2022, '2022-04-08 00:41:42', '2022-04-08 00:41:42');
 
 -- --------------------------------------------------------
 
@@ -605,7 +614,7 @@ ALTER TABLE `technique`
 -- AUTO_INCREMENT for table `time_keeping`
 --
 ALTER TABLE `time_keeping`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT for table `user`
