@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\DepController;
 use App\Http\Controllers\TimeKeepingController;
 use App\Http\Controllers\SalaryReportController;
+use App\Http\Controllers\EnterpriseController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\UserController;
@@ -42,7 +44,7 @@ use App\Http\Controllers\UserController;
 
 
 //tạo đường dẫn đến trang quản lý nhóm/tổ
-Route::get('group-management', function(){
+Route::get('group-management', function () {
     return view('pages.group');
 })->name('group');
 
@@ -68,33 +70,27 @@ Route::get('employee-management', [App\Http\Controllers\UserController::class, '
 //Thêm, Sửa, Xoá nhân viên
 
 // Route::get('/index', [App\Http\Controllers\UserController::class, 'Index']);
-route::middleware('auth')->group(function(){
+route::middleware('auth')->group(function () {
     Route::get('index-home', function () {
         return view('layout.index');
     })->name('index');
-    
+
     //tạo đường dẫn đến trang quản lý nhân viên
-    Route::get('/create-account', [App\Http\Controllers\UserController::class, 'Create'])->name('Emp_Create');
-    Route::post('/create-account', [App\Http\Controllers\UserController::class, 'Store'])->name('Emp_Store');
-    Route::get('/update-employee/{id}', [App\Http\Controllers\UserController::class, 'Emp_Edit'])->name('Emp_Edit');
-    Route::post('/update-employee/{id}', [App\Http\Controllers\UserController::class, 'Emp_Update'])->name('Emp_Update');
-    Route::get('/delete-account/{id}', [App\Http\Controllers\UserController::class, 'Emp_Delete'])->name('Emp_Delete');
+    Route::get('/create-account', [UserController::class, 'Create'])->name('Emp_Create');
+    Route::post('/create-account', [UserController::class, 'Store'])->name('Emp_Store');
+    Route::get('/update-employee/{id}', [UserController::class, 'Emp_Edit'])->name('Emp_Edit');
+    Route::post('/update-employee/{id}', [UserController::class, 'Emp_Update'])->name('Emp_Update');
+    Route::get('/delete-account/{id}', [UserController::class, 'Emp_Delete'])->name('Emp_Delete');
 });
 
 //tạo đường dẫn đến trang quản lý tài khoản
 
-//Quản lý đơn vị
-Route::get('enterprise-show', function(){
-    return view('ent_manage.enterprise');
-});
-
-Route::get('/enterprise-management',[App\Http\Controllers\EnterpriseController::class, 'ShowEnterprise'])->name('enterprise');
+// Quản lý Đơn vị
+Route::resource('enterprise', EnterpriseController::class);
 
 
 //Quản lý phòng ban
-Route::get('department-management', function(){
-    return view('dep_manage.department');
-})->name('department');
+Route::resource('department', DepController::class);
 
 
 Route::get('/time-keeping', [TimeKeepingController::class, 'index'])->name('timeKeeping.index');

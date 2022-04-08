@@ -41,10 +41,10 @@
           <a  href="{{route('employee')}}" class="nav-link {{ (\Request::route()->getName() == 'employee') ? 'active' : '' }}">Nhân viên</a>
         </li>
         <li class="nav-item">
-          <a href="{{route('enterprise')}}" class="nav-link {{ (\Request::route()->getName() == 'enterprise') ? 'active' : '' }}">Đơn vị</a>
+          <a href="{{route('enterprise.index')}}" class="nav-link {{ (\Request::route()->getName() == 'enterprise.index') ? 'active' : '' }}">Đơn vị</a>
         </li>
         <li class="nav-item">
-          <a href="{{route('department')}}" class="nav-link {{ (\Request::route()->getName() == 'department') ? 'active' : '' }}">Phòng ban</a>
+          <a href="{{route('department.index')}}" class="nav-link {{ (\Request::route()->getName() == 'department.index') ? 'active' : '' }}">Phòng ban</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Recently Added</a>

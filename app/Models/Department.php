@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
-    protected $table='department';
-    protected $primaryKey = 'id';
-    protected $guarded = [];
+    
+    public $timestamps = false;
+    protected $table = 'department';
     protected $fillable = [
-        'id',
         'd_name',
-        'd_phone'
+        'd_phone',
+        'e_id',
     ];
-    public function enterprise(){
-        return $this->belongsTo('App\Models\Enterprise');
+    public function enterprise()
+    {
+        return $this->belongsTo(Enterprise::class, 'e_id', 'id');
     }
 }
