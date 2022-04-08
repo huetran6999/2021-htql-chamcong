@@ -12,7 +12,7 @@
                         <label>Name</label>
                         <select class="form-control" name="e_id">
                             @foreach ($enterprises as $ent)
-                            <option value="{{$ent->id}}" >{{ $ent->e_name }}</option>
+                            <option value="{{$ent->id}}" {{ $department->e_id == $ent->id ? 'selected' : '' }}> {{ $ent->e_name }}</option>
                             @endforeach
                         </select>
                         <span class="text-danger">@error('e_id'){{$message}}@enderror</span>
@@ -21,8 +21,8 @@
                 <div class="form-group">
                     <div class="controls">
                         <label>Name</label>
-                        <input type="text" class="form-control" placeholder="Name" name="d_name" value="{{ $department->e_name }}">
-                        <span class="text-danger">@error('e_name'){{$message}}@enderror</span>
+                        <input type="text" class="form-control" placeholder="Name" name="d_name" value="{{ $department->d_name }}">
+                        <span class="text-danger">@error('d_name'){{$message}}@enderror</span>
                     </div>
                 </div>
                 <div class="form-group">

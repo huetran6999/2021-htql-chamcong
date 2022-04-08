@@ -44,7 +44,7 @@ class DepController extends Controller
         $enterprises = Enterprise::select('id', 'e_name')->get();
         $department = Department::find($id);
 
-        return view('ent_manage.edit', compact('department', 'enterprises'));
+        return view('dep_manage.edit', compact('department', 'enterprises'));
     }
 
     public function update(DepartmentRequest $request)
