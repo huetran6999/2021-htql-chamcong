@@ -97,9 +97,10 @@
     </div>
     <div class="col-md-12">
       <label for="u_status" class="form-label">Trạng thái</label>
-      <select id="u_status" class="form-select">
-        <option selected>Choose...</option>
-        <option>...</option>
+      <select name="u_status" class="form-select" id="myStatusSelected">
+        <option selected disabled>Chọn...</option>
+        <option value="0">Hoạt động</option>
+        <option value="1">Ngưng hoạt động</option>
       </select>
     </div>
     <div class="col-md-12">

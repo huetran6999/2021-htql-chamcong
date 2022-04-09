@@ -64,22 +64,12 @@
         <table class="table table-bordered">
             <thead class="table-primary">
               <tr>
-                <th>ID</th>
+                <th>STT</th>
+                <th width="8%">Avatar</th>
                 <th>Họ và tên</th>
-                <th>Giới tính</th>
-                <th>Số CCCD</th>
-                <th>Ngày sinh</th>
-                <th>Nơi sinh</th>
-                <th>Hộ khẩu thường trú</th>
-                <th>Địa chỉ</th>
+                <th>Chức vụ</th>
+                <th>Phòng ban</th>
                 <th>Số điện thoại</th>
-                <th>Email</th>
-                <th>Quốc tịch</th>
-                <th>Dân tộc</th>
-                <th>Tôn giáo</th>
-                <th>Ngày bắt đầu làm việc</th>
-                <th>Ảnh đại diện</th>
-                <th>Tên đăng nhập</th>
                 <th>Trạng thái</th>
                 <th>Hành động</th>
               </tr>
@@ -89,34 +79,24 @@
               @foreach ($users as $user )  
                   <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->u_name }}</td>
-                    <td>
-                      @if ($user->u_gender==0)
-                        Nam                      
-                      @else 
-                        Nữ    
-                      @endif
-                    </td>
-                    <td>{{ $user->u_IDcode }}</td>
-                    <td>{{ $user->u_dob }}</td>
-                    <td>{{ $user->u_pob }}</td>
-                    <td>{{ $user->u_household }}</td>
-                    <td>{{ $user->u_address }}</td>
-                    <td>{{ $user->u_phone }}</td>
-                    <td>{{ $user->u_email }}</td>
-                    <td>{{ $user->u_nationality }}</td>
-                    <td>{{ $user->u_ethnic }}</td>
-                    <td>{{ $user->u_religion }}</td>
-                    <td>{{ $user->u_checkindate }}</td>
                     <td>
                       @if ($user->u_avatar != '')                        
                         <img src="/uploads/{{$user->u_avatar}}" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60"/>
                       @else
                         <img src="/uploads/account-icon.png" alt="{{$user->u_name}}" class="card-img-top"  style="cursor: zoom-in;" width="60"/>
                       @endif
-                      </td>
-                    <td>{{ $user->username }}</td>
-                    <td>{{ $user->u_status }}</td>
+                    </td>
+                    <td>{{ $user->u_name }}</td>
+                    <td>{{$user->position->p_name}}</td>
+                    <td>{{$user->department->d_name}}</td>
+                    <td>{{ $user->u_phone }}</td>
+                    <td>
+                      @if ($user->u_status==0)
+                        Hoạt động                     
+                      @else 
+                        Ngưng hoạt động    
+                      @endif
+                    </td>
                     <td>
                       <div>
                         <a href="{{ route('Emp_Edit',$user->id) }}" class="btn btn-primary btn-sm">Sửa</a>

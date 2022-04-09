@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Salary::class, 's_id', 'id');
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class,'d_id', 'id');
+    }
 }
