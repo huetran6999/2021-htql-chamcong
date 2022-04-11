@@ -41,13 +41,13 @@
           <a  href="{{route('employee')}}" class="nav-link {{ (\Request::route()->getName() == 'employee') ? 'active' : '' }}">Nhân viên</a>
         </li>
         <li class="nav-item">
+          <a href="{{route('show_role')}}" class="nav-link {{ (\Request::route()->getName() == 'show_role') ? 'active' : '' }}">Phân quyền</a>
+        </li>
+        <li class="nav-item">
           <a href="{{route('enterprise.index')}}" class="nav-link {{ (\Request::route()->getName() == 'enterprise.index') ? 'active' : '' }}">Đơn vị</a>
         </li>
         <li class="nav-item">
           <a href="{{route('department.index')}}" class="nav-link {{ (\Request::route()->getName() == 'department.index') ? 'active' : '' }}">Phòng ban</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Recently Added</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">My List</a>

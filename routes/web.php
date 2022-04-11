@@ -7,6 +7,7 @@ use App\Http\Controllers\EnterpriseController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\UserController;
+use App\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,3 +102,9 @@ Route::get('/salary-report', [SalaryReportController::class, 'index'])->name('sa
 //Tìm kiếm nhân viên
 Route::get('employee/{$id}',[UserController::class, 'showById'])->name('show_Id');
 Route::get('search/name', [UserController::class, 'searchByName'])->name('search_name');
+
+//Phân quyền user
+Route::get('employee-roles', [UserController::class, 'ShowUserRole'])->name('show_role');
+Route::post('assign-role', [UserController::class, 'AssignRole'])->name('assign_role');
+
+Route::get('fake-user',[UserController::class, 'fakeUser']);

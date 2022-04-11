@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 // use App\Http\Requests\LoginRequest;
+
+use App\Models\Role;
 use App\Models\taikhoan;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -22,6 +24,34 @@ class UserController extends Controller
         // trả về view hiển thị danh sách tài khoản
         return view('emp_manage.employee', compact('users'));
     }
+
+    public function fakeUser(){
+        User::factory()->count(10)->create();
+    }
+
+    public function ShowUserrole(){
+        $user = User::with('role')->orderBy('id')->paginate(5);
+        return view('emp_manage.role_assign', compact('user'));
+    }
+
+    public function AssignRole(Request $request){{
+        $user = User::where('username',$request->username)->first();
+        $user->role()->detach();
+        if($request->manager_role){
+            $user->role()->attach(Role::where('r_name', 'manager')->first());
+        }
+        if($request->userleader_role){
+            $user->role()->attach(Role::where('r_name', 'userleader')->first());
+        }
+        if($request->salaryleader_role){
+            $user->role()->attach(Role::where('r_name', 'salaryleader')->first());
+        }
+        if($request->employee_role){
+            $user->role()->attach(Role::where('r_name', 'employee')->first());
+        }
+        return redirect()->back()->with('message', 'Cấp quyền thành công!');
+    }}
+
 
     public function searchByName(Request $request)
     {

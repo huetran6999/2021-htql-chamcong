@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Role;
+use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -20,28 +22,42 @@ class UserFactory extends Factory
      *
      * @return array
      */
+
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            't_id' => '1',
+            'p_id' => '6',
+            'f_id' => '3',
+            'l_id' => '3',
+            'd_id' => '4',
+            's_id' => '5',
+            'u_name' => $this->faker->name(),
+            'u_gender'=>$this->faker->randomElement([0,1]),
+            // 'u_IDcode'=>$this->faker->random_int($min=1000000000, $max=2000000000),
+            'u_IDcodedate'=> $this->faker->date($format = 'Y_m_d', $max = 'now', $min='2015-01-01'),
+            'u_IDcodeplace'=>$this->faker->city(),
+            'u_dob'=>$this->faker->date($format = 'Y_m_d', $max = '2000-12-31', $min='1975-01-01'),
+            'u_pob'=>$this->faker->city(),
+            'u_household'=>$this->faker->address(),
+            'u_address'=>$this->faker->address(),
+            'u_phone' => $this->faker->phoneNumber(),
+            'u_email' => $this->faker->unique()->safeEmail(),
+            'u_nationality'=> $this->faker->country(),
+            'u_checkindate'=>$this->faker->date($format = 'Y_m_d', $max = 'now', $min='2000-01-01'),
+            'u_status'=>$this->faker->randomElement([0,1]),
+            'username' => $this->faker->unique()->userName(),
+            'password' => bcrypt('123456'),
+            
         ];
+ 
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
+    public function subscribed() {
+        return $this
+            ->afterCreating(function(User $user){
+                $role = Role::where('r_name','employee')->get();
+                $user->role()->sync($role->pluck('id')->toArray());
+            });
     }
 }
