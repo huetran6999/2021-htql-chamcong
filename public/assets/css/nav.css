@@ -29,18 +29,6 @@ body {
     padding-top: 56px;
 }
 
-#align-form {
-    float: left;
-    width: 15%;
-    overflow-y: scroll;
-}
-
-#align-table {
-    float: right;
-    width: 85%;
-    overflow-x: scroll;
-}
-
 .card-img-top {
     width: 75px;
     height: 75px;

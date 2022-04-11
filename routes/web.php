@@ -98,3 +98,6 @@ Route::post('/time-keeping/import', [TimeKeepingController::class, 'import'])->n
 Route::get('/salary-report', [SalaryReportController::class, 'index'])->name('salaryReport.index');
 
 //Route::resource('/user', App\Http\Controllers\UserController::class);
+//Tìm kiếm nhân viên
+Route::get('employee/{$id}',[UserController::class, 'showById'])->name('show_Id');
+Route::get('search/name', [UserController::class, 'searchByName'])->name('search_name');

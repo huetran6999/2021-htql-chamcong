@@ -15,10 +15,19 @@ class UserController extends Controller
     public function ShowUser(){
         // lấy ra toàn bộ user
         $users = User::all();
+        $users=User::paginate(5);
+
         //dd($users);
 
         // trả về view hiển thị danh sách tài khoản
         return view('emp_manage.employee', compact('users'));
+    }
+
+    public function searchByName(Request $request)
+    {
+        $users = User::where('u_name', 'like', '%' . $request->value . '%')->get();
+
+        return response()->json($users); 
     }
     // public function index()
     // {
@@ -179,14 +188,6 @@ class UserController extends Controller
 
     }
 
-    public function ShowAcc(){
-        // lấy ra toàn bộ user
-        $users = User::all();
-        //dd($users);
-
-        // trả về view hiển thị danh sách tài khoản
-        return view('pages.account', compact('users'));
-    }
 
 
 
