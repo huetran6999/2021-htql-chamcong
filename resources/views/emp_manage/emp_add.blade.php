@@ -1,7 +1,7 @@
 @extends('layout.index')
 @section('content')
 <div class="container">
-  <h4 class="border-start border-danger" style="text-align:center;background: #ebf5fb;">Thêm nhân viên</h4>
+  <h4 class="border-start border-danger" style="text-align:center;background: #ebf5fb; padding-top: 28px">Thêm nhân viên</h4>
   <form class="row g-3" style="border-radius: 25px" action="{{route('Emp_Store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row g-3 border-end border-info col-lg-8">

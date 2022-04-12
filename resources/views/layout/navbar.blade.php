@@ -74,7 +74,6 @@
       <ul class="navbar-nav mb-2 mb-lg-0">
         @if (Auth::check())
           
-        
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
               <img src="{{ asset('assets/images/logo-ctu.png') }}" height="30" alt="ctu-logo" loading="lazy" />{{ Auth::user()->u_name }}

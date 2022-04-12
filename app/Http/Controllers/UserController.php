@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 // use App\Http\Requests\LoginRequest;
 
 use App\Models\Role;
-use App\Models\taikhoan;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -167,8 +167,6 @@ class UserController extends Controller
     public function Emp_Edit($id){
         // Tìm đến đối tượng muốn update
         $user = User::findOrFail($id);
-        // $pageName = 'User - Update';
-
         // điều hướng đến view edit user và truyền sang dữ liệu về user muốn sửa đổi
         return view('emp_manage.emp_update', compact('user'));
     }
@@ -208,21 +206,21 @@ class UserController extends Controller
         // Update user
         
         $user->save();
-        return redirect()->route('employee')->with('success', 'Cập nhật thành công');
-
-        
-        
-        // echo '<script language="javascript">alert("Cập nhật nhân viên thành công!");</script>';
-        // return redirect()->route('employee');
-        return redirect()->back()->with('status','Student Updated Successfully');
-        
+        return redirect()->route('employee')->with('success', 'Cập nhật thành công');       
     }
 
-    public function Emp_Delete(Request $request, $id){
-        // Tìm đến đối tượng muốn xóa
-        User::where('id',$id) -> delete();
-        echo '<script language="javascript">alert("Xoá thành viên thành công!");</script>';
-        return redirect()->route('employee');
+    public function Emp_Delete($id){
+        if(Auth::id()==$id){
+            return redirect()->back()->with('fail', 'Không thể xoá chính mình!!!');
+        } else {
+            $user = User::find($id);
+            if($user){
+                $user->role()->detach();
+                $user -> delete();
+            }
+            return redirect()->back()->with('del-success', 'Xoá người dùng thành công');
+        }
+
 
     }
 

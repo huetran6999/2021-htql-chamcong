@@ -3,6 +3,8 @@
 @if (session('status'))
 <h6 class="alert alert-success">{{ session('status') }}</h6>
 @endif
+
+
 <div class="container-fluid bg-light" style="width: 100%">
   <form class="row g-3" enctype="multipart/form-data">
     <!-- Vertical -->
