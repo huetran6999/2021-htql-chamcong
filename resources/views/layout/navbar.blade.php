@@ -74,10 +74,9 @@
       <ul class="navbar-nav mb-2 mb-lg-0">
         @if (Auth::check())
           
-        
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              <img src="assets/images/logo-ctu.png" height="30" alt="ctu-logo" loading="lazy" />{{ Auth::user()->u_name }}
+              <img src="/uploads/{{Auth::user()->u_avatar}}"  height="30" alt="{{Auth::user()->u_name}}" loading="lazy" /> {{ Auth::user()->u_name }}
             </a>
             <div class="dropdown-menu">
                <a class="dropdown-item" href="#">Xem hồ sơ</a>

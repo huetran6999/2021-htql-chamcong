@@ -1,7 +1,7 @@
 @extends('layout.index')
 @section('content')
 <div class="container">
-  <h4 class="border-start border-danger" style="text-align:center;background: #ebf5fb; padding-top: 56px">Cập nhật nhân viên</h4>
+  <h4 class="border-start border-danger" style="text-align:center;background: #ebf5fb;">Cập nhật nhân viên</h4>
   <form method="POST"  class="row g-3" action="{{ route('Emp_Update',$user->id) }}">
    @csrf
     <div class="row g-3 border-end border-info col-lg-8">
@@ -108,10 +108,8 @@
       </div>
       <div class="col-md-12">
         <label for="u_avatar" class="form-label">Ảnh hồ sơ</label>
-        <input type="file" class="form-control" name="u_avatar">
-      </div>
-    
-      
+        <input type="file" class="form-control" name="u_avatar" value="{{$user->u_avatar}}">
+      </div> 
     </div>
     <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block">
       <a href="{{route('employee')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>

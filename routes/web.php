@@ -67,7 +67,7 @@ Route::get('account-search', [App\Http\Controllers\UserController::class, 'GetSe
 
 
 
-Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee');
+Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee')->middleware('rolechecker');
 //Thêm, Sửa, Xoá nhân viên
 
 // Route::get('/index', [App\Http\Controllers\UserController::class, 'Index']);

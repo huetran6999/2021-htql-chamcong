@@ -1,7 +1,7 @@
 @extends('layout.index')
 @section('content')
 <div class="container">
-    <h3 class="border-start border-end border-danger" style="text-align:center">Phân quyền người dùng</h3>
+    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Phân quyền người dùng</h3>
     <br>
     @if (session('message'))
         <h6 class="alert alert-success">{{ session('message') }}</h6>
