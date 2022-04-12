@@ -17,6 +17,7 @@ class AccessManager
      */
     public function handle(Request $request, Closure $next)
     {
+        
         if(Auth::user()->hasRole('manager')){
             return $next($request);
         }
