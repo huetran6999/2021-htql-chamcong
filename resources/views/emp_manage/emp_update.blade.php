@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   <h4 class="border-start border-danger" style="text-align:center;background: #ebf5fb; padding-top: 56px">Cập nhật nhân viên</h4>
-  <form method="POST"  class="row g-3" action="{{ route('Emp_Update',$user->id) }}">
+  <form method="POST"  class="row g-3" action="{{ route('Emp_Update',$user->id) }}" enctype="multipart/form-data">
    @csrf
     <div class="row g-3 border-end border-info col-lg-8">
     <h5 style="text-align: center">Thông tin cá nhân</h5>

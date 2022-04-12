@@ -18,7 +18,7 @@
   <div class="container">
     <!-- Navbar brand -->
     <a class="navbar-brand" href="{{route('index')}}">
-      <img src="assets/images/logo-ctu.png" height="50" alt="ctu-logo" loading="lazy" /> Hệ thống quản lý
+      <img src="{{ asset('assets/images/logo-ctu.png') }}" height="50" alt="ctu-logo" loading="lazy" /> Hệ thống quản lý
     </a>
 
     <!-- Toggle button -->
@@ -77,7 +77,7 @@
         
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              <img src="assets/images/logo-ctu.png" height="30" alt="ctu-logo" loading="lazy" />{{ Auth::user()->u_name }}
+              <img src="{{ asset('assets/images/logo-ctu.png') }}" height="30" alt="ctu-logo" loading="lazy" />{{ Auth::user()->u_name }}
             </a>
             <div class="dropdown-menu">
                <a class="dropdown-item" href="#">Xem hồ sơ</a>

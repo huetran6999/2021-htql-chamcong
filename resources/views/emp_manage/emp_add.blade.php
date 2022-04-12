@@ -76,7 +76,7 @@
       </div>
     </div>
     {{------}}
-    <div class="row g-3 col-lg-4" style="margin-left: 0.625%" >
+    <div class="row g-3 col-lg-4" style="margin-left: 0.625%">
       <h5 style="text-align: center">Thông tin công tác</h5>
       <div class="col-md-12">
         <label for="username" class="form-label">Tên đăng nhập</label>
@@ -110,7 +110,7 @@
         {{-- <div class="preview-upload">
           <img id='sp_hinh-upload'/>
         </div> --}}
-      </div>  
+      </div>
     </div>
     <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block">
       <a href="{{route('employee')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
@@ -118,7 +118,7 @@
       <button type="submit" class="btn btn-primary">Thêm <i class="fa fa-arrow-right"></i></button>
     </div>
 
-    
+
   </form>
 
 </div>

@@ -192,6 +192,13 @@ class UserController extends Controller
         $user->u_checkindate= $request->u_checkindate;
         $user->u_status= $request->u_status;
         $user->u_avatar= $request->u_avatar;
+        if($request->hasFile('u_avatar')) {
+            $file = $request->file('u_avatar');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('uploads', $filename);
+            $user->u_avatar = $filename;
+        }
         $user->username= $request->username;
         $user->password = Hash::make($request->password);
         //dd($user);
@@ -199,6 +206,7 @@ class UserController extends Controller
         // $data['password'] = Hash::make($request->password);
 
         // Update user
+        
         $user->save();
         return redirect()->route('employee')->with('success', 'Cập nhật thành công');
 
