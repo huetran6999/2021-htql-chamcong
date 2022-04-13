@@ -83,12 +83,17 @@
             <tbody>
               @foreach ($users as $user )
               <tr>
-                <td>{{ $user->id }}</td>
+                <td>{{ $loop-> index + 1 }}</td>
                 <td>
                   @if ($user->u_avatar != '')
                   <img src="/uploads/{{$user->u_avatar}}" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
                   @else
-                  <img src="/uploads/account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+                    @if ($user->u_gender==0)
+                    <img src="/uploads/male-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+                    @else
+                    <img src="/uploads/female-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+                    @endif
+                  
                   @endif
                 </td>
                 <td>{{ $user->u_name }}</td>
@@ -102,11 +107,10 @@
                   <span class="badge bg-danger">Ngưng hoạt động</span>
                   @endif
                 </td>
-                <td class="text-right">
-                  <div>
-                    <a href="{{ route('Emp_Edit',$user->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-danger btn-delete btn-sm" href="{{ route('Emp_Delete',$user->id) }}"><i class="fa fa-trash"></i></a>
-                  </div>
+                <td class="text-right" >
+                  <a href="{{ route('Emp_Info') }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                  <a href="{{ route('Emp_Edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                  <a href="{{ route('Emp_Delete',$user->id) }}" class="btn btn-danger btn-delete btn-sm"><i class="fa fa-trash"></i></a>   
                 </td>
 
               </tr>

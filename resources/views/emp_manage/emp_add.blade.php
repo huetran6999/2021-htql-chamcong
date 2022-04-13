@@ -79,6 +79,15 @@
     <div class="row g-3 col-lg-4" style="margin-left: 0.625%">
       <h5 style="text-align: center">Thông tin công tác</h5>
       <div class="col-md-12">
+        <label>Đơn vị</label>
+            <select class="form-control" name="e_id">
+                @foreach ($enterprises as $ent)
+                <option value="{{$ent->id}}">{{ $ent->e_name }}</option>
+                @endforeach
+            </select>
+            <span class="text-danger">@error('e_id'){{$message}}@enderror</span>
+      </div>
+      <div class="col-md-12">
         <label for="username" class="form-label">Tên đăng nhập</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -107,9 +116,7 @@
         <label for="u_avatar" class="form-label">Ảnh hồ sơ</label>
         <input type="file" accept="image/*" class="form-control" name="u_avatar" id="u_avatar">
         <div id="imagePreview"></div>
-        {{-- <div class="preview-upload">
-          <img id='sp_hinh-upload'/>
-        </div> --}}
+
       </div>
     </div>
     <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block">

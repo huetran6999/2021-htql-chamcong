@@ -103,6 +103,9 @@ Route::get('/salary-report', [SalaryReportController::class, 'index'])->name('sa
 Route::get('employee/{$id}',[UserController::class, 'showById'])->name('show_Id');
 Route::get('search/name', [UserController::class, 'searchByName'])->name('search_name');
 
+//Xem thong tin nhan vien
+Route::get('employee-info', [UserController::class, 'showInfo'])->name('Emp_Info');
+
 //Phân quyền user
 Route::get('employee-roles', [UserController::class, 'ShowUserRole'])->name('show_role');
 Route::post('assign-role', [UserController::class, 'AssignRole'])->name('assign_role');

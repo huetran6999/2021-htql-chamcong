@@ -108,7 +108,11 @@
       </div>
       <div class="col-md-12">
         <label for="u_avatar" class="form-label">Ảnh hồ sơ</label>
-        <input type="file" accept="image/*" class="form-control" name="u_avatar" id="u_avatar">
+        <input type="file" accept="image/*" class="form-control" name="u_avatar" id="u_avatar" value="{{$user->u_avatar}}">
+        <div>
+          <img src="/uploads/{{$user->u_avatar}}" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+          
+        </div>
       </div> 
     </div>
     <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block">

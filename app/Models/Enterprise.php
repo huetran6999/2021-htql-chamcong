@@ -18,4 +18,8 @@ class Enterprise extends Model
     {
         return $this->hasMany(Department::class);
     }
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

@@ -25,6 +25,10 @@ class UserController extends Controller
         return view('emp_manage.employee', compact('users'));
     }
 
+    public function showInfo(){
+        return view('emp_manage.emp_info');
+    }
+
     public function fakeUser(){
         User::factory()->count(10)->create();
     }
@@ -59,14 +63,7 @@ class UserController extends Controller
 
         return response()->json($users); 
     }
-    // public function index()
-    // {
-    //     $users = User::orderBy('id','desc')->get();
 
-    //     return view('emp_manage.employee',[
-    //         'users' => $users,
-    //     ]);
-    // }
     public function insert(Request $request) {
         $this->validate(request(), [
             'username' => 'required',
@@ -158,55 +155,72 @@ class UserController extends Controller
         $user->username= $request->username;
         $user->password = Hash::make($request->password);  
         $user->save(); 
-        //dd($request->all());
-        // echo '<script language="javascript">alert("Thêm thành viên thành công!");</script>';
-        return redirect()->route('employee')->with('success', 'Đăng ký thành công');
-        
+        return redirect()->route('employee')->with('success', 'Đăng ký thành công');        
     }
 
     public function Emp_Edit($id){
-        // Tìm đến đối tượng muốn update
         $user = User::findOrFail($id);
-        // điều hướng đến view edit user và truyền sang dữ liệu về user muốn sửa đổi
         return view('emp_manage.emp_update', compact('user'));
     }
-    public function Emp_Update(Request $request, $id){
-        
-        $user = User::find($id);
-        $user->u_name=$request->u_name;
-        $user->u_gender = $request->u_gender;
-        $user->u_dob = $request->u_dob;
-        $user->u_pob = $request->u_pob;
-        $user->u_IDcode = $request->u_IDcode;
-        $user->u_IDcodedate= $request->u_IDcodedate;
-        $user->u_IDcodeplace =$request->u_IDcodeplace;
-        $user->u_household = $request->u_household;
-        $user->u_address = $request->u_address;
-        $user->u_phone = $request->u_phone;
-        $user->u_email = $request->u_email;
-        $user->u_nationality = $request->u_nationality;
-        $user->u_ethnic = $request->u_ethnic;
-        $user->u_religion= $request->u_religion;
-        $user->u_checkindate= $request->u_checkindate;
-        $user->u_status= $request->u_status;
-        $user->u_avatar= $request->u_avatar;
-        if($request->hasFile('u_avatar')) {
-            $file = $request->file('u_avatar');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('uploads', $filename);
-            $user->u_avatar = $filename;
-        }
-        $user->username= $request->username;
-        $user->password = Hash::make($request->password);
-        //dd($user);
-        // mã hóa password trước khi đẩy lên DB
-        // $data['password'] = Hash::make($request->password);
 
-        // Update user
+    public function Emp_Update(Request $request, $id){
+        $user = User::find($id);
+        $image = $request->u_avatar;
         
-        $user->save();
-        return redirect()->route('employee')->with('success', 'Cập nhật thành công');       
+        if($request->hasFile('u_avatar')) {
+            $extension = $image->getClientOriginalExtension();
+            $filename = $request->u_name.'.'.$extension;
+            $image->move('uploads', $filename);
+            $user->u_name=$request->u_name;
+            $user->u_gender = $request->u_gender;
+            $user->u_dob = $request->u_dob;
+            $user->u_pob = $request->u_pob;
+            $user->u_IDcode = $request->u_IDcode;
+            $user->u_IDcodedate= $request->u_IDcodedate;
+            $user->u_IDcodeplace =$request->u_IDcodeplace;
+            $user->u_household = $request->u_household;
+            $user->u_address = $request->u_address;
+            $user->u_phone = $request->u_phone;
+            $user->u_email = $request->u_email;
+            $user->u_nationality = $request->u_nationality;
+            $user->u_ethnic = $request->u_ethnic;
+            $user->u_religion= $request->u_religion;
+            $user->u_checkindate= $request->u_checkindate;
+            $user->u_status= $request->u_status;
+            $user->u_avatar= $filename;
+                    
+            // if($request->hasFile('u_avatar')) {
+            //     $file = $request->file('u_avatar');
+            //     $extension = $file->getClientOriginalExtension();
+            //     $filename = time().'.'.$extension;
+            //     $file->move('uploads', $filename);
+            //     $user->u_avatar = $filename;
+            // }
+            $user->username= $request->username;
+            $user->password = Hash::make($request->password);
+        } else {
+            $user->u_name=$request->u_name;
+            $user->u_gender = $request->u_gender;
+            $user->u_dob = $request->u_dob;
+            $user->u_pob = $request->u_pob;
+            $user->u_IDcode = $request->u_IDcode;
+            $user->u_IDcodedate= $request->u_IDcodedate;
+            $user->u_IDcodeplace =$request->u_IDcodeplace;
+            $user->u_household = $request->u_household;
+            $user->u_address = $request->u_address;
+            $user->u_phone = $request->u_phone;
+            $user->u_email = $request->u_email;
+            $user->u_nationality = $request->u_nationality;
+            $user->u_ethnic = $request->u_ethnic;
+            $user->u_religion= $request->u_religion;
+            $user->u_checkindate= $request->u_checkindate;
+            $user->u_status= $request->u_status;
+            $user->username= $request->username;
+            $user->password = Hash::make($request->password);
+        }    
+  //dd($user);    
+       $user->save();
+       return redirect()->route('employee')->with('success', 'Cập nhật thành công');       
     }
 
     public function Emp_Delete($id){
