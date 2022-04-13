@@ -199,6 +199,12 @@ class UserController extends Controller
         }
         $user->username= $request->username;
         $user->password = Hash::make($request->password);
+        //dd($user);
+        // mã hóa password trước khi đẩy lên DB
+        // $data['password'] = Hash::make($request->password);
+
+        // Update user
+        
         $user->save();
         return redirect()->route('employee')->with('success', 'Cập nhật thành công');       
     }
