@@ -102,13 +102,13 @@
         <label for="u_status" class="form-label">Trạng thái</label>
         <select name="u_status" class="form-select" id="myStatusSelected">
           <option selected disabled>Chọn...</option>
-          <option value="0">Hoạt động</option>
-          <option value="1">Ngưng hoạt động</option>
+          <option value="0" @if($user->u_status == '0') ? selected : null @endif>Hoạt động</option>
+          <option value="1" @if($user->u_status == '1') ? selected : null @endif>Ngưng hoạt động</option>
         </select>
       </div>
       <div class="col-md-12">
         <label for="u_avatar" class="form-label">Ảnh hồ sơ</label>
-        <input type="file" class="form-control" name="u_avatar" value="{{$user->u_avatar}}">
+        <input type="file" accept="image/*" class="form-control" name="u_avatar" id="u_avatar">
       </div> 
     </div>
     <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block">
