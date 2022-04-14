@@ -17,6 +17,7 @@
       <div class="col-md-5">
         <label for="u_gender" class="form-label">Giới tính</label>
         <select name="u_gender" class="form-select" id="genderSelection">
+          <option selected disabled>---> Chọn giới tính <---</option>
           <option value="0">Nam</option>
           <option value="1">Nữ</option>
         </select>
@@ -78,16 +79,38 @@
     {{------}}
     <div class="row g-3 col-lg-4" style="margin-left: 0.625%">
       <h5 style="text-align: center">Thông tin công tác</h5>
+
       <div class="col-md-12">
-        <label>Đơn vị</label>
-            <select class="form-control" name="e_id">
-                @foreach ($enterprises as $ent)
-                <option value="{{$ent->id}}">{{ $ent->e_name }}</option>
-                @endforeach
+        <label for="e_name" class="form-label">Đơn vị</label>
+            <select class="form-select" name="e_name" id="entDropdown">
+              <option selected disabled>---> Chọn đơn vị <---</option>
+              @foreach ($enterprises as $ent)
+                  <option value="{{$ent->id}}">{{ $ent->e_name }}</option>
+              @endforeach
             </select>
-            <span class="text-danger">@error('e_id'){{$message}}@enderror</span>
+            <span class="text-danger">@error('e_name'){{$message}}@enderror</span>
       </div>
+
       <div class="col-md-12">
+        <label for="d_name" class="form-label">Phòng ban</label>
+            <select class="form-select" name="d_name" id="depDropdown">
+
+            </select>
+            <span class="text-danger">@error('d_name'){{$message}}@enderror</span>
+      </div>
+
+      <div class="col-md-12">
+        <label for="p_name" class="form-label">Chức vụ</label>
+            <select class="form-select" name="p_name">
+              <option selected disabled>---> Chọn chức vụ <---</option>
+              @foreach ($positions as $pos)
+                <option value="{{$pos->id}}">{{ $pos->p_name }}</option>
+              @endforeach
+            </select>
+            <span class="text-danger">@error('p_name'){{$message}}@enderror</span>
+      </div>
+
+      <div class="col-md-6">
         <label for="username" class="form-label">Tên đăng nhập</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -96,7 +119,7 @@
           <input type="text" class="form-control" name="username">
         </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-6">
         <label for="password" class="form-label">Mật khẩu</label>
         <input type="password" class="form-control" name="password">
       </div>
@@ -107,7 +130,7 @@
       <div class="col-md-12">
         <label for="u_status" class="form-label">Trạng thái</label>
         <select name="u_status" class="form-select" id="myStatusSelected">
-          <option selected disabled>Chọn...</option>
+          <option selected disabled>---> Chọn trạng thái <---</option>
           <option value="0">Hoạt động</option>
           <option value="1">Ngưng hoạt động</option>
         </select>
@@ -129,5 +152,32 @@
   </form>
 
 </div>
+<script>
+  $(document).ready(function() {
+    $('#entDropdown').on('change', function() {
+      var e_id = this.value;
+      $("#depDropdown").html('');
+      $.ajax({
+        url:"{{url('get-department')}}",
+        type: "POST",
+        data: {
+          e_id: e_id,
+          _token: '{{csrf_token()}}' 
+        },
+        dataType : 'json',
+        success: function(result){
+          $.each(result.deps, function(key, value){
+            $("#depDropdown").append('<option value="'+value.id+'">'+value.d_name+'</option>');
+          });
+          
+           
+          
+            $('#depDropdown').html('<option value="">Chọn phòng ban</option>');
+          
+        }
+      });
+    });
+  });
+</script>
 
 @endsection

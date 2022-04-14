@@ -16,6 +16,8 @@ class DepController extends Controller
         return view('dep_manage.index', compact('departments'));
     }
 
+
+
     public function create() // trang create
     {
         $enterprises = Enterprise::select('id', 'e_name')->get();

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 // use App\Http\Requests\LoginRequest;
 
+use App\Models\Department;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Enterprise;
+use App\Models\Position;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,7 +78,10 @@ class UserController extends Controller
     }
 
     public function Create(){
-        return view('emp_manage.emp_add');
+        $enterprises = Enterprise::select('id', 'e_name')->get();
+        $deps = Department::select('id', 'd_name')->get();
+        $positions = Position::select('id', 'p_name')->get();
+        return view('emp_manage.emp_add', compact(['enterprises', 'deps', 'positions']));
     }
     public function Store(Request $request){   
         // $request->validate([
@@ -168,6 +174,12 @@ class UserController extends Controller
         $image = $request->u_avatar;
         
         if($request->hasFile('u_avatar')) {
+            //Xoá ảnh cũ của user
+            $desPath = 'uploads/'.$user->u_avatar;
+            if(file_exists($desPath)){
+                unlink($desPath);
+            }
+
             $extension = $image->getClientOriginalExtension();
             $filename = $request->u_name.'.'.$extension;
             $image->move('uploads', $filename);
@@ -229,7 +241,11 @@ class UserController extends Controller
         } else {
             $user = User::find($id);
             if($user){
-                $user->role()->detach();
+                // $desPath = 'uploads/'.$user->u_avatar;
+                // if(file_exists($desPath)){
+                //     unlink($desPath); //xoá ảnh ứng với user
+                // }
+                $user->role()->detach(); //gỡ role ứng với user
                 $user -> delete();
             }
             return redirect()->back()->with('del-success', 'Xoá người dùng thành công');
