@@ -261,6 +261,15 @@ class UserController extends Controller
     //     $user=User::where('fullname','like','%'.$request->key.'%')->get();
     //     return view('pages.search', compact('user'));
     // }
-
     
+    public function getDep(Request $request)
+    {
+        $entId = $request->post('entId');
+        $deps = Department::where('e_id', $entId)->select('id', 'd_name')->get();
+        $html='<option value="" disabled selected hidden>---> Chọn phòng ban <---</option>';
+		foreach($deps as $dep){
+			$html.='<option value="'.$dep->id.'">'.$dep->d_name.'</option>';
+		}
+		echo $html;
+    }
 }
