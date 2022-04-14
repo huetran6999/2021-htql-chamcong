@@ -94,8 +94,8 @@ Route::resource('enterprise', EnterpriseController::class);
 Route::resource('department', DepController::class);
 
 //Dropdown phòng ban phụ thuộc đơn vị
-Route::get('get-enterprise',[ĐependentDropdownController::class, 'getEnt']);
-Route::post('get-department', [ĐependentDropdownController::class, 'getDep']);
+Route::get('get-enterprise',[DependentDropdownController::class, 'getEnt']);
+Route::post('get-department', [DependentDropdownController::class, 'getDep']);
 
 
 Route::get('/time-keeping', [TimeKeepingController::class, 'index'])->name('timeKeeping.index');

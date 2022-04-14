@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Models\Enterprise;
 
-class ĐependentDropdownController extends Controller
+class DependentDropdownController extends Controller
 {
     public function getEnt(Request $request){
         $data['enterprises'] = Enterprise::get(['e_name', 'id']);
