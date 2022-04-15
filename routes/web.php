@@ -65,18 +65,17 @@ Route::get('/delete-account/{id}', [App\Http\Controllers\UserController::class, 
 
 Route::get('account-search', [App\Http\Controllers\UserController::class, 'GetSearch'])->name('search');
 
-
-
 Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee')->middleware('rolechecker');
 //Thêm, Sửa, Xoá nhân viên
 
 // Route::get('/index', [App\Http\Controllers\UserController::class, 'Index']);
-route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('index-home', function () {
         return view('layout.index');
     })->name('index');
 
     //tạo đường dẫn đến trang quản lý nhân viên
+    Route::post('/dep', [UserController::class, 'getDep'])->name('emp.getDep');
     Route::get('/create-account', [UserController::class, 'Create'])->name('Emp_Create');
     Route::post('/create-account', [UserController::class, 'Store'])->name('Emp_Store');
     Route::get('/update-employee/{id}', [UserController::class, 'Emp_Edit'])->name('Emp_Edit');
@@ -92,11 +91,6 @@ Route::resource('enterprise', EnterpriseController::class);
 
 //Quản lý phòng ban
 Route::resource('department', DepController::class);
-
-//Dropdown phòng ban phụ thuộc đơn vị
-Route::get('get-enterprise',[DependentDropdownController::class, 'getEnt']);
-Route::post('get-department', [DependentDropdownController::class, 'getDep']);
-
 
 Route::get('/time-keeping', [TimeKeepingController::class, 'index'])->name('timeKeeping.index');
 Route::post('/time-keeping/import', [TimeKeepingController::class, 'import'])->name('timeKeeping.import');
