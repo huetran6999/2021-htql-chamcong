@@ -17,15 +17,45 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function ShowUser(){
+    public function ShowUser(Request $request){
         // lấy ra toàn bộ user
-        $users = User::all();
-        $users=User::paginate(5);
+        $users = User::with('department')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
+        $ents = Enterprise::select('id', 'e_name')->get();
+        $deps = Department::select('id', 'd_name')->get();
+        
+        if ($request->has('username')) {
+            $users = User::with('department')->where('username', 'LIKE', '%' . $request->username . '%')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
+        }
+
+        if ($request->has('u_name')) {
+            $users = User::with('department')->where('u_name', 'LIKE', '%' . $request->u_name . '%')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
+        }
+
+        if ($request->has('d_id')) {
+            $users = User::with('department')->where('d_id', 'LIKE', '%' . $request->d_id . '%')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
+        }
+
+        if ($request->has('username') && $request->has('u_name')) {
+            $users = User::with('department')->where([['username', 'LIKE', '%' . $request->username . '%'], ['u_name', 'LIKE', '%' . $request->u_name . '%']])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
+        }
+
+        if ($request->has('d_id') && $request->has('u_name')) {
+            $users = User::with('department')->where([['d_id', 'LIKE', '%' . $request->d_id . '%'], ['u_name', 'LIKE', '%' . $request->u_name . '%']])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
+        }
+
+        if ($request->has('d_id') && $request->has('username')) {
+            $users = User::with('department')->where([['username', 'LIKE', '%' . $request->username . '%'], ['d_id', 'LIKE', '%' . $request->d_id . '%']])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
+        }
+
+        if ($request->has('username') && $request->has('u_name') && $request->has('d_id')) {
+            $users = User::with('department')->where([['username', 'LIKE', '%' . $request->username . '%'], ['u_name', 'LIKE', '%' . $request->u_name . '%'], ['d_id', 'LIKE', '%' . $request->d_id . '%']])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
+        }
+
 
         //dd($users);
 
         // trả về view hiển thị danh sách tài khoản
-        return view('emp_manage.employee', compact('users'));
+        return view('emp_manage.employee', compact('users', 'ents', 'deps'));
     }
 
     public function showInfo(){
