@@ -6,22 +6,18 @@
 
 
 <div class="container-fluid bg-light" style="width: 100%">
-  <form class="row g-3" enctype="multipart/form-data">
+  <form class="row g-3" action="{{ route('employee')}}" method="get" enctype="multipart/form-data">
+    @csrf
     <!-- Vertical -->
-
     <div class="row mb-3 bg-light border-end border-info col-lg-3" id="align-form" style="padding-top: 10px">
       <h3 style="text-align: center; padding-top: 28px">Nhân viên</h3>
-      <label for="username">Tên đăng nhập</label>
-      {{-- <input type="text" id = "username" class="form-control" placeholder="Tên đăng nhập"> --}}
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@</div>
-        </div>
-        <input type="search" class="form-control" id="username" placeholder="Username">
+      <div>
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" name="username" id="username" class="form-control" placeholder="Tên đăng nhập">
       </div>
       <div>
         <label for="u_name">Tên người dùng</label>
-        <input type="search" name="u_name" class="form-control search-input" placeholder="Tên người dùng">
+        <input type="text" name="u_name" id="u_name" class="form-control" placeholder="Tên người dùng">
       </div>
       <label for="u_gender">Giới tính</label>
       <div class="form-check">
@@ -32,15 +28,19 @@
       </div>
       <label for="u_phone">Số điện thoại</label>
       <input type="tel" id="u_phone" class="form-control" placeholder="Số điện thoại">
-      <label for="e_name" class="form-label">Đơn vị</label>
-      <select id="e_name" class="form-select">
-        <option selected>Choose...</option>
-        <option>...</option>
+      <label for="ent" class="form-label">Đơn vị</label>
+      <select name="ent" id="ent" class="form-select">
+        <option selected disabled>Choose...</option>
+        @foreach ($ents as $ent)
+        <option value="{{ $ent->id }}">{{ $ent->e_name }}</option>
+        @endforeach
       </select>
-      <label for="p_name" class="form-label">Phòng ban</label>
-      <select id="p_name" class="form-select">
-        <option selected>Choose...</option>
-        <option>...</option>
+      <label for="d_id" class="form-label">Phòng ban</label>
+      <select name="d_id" id="d_id" class="form-select">
+        <option selected disabled>Choose...</option>
+        @foreach ($deps as $dep)
+        <option value="{{ $dep->id }}">{{ $dep->d_name }}</option>
+        @endforeach
       </select>
       <label for="u_status" class="form-label">Trạng thái</label>
       <select id="u_status" class="form-select">
@@ -71,9 +71,11 @@
               <tr>
                 <th>STT</th>
                 <th width="8%">Avatar</th>
+                <th>Username</th>
                 <th>Họ và tên</th>
                 <th>Chức vụ</th>
                 <th>Phòng ban</th>
+                <th>Đơn vị</th>
                 <th>Số điện thoại</th>
                 <th>Trạng thái</th>
                 <th class="text-right">Hành động</th>
@@ -88,17 +90,19 @@
                   @if ($user->u_avatar != '')
                   <img src="/uploads/{{$user->u_avatar}}" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
                   @else
-                    @if ($user->u_gender==0)
-                    <img src="/uploads/male-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
-                    @else
-                    <img src="/uploads/female-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
-                    @endif
-                  
+                  @if ($user->u_gender==0)
+                  <img src="/uploads/male-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+                  @else
+                  <img src="/uploads/female-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+                  @endif
+
                   @endif
                 </td>
+                <td>{{ $user->username }}</td>
                 <td>{{ $user->u_name }}</td>
                 <td>{{$user->position->p_name}}</td>
                 <td>{{$user->department->d_name}}</td>
+                <td>{{$user->department->enterprise->e_name}}</td>
                 <td>{{ $user->u_phone }}</td>
                 <td>
                   @if ($user->u_status==0)
@@ -107,10 +111,10 @@
                   <span class="badge bg-danger">Ngưng hoạt động</span>
                   @endif
                 </td>
-                <td class="text-right" >
+                <td class="text-right">
                   <a href="{{ route('Emp_Info') }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
                   <a href="{{ route('Emp_Edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                  <a href="{{ route('Emp_Delete',$user->id) }}" class="btn btn-danger btn-delete btn-sm"><i class="fa fa-trash"></i></a>   
+                  <a href="{{ route('Emp_Delete',$user->id) }}" class="btn btn-danger btn-delete btn-sm"><i class="fa fa-trash"></i></a>
                 </td>
 
               </tr>

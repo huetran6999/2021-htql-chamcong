@@ -85,9 +85,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class,'d_id', 'id');
     }
-
-    public function enterprise()
-    {
-        return $this->belongsTo(Enterprise::class,'e_id', 'id');
-    }
 }
