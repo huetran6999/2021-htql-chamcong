@@ -16,10 +16,11 @@
                 </ul>
             </div>
             <div class="card-body">
-                <div id="#home">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#menu1" class="btn btn-primary">Go somewhere</a>
+                <div id="home">
+                    <div class="row col-lg-12">
+                        <label>Họ và tên</label>
+                        <input type="text" name="u_name" class="form-control" value="abc">
+                    </div>
                 </div>
             </div>   
         </div> 

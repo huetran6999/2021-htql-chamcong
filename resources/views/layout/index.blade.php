@@ -26,7 +26,7 @@
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/sidebar.js') }}"></script>
     <script src="{{ asset('assets/js/emp.js') }}"></script>
-    <script src="{{ asset('assets/js/modal.js') }}"></script>
+    
 </body>
 
 </html>

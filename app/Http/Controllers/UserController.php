@@ -84,57 +84,8 @@ class UserController extends Controller
         return view('emp_manage.emp_add', compact(['enterprises', 'deps', 'positions']));
     }
     public function Store(Request $request){   
-        // $request->validate([
-        //     'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]
-        // );   
-        // $avatar = $request->file('file');
-        // $input['avatar_name'] = time().'.'.$avatar->getClientOriginalExtension();
-        // $desPath=public_path('/uploads');
-        // $avatar->move($desPath, $input['avatar_name']);
-        //Lưu hình thẻ khi có file hình
-	
-	// if($request->hasFile('avatar')){
-	// 	//Hàm kiểm tra dữ liệu
-	// 	$this->validate($request, 
-	// 		[
-	// 			//Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
-	// 			'avatar' => 'mimes:jpg,jpeg,png,gif|max:2048',
-	// 		],			
-	// 		[
-	// 			//Tùy chỉnh hiển thị thông báo không thõa điều kiện
-	// 			'avatar.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-	// 			'avatar.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
-	// 		]
-	// 	);
-		
-	// 	//Lưu hình ảnh vào thư mục public/upload/hinhthe
-	// 	$file = $request->u_avatar;
-	// 	$file_name = $file->getClientOriginalName();
-		
-	// 	$file->move(public_path('uploads'), $file_name);
-	// }
-        // User::create([
-        //     'u_name' => $request->u_name,
-        //     'u_gender' => $request->u_gender,
-        //     'u_dob' => $request->u_dob,
-        //     'u_pob' => $request->u_dob,
-        //     'u_IDcode' => $request->u_IDcode,
-        //     'u_IDcodedate' => $request->u_IDcodedate,
-        //     'u_IDcodeplace' => $request->u_IDcodeplace,
-        //     'u_household' => $request->u_household,
-        //     'u_address' => $request->u_address,
-        //     'u_phone' => $request->u_phone,
-        //     'u_email' => $request->u_email,
-        //     'u_nationality' => $request->u_nationality,
-        //     'u_ethnic' => $request->u_ethnic,
-        //     'u_religion'=> $request->u_religion,
-        //     'u_checkindate'=> $request->u_checkindate,
-        //     'u_status'=> $request->u_status,
-        // 'username'=> $request->username,
-        //     'password'=> bcrypt($request->password),
-        // ]);
         $user = new User;
+        // $user = $request->all()
         $user->u_name=$request->u_name;
         $user->u_gender = $request->u_gender;
         $user->u_dob = $request->u_dob;
