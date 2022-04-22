@@ -9,6 +9,8 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Enterprise;
+use App\Models\Literacy;
+use App\Models\Parents;
 use App\Models\Position;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -111,27 +113,30 @@ class UserController extends Controller
         $enterprises = Enterprise::select('id', 'e_name')->get();
         $deps = Department::select('id', 'd_name')->get();
         $positions = Position::select('id', 'p_name')->get();
-        return view('emp_manage.emp_add', compact(['enterprises', 'deps', 'positions']));
+        $lit = Literacy::select('id', 'l_name', 'l_major', 'l_grading','l_graduation_school','l_graduation_year', 'l_othher_major','note')->get();
+        $par = Parents::select('id', 're_name','re_ship','re_gender','re_phone','re_address')->get();
+        return view('emp_manage.emp_add', compact(['enterprises', 'deps', 'positions', 'lit','par']));
     }
     public function Store(Request $request){   
         $user = new User;
+        User::create($user);
         // $user = $request->all()
-        $user->u_name=$request->u_name;
-        $user->u_gender = $request->u_gender;
-        $user->u_dob = $request->u_dob;
-        $user->u_pob = $request->u_pob;
-        $user->u_IDcode = $request->u_IDcode;
-        $user->u_IDcodedate= $request->u_IDcodedate;
-        $user->u_IDcodeplace =$request->u_IDcodeplace;
-        $user->u_household = $request->u_household;
-        $user->u_address = $request->u_address;
-        $user->u_phone = $request->u_phone;
-        $user->u_email = $request->u_email;
-        $user->u_nationality = $request->u_nationality;
-        $user->u_ethnic = $request->u_ethnic;
-        $user->u_religion= $request->u_religion;
-        $user->u_checkindate= $request->u_checkindate;
-        $user->u_status= $request->u_status;
+        // $user->u_name=$request->u_name;
+        // $user->u_gender = $request->u_gender;
+        // $user->u_dob = $request->u_dob;
+        // $user->u_pob = $request->u_pob;
+        // $user->u_IDcode = $request->u_IDcode;
+        // $user->u_IDcodedate= $request->u_IDcodedate;
+        // $user->u_IDcodeplace =$request->u_IDcodeplace;
+        // $user->u_household = $request->u_household;
+        // $user->u_address = $request->u_address;
+        // $user->u_phone = $request->u_phone;
+        // $user->u_email = $request->u_email;
+        // $user->u_nationality = $request->u_nationality;
+        // $user->u_ethnic = $request->u_ethnic;
+        // $user->u_religion= $request->u_religion;
+        // $user->u_checkindate= $request->u_checkindate;
+        // $user->u_status= $request->u_status;
         if($request->hasFile('u_avatar')) {
             $file = $request->file('u_avatar');
             $extension = $file->getClientOriginalExtension();
@@ -139,9 +144,9 @@ class UserController extends Controller
             $file->move('uploads', $filename);
             $user->u_avatar = $filename;
         }
-        $user->username= $request->username;
+        // $user->username= $request->username;
         $user->password = Hash::make($request->password);  
-        $user->save(); 
+        // $user->save();
         return redirect()->route('employee')->with('success', 'Đăng ký thành công');        
     }
 
