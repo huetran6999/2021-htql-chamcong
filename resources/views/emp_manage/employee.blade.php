@@ -5,58 +5,35 @@
 @endif
 
 
-<div class="container-fluid bg-light" style="width: 100%">
+<div class="container bg-light" style="width: 100%">
   <form class="row g-3" action="{{ route('employee')}}" method="get" enctype="multipart/form-data">
     @csrf
     <!-- Vertical -->
-    <div class="row mb-3 bg-light border-end border-info col-lg-3" id="align-form" style="padding-top: 10px">
-      <h3 style="text-align: center; padding-top: 28px">Nhân viên</h3>
-      <div>
+    <div style="padding-top: 20px; width: 30%; margin-left:auto; margin-right:auto; font-size: 11" class="row g-3">  
+      <div class="col-md-12">
+        <label for="d_id" class="form-label">Phòng ban</label>
+        <select name="d_id" id="d_id">
+          <option selected disabled>Choose...</option>
+          @foreach ($deps as $dep)
+          <option value="{{ $dep->id }}">{{ $dep->d_name }}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="col-md-12">
         <label for="username">Tên đăng nhập</label>
-        <input type="text" name="username" id="username" class="form-control" placeholder="Tên đăng nhập">
+        <input type="text" name="username" id="username" placeholder="Tên đăng nhập">
       </div>
-      <div>
+      <div class="col-md-12">
         <label for="u_name">Tên người dùng</label>
-        <input type="text" name="u_name" id="u_name" class="form-control" placeholder="Tên người dùng">
+        <input type="text" name="u_name" id="u_name" placeholder="Tên người dùng">
       </div>
-      <label for="u_gender">Giới tính</label>
-      <div class="form-check">
-        <input type="radio" id="u_gender_male" name="u_gender">
-        <label class="form-check-label" for="u_gender_male">Nam</label>
-        <input type="radio" id="u_gender_female" name="u_gender">
-        <label class="form-check-label" for="u_gender_female">Nữ</label>
-      </div>
-      <label for="u_phone">Số điện thoại</label>
-      <input type="tel" id="u_phone" class="form-control" placeholder="Số điện thoại">
-      <label for="ent" class="form-label">Đơn vị</label>
-      <select name="ent" id="ent" class="form-select">
-        <option selected disabled>Choose...</option>
-        @foreach ($ents as $ent)
-        <option value="{{ $ent->id }}">{{ $ent->e_name }}</option>
-        @endforeach
-      </select>
-      <label for="d_id" class="form-label">Phòng ban</label>
-      <select name="d_id" id="d_id" class="form-select">
-        <option selected disabled>Choose...</option>
-        @foreach ($deps as $dep)
-        <option value="{{ $dep->id }}">{{ $dep->d_name }}</option>
-        @endforeach
-      </select>
-      <label for="u_status" class="form-label">Trạng thái</label>
-      <select id="u_status" class="form-select">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
-      <label for="u_checkindate">Ngày bắt đầu làm việc</label>
-      <input type="date" id="u_checkindate" class="form-control" placeholder="">
-      <hr>
-      <button type="reset" class="btn btn-sm btn-info">Làm trống</button>
-      <button type="submit" class="btn btn-sm btn-primary">Tìm kiếm</button>
-
+      <button type="submit" class="btn btn-sm btn-primary" style="width: 20%">Tìm kiếm</button>
     </div>
 
+    
 
-    <div class=" bg-light row g-3 col-lg-9" id="align-table" style="padding-top: 10px; margin-left: 15px">
+
+    <div class=" bg-light row g-3 col-lg-12" id="align-table" style="padding-top: 10px">
       <div class="container">
         <a href="{{route('Emp_Create')}}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
         <br>

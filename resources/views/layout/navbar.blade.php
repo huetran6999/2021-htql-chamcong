@@ -13,7 +13,7 @@
 </div> <a href="{{route('logout')}}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Đăng xuất</span> </a> --}}
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark z-depth-5">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark z-depth-5">
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->

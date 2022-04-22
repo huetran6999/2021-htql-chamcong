@@ -85,4 +85,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class,'d_id', 'id');
     }
+
+    public function literacy()
+    {
+        return $this->belongsTo(Literacy::class, 'u_id', 'id');
+    }
+
+    public function parents()
+    {
+        return $this->hasOne(Parents::class);
+    }
 }
