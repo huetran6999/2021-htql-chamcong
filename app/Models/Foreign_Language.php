@@ -5,21 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Parents extends Model
+class Foreign_Language extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = 'parents';
+    protected $table = 'foreign_language';
     protected $fillable = [
-        're_name',
-        're_gender',
-        're_ship',
-        're_phone',
-        're_address',
+        'id',
+        'f_name',
     ];
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 }

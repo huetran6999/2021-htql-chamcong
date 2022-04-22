@@ -18,7 +18,7 @@ class User extends Authenticatable
         'id',
         't_id',
         'l_id',
-        'fl_id',
+        'f_id',
         'd_id',
         'p_id',
         's_id',
@@ -59,6 +59,11 @@ class User extends Authenticatable
     }
     public function hasRole($role){
         return null != $this->role()->whereIn('r_name', $role) ->first();
+    }
+
+    public function foreign_language()
+    {
+        return $this->belongsTo(Foreign_Language::class,'f_id', 'id');
     }
 
     public function attendanceReports()

@@ -309,6 +309,7 @@
             </div>
           </div>
         </div>
+
         {{-- Thông tin trình độ bằng cấp --}}
         <div id="menu2" class="tab-pane" role="tabpanel" aria-labelledby="menu2-tab">
           <div class="row">
@@ -336,7 +337,8 @@
               <label for="l_grading" class="form-label">Xếp loại</label>
               <select name="l_name" class="form-select" id="lnameSelection">
                 <option selected disabled>--- Chọn xếp loại ---</option>
-                <option value="0">Giỏi</option>
+                <option value="0">Xuất sắc</option>
+                <option value="4">Giỏi</option>
                 <option value="1">Khá</option>
                 <option value="2">Trung bình</option>
                 <option value="3">Khác</option>
@@ -358,6 +360,16 @@
               <input type="text" class="form-control" name="l_other_major" placeholder="">
             </div>
 
+            <div class="col-md-12">
+              <label for="f_id" class="form-label">Phòng ban</label>
+              <select name="f_id" id="f_id">
+                <option selected disabled>Choose...</option>
+                @foreach ($lang as $l)
+                <option value="{{ $l->id }}">{{ $l->f_name }}</option>
+                @endforeach
+              </select>
+            </div>
+
             <div class="col-12">
               <label for="note" class="form-label">Ghi chú</label>
               <input type="text" class="form-control" name="note" placeholder="">
@@ -365,7 +377,6 @@
           </div>
         </div>
         
-
         {{-- Thông tin công tác --}}
         <div id="menu3" class="tab-pane" role="tabpanel" aria-labelledby="menu3-tab">
           <div class="row">
@@ -392,11 +403,16 @@
               <label for="p_name" class="form-label">Chức vụ</label>
               <select class="form-select" name="p_name">
                 <option selected disabled>--- Chọn chức vụ --- </option>
-                    @foreach ($positions as $pos)
-                <option value="{{$pos->id}}">{{ $pos->p_name }}</option>
+                @foreach ($positions as $pos)
+                  <option value="{{$pos->id}}">{{ $pos->p_name }}</option>
                 @endforeach
               </select>
               <span class="text-danger">@error('p_name'){{$message}}@enderror</span>
+            </div>
+
+            <div class="col-md-12">
+              <label for="coefficient_salary" class="form-label">Hệ số lương</label>
+              <input type="text" class="form-control" name="coefficient_salary" value="" disabled>
             </div>
 
             <div class="col-md-6">

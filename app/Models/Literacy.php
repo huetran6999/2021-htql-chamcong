@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Literacy extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'literacy';
     protected $fillable = [
+        'u_id',
         'l_name',
         'l_major',
         'l_grading',
         'l_graduation_school',
         'l_graduation_year',
         'l_ohter_major',
-        'u_id',
         'l_note',
     ];
 
