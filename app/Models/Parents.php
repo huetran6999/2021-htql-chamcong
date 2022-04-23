@@ -20,6 +20,6 @@ class Parents extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class, 'u_id', 'id');
+        return $this->belongsTo(User::class, 'u_id', 'id');
     }
 }

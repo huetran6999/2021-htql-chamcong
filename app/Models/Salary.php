@@ -15,8 +15,8 @@ class Salary extends Model
         'coefficient_salary',
     ];
 
-    public function users()
+    public function position()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(Position::class);
     }
 }

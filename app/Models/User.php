@@ -93,11 +93,11 @@ class User extends Authenticatable
 
     public function literacy()
     {
-        return $this->belongsTo(Literacy::class, 'u_id', 'id');
+        return $this->hasMany(Literacy::class);
     }
 
     public function parents()
     {
-        return $this->belongsTo(Parents::class, 'u_id', 'id');
+        return $this->hasMany(Parents::class, 'u_id', 'id');
     }
 }

@@ -361,9 +361,9 @@
             </div>
 
             <div class="col-md-12">
-              <label for="f_id" class="form-label">Phòng ban</label>
-              <select name="f_id" id="f_id">
-                <option selected disabled>Choose...</option>
+              <label for="f_id" class="form-label">Trình độ ngoại ngữ</label>
+              <select name="f_id" id="f_id" class="form-select">
+                <option selected disabled>--- Chọn trình độ ---</option>
                 @foreach ($lang as $l)
                 <option value="{{ $l->id }}">{{ $l->f_name }}</option>
                 @endforeach

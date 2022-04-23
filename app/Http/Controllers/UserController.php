@@ -200,7 +200,14 @@ class UserController extends Controller
 
     public function Emp_Edit($id){
         $user = User::findOrFail($id);
-        return view('emp_manage.emp_update', compact('user'));
+        $enterprises = Enterprise::select('id', 'e_name')->get();
+        $deps = Department::select('id', 'd_name')->get();
+        $positions = Position::select('id', 'p_name')->get();
+        $lang = Foreign_Language::select('id', 'f_name')->get();
+        $salaries = Salary::select('id', 'coefficient_salary')->first();
+        $lit = Literacy::select('id', 'l_name', 'l_major', 'l_grading','l_graduation_school','l_graduation_year', 'l_other_major','note', 'u_id')->get();
+        $par = Parents::select('id', 're_name','re_ship','re_gender','re_phone','re_address', 'u_id')->get();
+        return view('emp_manage.emp_update', compact(['enterprises', 'deps', 'positions', 'lit','par', 'lang', 'user', 'salaries']));
     }
 
     public function Emp_Update(Request $request, $id){
