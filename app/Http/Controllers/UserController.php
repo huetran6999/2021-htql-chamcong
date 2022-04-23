@@ -148,6 +148,7 @@ class UserController extends Controller
         $user->p_id = $request->p_name;
         $user->d_id = $request->d_name;
         $user->f_id = $request->f_name;
+        $user->s_id = $user->p_id;
         if ($user->p_id == 1) {
             $user->s_id = '10';
         }

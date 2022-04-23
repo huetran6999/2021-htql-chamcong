@@ -412,7 +412,7 @@
 
             <div class="col-md-12">
               <label for="coefficient_salary" class="form-label">Hệ số lương</label>
-              <input type="text" class="form-control" name="coefficient_salary" value="" disabled>
+              <input type="text" class="form-control" name="coefficient_salary" value="" readonly>
             </div>
 
             <div class="col-md-6">

@@ -98,6 +98,6 @@ class User extends Authenticatable
 
     public function parents()
     {
-        return $this->hasOne(Parents::class);
+        return $this->belongsTo(Parents::class, 'u_id', 'id');
     }
 }
