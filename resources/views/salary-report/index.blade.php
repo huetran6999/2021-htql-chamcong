@@ -41,7 +41,7 @@
         <tbody>
             @foreach ($users as $user)
             @php
-            $salary = $user->user->position->basic_salary * $user->user->salary->coefficient_salary ; //gross-salary
+            $salary = $user->user->position->basic_salary * $user->user->position->salary->coefficient_salary ; //gross-salary
             $socialInsurance = $salary * 10.5 / 100; //bảo hiểm xã hội
             $tax = $salary * 10 / 100; //thuế
             @endphp

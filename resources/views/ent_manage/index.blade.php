@@ -1,8 +1,8 @@
 @extends('layout.index')
 @section('content')
-<div class="mt-5 height-100 bg-light col-lg-9" id="align-table">
+<div class="mt-5 bg-light col-lg-9" style="width: 100%" id="align-table">
   <div class="container">
-    <a href="{{ route('department.create') }}" class="btn btn-success btn-add"><i class="fa fa-plus"></i> Thêm mới</a> <br>
+    <a href="{{ route('department.create') }}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
     <br>
     <div class="table-responsive-sm">
       @if (Session::has('message'))
@@ -10,7 +10,7 @@
         {{Session::get('message')}}
       </div>
       @endif
-      <table class="table table-bordered">
+      <table class="table table-bordered table-hover">
         <thead class="table-primary">
           <tr>
             <th>ID</th>
@@ -43,6 +43,10 @@
           @endforeach
         </tbody>
       </table>
+      <hr>
+          <div style="float: right">
+            {{ $enterprises->links() }}
+          </div>
     </div>
   </div>
 </div>

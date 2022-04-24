@@ -15,7 +15,8 @@ class SalaryReportController extends Controller
         $users = TimeKeeping::with('user')->select('u_id', 'total', 'month', 'year')->get();
 
         if ($request->has('years') && $request->has('months')) {
-            $users = TimeKeeping::with('user')->where([['year', 'LIKE', '%' . $request->years . '%'], ['month', 'LIKE', '%' . $request->months . '%']])->select('u_id', 'total', 'month', 'year')->get();
+            $users = TimeKeeping::with('user')->where([['year', 'LIKE', '%' . $request->years . '%'], ['month', 'LIKE', '%' . $request->months . '%']])
+            ->select('u_id', 'total', 'month', 'year')->get();
         }
         
         else if ($request->has('years')) {

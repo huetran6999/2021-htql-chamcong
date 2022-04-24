@@ -76,10 +76,10 @@
           
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              <img src="{{ asset('assets/images/logo-ctu.png') }}" height="30" alt="ctu-logo" loading="lazy" />{{ Auth::user()->u_name }}
+              <img src="{{ asset('assets/images/logo-ctu.png') }}" height="30" alt="ctu-logo" loading="lazy" /> {{ Auth::user()->u_name }}
             </a>
             <div class="dropdown-menu">
-               <a class="dropdown-item" href="#">Xem hồ sơ</a>
+               <a class="dropdown-item" href="{{route('Account_Info')}}">Xem hồ sơ</a>
                <a class="dropdown-item" href="#">Xem lịch sử chấm công</a>
                <a class="dropdown-item" href="#">Xem báo cáo</a>
                <hr class="dropdown-divider" />

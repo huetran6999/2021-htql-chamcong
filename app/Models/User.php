@@ -16,12 +16,9 @@ class User extends Authenticatable
 
     protected $fillable = [
         'id',
-        't_id',
-        'l_id',
         'f_id',
         'd_id',
         'p_id',
-        's_id',
         'u_name',
         'u_gender',
         'u_dob',
@@ -81,10 +78,10 @@ class User extends Authenticatable
         return $this->belongsTo(Position::class, 'p_id', 'id');
     }
 
-    public function salary()
-    {
-        return $this->belongsTo(Salary::class, 's_id', 'id');
-    }
+    // public function salary()
+    // {
+    //     return $this->belongsTo(Salary::class, 's_id', 'id');
+    // }
 
     public function department()
     {

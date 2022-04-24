@@ -11,7 +11,7 @@ class DepController extends Controller
 {
     public function index()
     {
-        $departments = Department::with('enterprise')->select('id', 'e_id', 'd_name', 'd_phone')->get();
+        $departments = Department::with('enterprise')->select('id', 'e_id', 'd_name', 'd_phone')->paginate(5);
 
         return view('dep_manage.index', compact('departments'));
     }

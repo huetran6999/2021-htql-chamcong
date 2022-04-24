@@ -12,7 +12,7 @@ class EnterpriseController extends Controller
     public function index() {
         
         // lấy ra toàn bộ đơn vị
-        $enterprises = Enterprise::select('id', 'e_name', 'e_address', 'e_phone')->get();
+        $enterprises = Enterprise::select('id', 'e_name', 'e_address', 'e_phone')->paginate(5);
         //dd($enterprises);
 
         // trả về view hiển thị danh sách tài khoản

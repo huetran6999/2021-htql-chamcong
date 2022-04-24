@@ -63,9 +63,7 @@ class UserController extends Controller
         return view('emp_manage.employee', compact('users', 'ents', 'deps'));
     }
 
-    public function showInfo(){
-        return view('emp_manage.emp_info');
-    }
+
 
     public function fakeUser(){
         User::factory()->count(10)->create();
@@ -205,8 +203,12 @@ class UserController extends Controller
         $positions = Position::select('id', 'p_name')->get();
         $lang = Foreign_Language::select('id', 'f_name')->get();
         $salaries = Salary::select('id', 'coefficient_salary')->first();
-        $lit = Literacy::select('id', 'l_name', 'l_major', 'l_grading','l_graduation_school','l_graduation_year', 'l_other_major','note', 'u_id')->get();
-        $par = Parents::select('id', 're_name','re_ship','re_gender','re_phone','re_address', 'u_id')->get();
+        // $lit = Literacy::select('id', 'l_name', 'l_major', 'l_grading','l_graduation_school','l_graduation_year', 'l_other_major','note', 'u_id')->get();
+        //$par = Parents::select('id', 're_name','re_ship','re_gender','re_phone','re_address', 'u_id')->get();
+        $par = Parents::where('u_id', $user->id)->get();
+        $lit = Literacy::where('u_id', $user->id)->get();
+
+        //dd($p);
         return view('emp_manage.emp_update', compact(['enterprises', 'deps', 'positions', 'lit','par', 'lang', 'user', 'salaries']));
     }
 

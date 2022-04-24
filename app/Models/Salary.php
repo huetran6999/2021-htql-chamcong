@@ -17,6 +17,6 @@ class Salary extends Model
 
     public function position()
     {
-        return $this->belongsTo(Position::class);
+        return $this->belongsTo(Position::class, 's_id', 'id');
     }
 }

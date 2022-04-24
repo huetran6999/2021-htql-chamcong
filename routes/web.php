@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function () {
     })->name('index');
 
     //tạo đường dẫn đến trang quản lý nhân viên
+    Route::get('account-info', [App\Http\Controllers\AccountController::class, 'showAccountInfo'])->name('Account_Info');
     Route::post('/dep', [UserController::class, 'getDep'])->name('emp.getDep');
     Route::get('/create-account', [UserController::class, 'Create'])->name('Emp_Create');
     Route::post('/create-account', [UserController::class, 'Store'])->name('Emp_Store');
@@ -101,8 +102,8 @@ Route::get('/salary-report', [SalaryReportController::class, 'index'])->name('sa
 Route::get('employee/{$id}',[UserController::class, 'showById'])->name('show_Id');
 Route::get('search/name', [UserController::class, 'searchByName'])->name('search_name');
 
-//Xem thong tin nhan vien
-Route::get('employee-info', [UserController::class, 'showInfo'])->name('Emp_Info');
+//Xem thong tin tài khoản
+
 
 //Phân quyền user
 Route::get('employee-roles', [UserController::class, 'ShowUserRole'])->name('show_role');

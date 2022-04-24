@@ -43,7 +43,7 @@
             {{Session::get('success')}}
           </div>
           @endif
-          <table class="table table-bordered">
+          <table class="table table-bordered table-hover">
             <thead class="table-primary">
               <tr>
                 <th>STT</th>
@@ -89,7 +89,7 @@
                   @endif
                 </td>
                 <td class="text-right">
-                  <a href="{{ route('Emp_Info') }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                  <a href="#" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
                   <a href="{{ route('Emp_Edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
                   <a href="{{ route('Emp_Delete',$user->id) }}" class="btn btn-danger btn-delete btn-sm"><i class="fa fa-trash"></i></a>
                 </td>
