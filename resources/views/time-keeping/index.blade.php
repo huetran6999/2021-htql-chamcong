@@ -1,8 +1,10 @@
 @extends('layout.index')
 @section('content')
 <div class="container">
-    <form action="{{ route('timeKeeping.index')}}" method="get" class="row g-3" style="padding-top: 56px">
+    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách chấm công</h3>
+    <form action="{{ route('timeKeeping.index')}}" method="get" class="row g-3" style="padding-top: 20px">
         @csrf
+        
         <div class="col-md-5">
             {{-- <label for="years" class="form-label">Năm:</label> --}}
             <select name="years" id="years" class="form-select">
@@ -24,13 +26,14 @@
         </div>
 
         <div class="col-md-2">
-            <input type="submit" value="Submit" class="btn btn-primary">
+            {{-- <input type="submit" value="Submit" class="btn btn-primary"> --}}
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
         </div>
     </form>
     
 
-    <table class="table table-hover">
-        <thead>
+    <table class="table table-bordered table-hover mt-3">
+        <thead class="table-primary">
             <tr>
                 <th>STT</th>
                 <th>Nhân viên</th>
@@ -49,8 +52,12 @@
             @endforeach
         </tbody>
     </table>
+    <hr>
+          <div style="float: right">
+            {{ $timeKeepings->links() }}
+          </div>
 
-    <form action="{{ route('timeKeeping.import') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+    <form action="{{ route('timeKeeping.import') }}" method="POST" enctype="multipart/form-data" class="row g-3" style="float: left">
         @csrf
         <div class="form-group col-md-10">
             {{-- <label for="file">Chọn file chấm công</label> --}}
@@ -58,7 +65,7 @@
             
         </div>
         <div class="col-md-2">
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-file-import"></i> Nhập</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-file-import"></i></button>
             
         </div>
     </form>

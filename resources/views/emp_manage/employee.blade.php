@@ -89,8 +89,11 @@
                   @endif
                 </td>
                 <td class="text-right">
-                  <a href="#" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                  {{-- Nút xem --}}
+                  <a href="{{ route('Emp_Info',$user->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                  {{-- Nút sửa --}}
                   <a href="{{ route('Emp_Edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                  {{-- Nút xoá --}}
                   <a href="{{ route('Emp_Delete',$user->id) }}" class="btn btn-danger btn-delete btn-sm"><i class="fa fa-trash"></i></a>
                 </td>
 

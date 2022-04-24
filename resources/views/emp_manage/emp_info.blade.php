@@ -3,7 +3,7 @@
 <div class="container">
     <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Thông tin nhân viên</h3>
     <br>
-    <form class="row g-3"  method="POST" enctype="multipart/form-data">
+    <form class="row g-3"   enctype="multipart/form-data">
         @csrf
         <div class="card" style="box-shadow: 0 0 50px #ccc">
           <ul class="nav nav-tabs" role="tablist" style="padding-top: 10px;">

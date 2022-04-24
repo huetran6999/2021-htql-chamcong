@@ -63,8 +63,6 @@ class UserController extends Controller
         return view('emp_manage.employee', compact('users', 'ents', 'deps'));
     }
 
-
-
     public function fakeUser(){
         User::factory()->count(10)->create();
     }
@@ -211,7 +209,6 @@ class UserController extends Controller
         //dd($p);
         return view('emp_manage.emp_update', compact(['enterprises', 'deps', 'positions', 'lit','par', 'lang', 'user', 'salaries']));
     }
-
     public function Emp_Update(Request $request, $id){
         $user = User::find($id);
         $image = $request->u_avatar;
@@ -293,17 +290,7 @@ class UserController extends Controller
             }
             return redirect()->back()->with('del-success', 'Xoá người dùng thành công');
         }
-
-
     }
-
-
-
-
-    // public function GetSearch(Request $request){
-    //     $user=User::where('fullname','like','%'.$request->key.'%')->get();
-    //     return view('pages.search', compact('user'));
-    // }
     
     public function getDep(Request $request)
     {
@@ -314,5 +301,19 @@ class UserController extends Controller
 			$html.='<option value="'.$dep->id.'">'.$dep->d_name.'</option>';
 		}
 		echo $html;
+    }
+
+    public function showEmpInfo($id){
+        $user = User::find($id);
+        $enterprises = Enterprise::select('id', 'e_name')->get();
+        $deps = Department::select('id', 'd_name')->get();
+        $positions = Position::select('id', 'p_name')->get();
+        $lang = Foreign_Language::select('id', 'f_name')->get();
+        $salaries = Salary::select('id', 'coefficient_salary')->first();
+        $par = Parents::where('u_id', $user->id)->get();
+        $lit = Literacy::where('u_id', $user->id)->get();
+
+        // //dd($user);
+        return view('emp_manage.emp_info', compact(['enterprises', 'deps', 'positions', 'lit','par', 'lang', 'user', 'salaries']));
     }
 }

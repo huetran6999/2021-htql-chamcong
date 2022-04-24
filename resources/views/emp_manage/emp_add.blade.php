@@ -410,10 +410,10 @@
               <span class="text-danger">@error('p_name'){{$message}}@enderror</span>
             </div>
 
-            <div class="col-md-12">
+            {{-- <div class="col-md-12">
               <label for="coefficient_salary" class="form-label">Hệ số lương</label>
               <input type="text" class="form-control" name="coefficient_salary" value="" readonly>
-            </div>
+            </div> --}}
 
             <div class="col-md-6">
               <label for="username" class="form-label">Tên đăng nhập</label>

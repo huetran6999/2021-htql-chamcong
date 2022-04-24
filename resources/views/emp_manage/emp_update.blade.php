@@ -218,7 +218,7 @@
               <select name="f_id" id="fnameSelection" class="form-select">
                 <option selected disabled>--- Chọn trình độ ---</option>
                 @foreach ($lang as $la)
-                  <option @if($la->id==$la->id) {{"selected"}} @endif value="{{$la->id}}">{{$la->f_name}}</option>
+                  <option @if($user->foreign_language->id==$la->id) {{"selected"}} @endif value="{{$la->id}}">{{$la->f_name}}</option>
                 @endforeach
               </select>
             </div>
