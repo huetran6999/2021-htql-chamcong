@@ -17,7 +17,7 @@
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="{{route('index')}}">
+    <a class="navbar-brand" href="{{route('dashboard')}}">
       <img src="{{ asset('assets/images/logo-ctu.png') }}" height="50" alt="ctu-logo" loading="lazy" /> Hệ thống quản lý
     </a>
 
@@ -35,7 +35,7 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="{{route('index')}}">Trang chủ</a>
+          <a class="nav-link {{ (\Request::route()->getName() == 'dashboard') ? 'active' : '' }}" aria-current="page" href="{{route('dashboard')}}">Trang chủ</a>
         </li>
         <li class="nav-item">
           <a  href="{{route('employee')}}" class="nav-link {{ (\Request::route()->getName() == 'employee') ? 'active' : '' }}">Nhân viên</a>

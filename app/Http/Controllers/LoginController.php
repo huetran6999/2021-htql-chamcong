@@ -18,7 +18,7 @@ class LoginController extends Controller
             'username' => $username,
             'password' => $password
         ])) {
-            return redirect() ->route('index');
+            return redirect() ->route('dashboard');
         } else {
             return redirect('/login')->with('thongbao', 'Tên đăng nhập hoặc mật khẩu không đúng!');
             //dd($username, $password);

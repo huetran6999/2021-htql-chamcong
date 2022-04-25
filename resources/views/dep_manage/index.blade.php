@@ -1,7 +1,8 @@
 @extends('layout.index')
 @section('content')
+<h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách phòng ban</h3>
 <div class="container">
-<div class="container mt-5 bg-light" style="width: 100%" id="align-table">
+<div class="container bg-light" style="width: 100%" id="align-table">
   
     <a href="{{ route('department.create') }}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
     <br>
