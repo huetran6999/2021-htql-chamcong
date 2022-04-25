@@ -23,6 +23,6 @@ class Position extends Model
 
     public function salary()
     {
-        return $this->hasOne(Salary::class);
+        return $this->belongsTo(salary::class, 's_id', 'id');
     }
 }
