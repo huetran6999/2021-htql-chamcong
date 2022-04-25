@@ -1,41 +1,45 @@
 @extends('layout.index')
 @section('content')
 <div class="container">
-    <form action="{{ route('salaryReport.index')}}" method="get" style="padding-top: 56px" class="row g-3">
+    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách lương</h3>
+    <form action="{{ route('salaryReport.index')}}" method="get" style="padding-top: 20px" class="row g-3">
         @csrf
-        <div class="col-md-5 form-inline">
-        {{-- <label for="years" class="form-label">Năm:</label> --}}
-        <select name="years" id="years" class="form-select">
-            <option disabled selected>--Chọn Năm--</option>
-            @foreach ($years as $year)
-            <option value="{{ $year }}">{{ $year }}</option>
-            @endforeach
-        </select>
+        <div class="col-md-5">
+            {{-- <label for="years" class="form-label">Năm:</label> --}}
+            <select name="years" id="years" class="form-select">
+                <option disabled selected>--Chọn Năm--</option>
+                @foreach ($years as $year)
+                <option value="{{ $year }}">{{ $year }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="col-md-5">
-        {{-- <label for="months" class="form-label">Tháng:</label> --}}
-        <select name="months" id="months" class="form-select">
-            <option disabled selected>--Chọn tháng--</option>
-            @foreach ($months as $month)
-            <option value="{{ $month }}">{{ $month }}</option>
-            @endforeach
-        </select>
+            {{-- <label for="months" class="form label">Tháng:</label> --}}
+            <select name="months" id="months" class="form-select">
+                <option disabled selected>--Chọn tháng--</option>
+                @foreach ($months as $month)
+                <option value="{{ $month }}">{{ $month }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="col-md-2">
-            <input type="submit" value="Duyệt" class="btn btn-primary">
+            {{-- <input type="submit" value="Submit" class="btn btn-primary"> --}}
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
         </div>    
 
         
     </form>
-    <table class="table table-hover">
-        <thead>
+    <table class="table table-bordered table-hover mt-3">
+        <thead class="table-primary">
             <tr>
                 <th>STT</th>
-                <th>Nhân viên</th>
+                <th>Họ và tên</th>
+                {{-- <th>Phòng ban</th>
+                <th>Chức vụ</th> --}}
                 <th>Lương</th>
-                <Th>Ngày</Th>
+                <Th>Tháng</Th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +52,14 @@
             <tr>
                 <td>{{ $loop-> index + 1 }}</td>
                 <td>{{ $user->user->username }} - {{ $user->user->u_name }}</td>
+                {{-- @foreach ($pos as $p)
+                
+                <td>{{ $p->p_name }}</td>
+                
+                
+                @endforeach --}}
+                
+                {{-- <td>{{ $user->position>p_name }}</td> --}}
                 @if ($user->month === 2)
                 <td> {{ number_format((($salary * $user->total / 24) - $socialInsurance - $tax), 0, ',', ',') }} VNĐ</td>
                 @else
@@ -58,5 +70,9 @@
             @endforeach
         </tbody>
     </table>
+    <hr>
+    {{-- <div style="float: right">
+        {{$users->links();}}
+    </div> --}}
 </div>
 @endsection
