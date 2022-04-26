@@ -1,9 +1,10 @@
 @extends('layout.index')
 @section('content')
 <div class="container">
-    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách lương</h3>
+    
     <form action="{{ route('salaryReport.index')}}" method="get" style="padding-top: 20px" class="row g-3">
         @csrf
+        <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 10px">Danh sách lương</h3>
         <div class="col-md-5">
             {{-- <label for="years" class="form-label">Năm:</label> --}}
             <select name="years" id="years" class="form-select">
@@ -36,35 +37,43 @@
             <tr>
                 <th>STT</th>
                 <th>Họ và tên</th>
-                {{-- <th>Phòng ban</th>
-                <th>Chức vụ</th> --}}
-                <th>Lương</th>
+                <th>Số ngày công</th>
+                <th>Lương trước thuế</th>
+                <th>Lương sau thuế</th>
+                <th>Đơn vị</th>
                 <Th>Tháng</Th>
             </tr>
         </thead>
         <tbody>
             @foreach ($users as $user)
             @php
-            $salary = $user->user->position->basic_salary * $user->user->position->salary->coefficient_salary ; //gross-salary
-            $socialInsurance = $salary * 10.5 / 100; //bảo hiểm xã hội
-            $tax = $salary * 10 / 100; //thuế
+            $salary = $user->user->position->basic_salary * $user->user->position->salary->coefficient_salary ; //lcb*hsl
+            $socialInsurance = $salary * 10.5 / 100; //bảo hiểm xã hội = salary - hcb*hsl(100%-10.5%)
+            $gross_salary2 = ($salary * $user->total / 24) - $socialInsurance; //lương ròng tháng 2
+            $gross_salary = ($salary * $user->total / 26) - $socialInsurance; //lương ròng các tháng còn lại
+            $tax = $gross_salary * 10 / 100; //thuế = 10% salary
+            if ($gross_salary2 >= 10000000 || $gross_salary >= 10000000) {
+                $net_salary2 = $gross_salary2 - $tax;
+                $net_salary = $gross_salary - $tax;
+            }
+            
             @endphp
             <tr>
                 <td>{{ $loop-> index + 1 }}</td>
                 <td>{{ $user->user->username }} - {{ $user->user->u_name }}</td>
-                {{-- @foreach ($pos as $p)
-                
-                <td>{{ $p->p_name }}</td>
-                
-                
-                @endforeach --}}
-                
+                <td>{{ $user->total}}</td>
+                @if ($user->month === 2)
+                <td> {{ number_format(($gross_salary2), 0, ',', ',') }}</td>
+                @else
+                <td> {{ number_format(($gross_salary), 0, ',', ',') }}</td>
+                @endif
                 {{-- <td>{{ $user->position>p_name }}</td> --}}
                 @if ($user->month === 2)
-                <td> {{ number_format((($salary * $user->total / 24) - $socialInsurance - $tax), 0, ',', ',') }} VNĐ</td>
+                <td> {{ number_format(($net_salary2), 0, ',', ',') }}</td>
                 @else
-                <td> {{ number_format((($salary * $user->total / 26) - $socialInsurance - $tax), 0, ',', ',') }} VNĐ</td>
+                <td> {{ number_format(($net_salary), 0, ',', ',') }}</td>
                 @endif
+                <td>VNĐ</td>
                 <Th>{{ $user->month }}-{{ $user->year }}</Th>
             </tr>
             @endforeach

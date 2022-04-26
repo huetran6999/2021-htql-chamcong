@@ -102,14 +102,14 @@ class UserController extends Controller
     }
 
     public function Create(){
-        $enterprises = Enterprise::select('id', 'e_name')->get();
-        $deps = Department::select('id', 'd_name')->get();
-        $positions = Position::select('id', 'p_name')->get();
-        $lang = Foreign_Language::select('id', 'f_name')->get();
+        $enterprises = Enterprise::all();
+        $deps = Department::all();
+        $positions = Position::all();
+        $lang = Foreign_Language::all();
         $users = User::all();
-        $salaries = Salary::select('id', 'coefficient_salary')->first();
-        $lit = Literacy::select('id', 'l_name', 'l_major', 'l_grading','l_graduation_school','l_graduation_year', 'l_other_major','note')->get();
-        $par = Parents::select('id', 're_name','re_ship','re_gender','re_phone','re_address')->get();
+        $salaries = Salary::all();
+        $lit = Literacy::all();
+        $par = Parents::all();
         return view('emp_manage.emp_add', compact(['enterprises', 'deps', 'positions', 'lit','par', 'lang', 'users', 'salaries']));
     }
     public function Store(Request $request){   
@@ -144,41 +144,19 @@ class UserController extends Controller
         $user->p_id = $request->p_name;
         $user->d_id = $request->d_name;
         $user->f_id = $request->f_name;
-        $user->s_id = $user->p_id;
-        if ($user->p_id == 1) {
-            $user->s_id = '10';
-        }
-        if ($user->p_id == 2) {
-            $user->s_id = '9';
-        }
-        if ($user->p_id == 3 && $user->p_id == 5) {
-            $user->s_id = '7';
-        }
-        if ($user->p_id == 4) {
-            $user->s_id = '6';
-        }
-        if ($user->p_id == 6) {
-            $user->s_id = '5';
-        }
-        if ($user->p_id == 7) {
-            $user->s_id = '1';
-        }
-        if ($user->p_id == 8) {
-            $user->s_id = '1';
-        }
-        
-        // $user->e_id = $request->e_name;
+        $user->save();
 
         $parent = new Parents;
-        $parent->u_id = $user->id;
+        
         $parent->re_name = $request->re_name;
         $parent->re_ship = $request->re_ship;
         $parent->re_gender = $request->re_gender;
         $parent->re_phone = $request->re_phone;
         $parent->re_address = $request->re_address;
+        $parent->u_id = $user->id;
 
         $literacy = new Literacy;
-        $literacy->u_id = $user->id;
+        
         $literacy->l_name = $request->l_name;
         $literacy->l_major = $request->l_major;
         $literacy->l_grading = $request->l_grading;
@@ -186,8 +164,9 @@ class UserController extends Controller
         $literacy->l_graduation_year = $request->l_graduation_year;
         $literacy->l_other_major = $request->l_other_major;
         $literacy->note = $request->note;
+        $literacy->u_id = $user->id;
         
-        $user->save();
+        // $user->save();
         $parent->save();
         $literacy->save();
 
@@ -196,13 +175,12 @@ class UserController extends Controller
 
     public function Emp_Edit($id){
         $user = User::findOrFail($id);
-        $enterprises = Enterprise::select('id', 'e_name')->get();
-        $deps = Department::select('id', 'd_name')->get();
-        $positions = Position::select('id', 'p_name')->get();
-        $lang = Foreign_Language::select('id', 'f_name')->get();
-        $salaries = Salary::select('id', 'coefficient_salary')->first();
-        // $lit = Literacy::select('id', 'l_name', 'l_major', 'l_grading','l_graduation_school','l_graduation_year', 'l_other_major','note', 'u_id')->get();
-        //$par = Parents::select('id', 're_name','re_ship','re_gender','re_phone','re_address', 'u_id')->get();
+        $enterprises = Enterprise::all();
+        $deps = Department::all();
+        $positions = Position::all();
+        $lang = Foreign_Language::all();
+        $salaries = Salary::select('id', 'level', 'coefficient_salary')->get();
+        // $salaries = Salary::select('id', 'coefficient_salary')->first();
         $par = Parents::where('u_id', $user->id)->get();
         $lit = Literacy::where('u_id', $user->id)->get();
 
@@ -211,6 +189,10 @@ class UserController extends Controller
     }
     public function Emp_Update(Request $request, $id){
         $user = User::find($id);
+        
+        $parent = Parents::where('u_id', $user->id)->first();
+        $literacy = Literacy::where('u_id', $user->id)->first();
+        
         $image = $request->u_avatar;
         
         if($request->hasFile('u_avatar')) {
@@ -250,6 +232,25 @@ class UserController extends Controller
             // }
             $user->username= $request->username;
             $user->password = Hash::make($request->password);
+            $user->p_id = $request->p_name;
+            $user->d_id = $request->d_name;
+            $user->f_id = $request->f_name;
+            
+            $user->save();
+
+            $parent->re_name = $request->re_name;
+            $parent->re_ship = $request->re_ship;
+            $parent->re_gender = $request->re_gender;
+            $parent->re_phone = $request->re_phone;
+            $parent->re_address = $request->re_address;
+
+            $literacy->l_name = $request->l_name;
+            $literacy->l_major = $request->l_major;
+            $literacy->l_grading = $request->l_grading;
+            $literacy->l_graduation_school = $request->l_graduation_school;
+            $literacy->l_graduation_year = $request->l_graduation_year;
+            $literacy->l_other_major = $request->l_other_major;
+            $literacy->note = $request->note;
         } else {
             $user->u_name=$request->u_name;
             $user->u_gender = $request->u_gender;
@@ -269,9 +270,29 @@ class UserController extends Controller
             $user->u_status= $request->u_status;
             $user->username= $request->username;
             $user->password = Hash::make($request->password);
+            $user->p_id = $request->p_name;
+            $user->d_id = $request->d_name;
+            $user->f_id = $request->f_name;
+            $user->save();
+
+            $parent->re_name = $request->re_name;
+            $parent->re_ship = $request->re_ship;
+            $parent->re_gender = $request->re_gender;
+            $parent->re_phone = $request->re_phone;
+            $parent->re_address = $request->re_address;
+
+            $literacy->l_name = $request->l_name;
+            $literacy->l_major = $request->l_major;
+            $literacy->l_grading = $request->l_grading;
+            $literacy->l_graduation_school = $request->l_graduation_school;
+            $literacy->l_graduation_year = $request->l_graduation_year;
+            $literacy->l_other_major = $request->l_other_major;
+            $literacy->note = $request->note;
         }    
   //dd($user);    
-       $user->save();
+        $parent->save();
+        $literacy->save();
+      
        return redirect()->route('employee')->with('success', 'Cập nhật thành công');       
     }
 

@@ -183,7 +183,7 @@
 
               <div class="col-12">
                 <label for="l_grading" class="form-label">Xếp loại</label>
-                <select name="l_name" class="form-select" id="lnameSelection">
+                <select name="l_grading" class="form-select" id="lnameSelection">
                   <option selected disabled>--- Chọn xếp loại ---</option>
                   <option value="0" @if ($l->l_grading == '0') ? selected : null @endif>Xuất sắc</option>
                   <option value="4" @if ($l->l_grading == '4') ? selected : null @endif>Giỏi</option>
@@ -203,6 +203,16 @@
                 <input type="number" class="form-control" name="l_graduation_year" min="1980" max="2022" step="1" value="{{$l->l_graduation_year}}">
               </div>
 
+              <div class="col-md-12">
+                <label for="f_id" class="form-label">Trình độ ngoại ngữ</label>
+                <select name="f_name" id="fnameSelection" class="form-select">
+                  <option selected disabled>--- Chọn trình độ ---</option>
+                  @foreach ($lang as $la)
+                    <option @if($user->foreign_language->id==$la->id) {{"selected"}} @endif value="{{$la->id}}">{{$la->f_name}}</option>
+                  @endforeach
+                </select>
+              </div>
+
               <div class="col-12">
                 <label for="l_other_major" class="form-label">Văn bằng khác (nếu có)</label>
                 <input type="text" class="form-control" name="l_other_major" value="{{$l->l_ohter_major}}">
@@ -213,15 +223,7 @@
                 <input type="text" class="form-control" name="note" value="{{$l->note}}">
               </div>
 
-            <div class="col-md-12">
-              <label for="f_id" class="form-label">Trình độ ngoại ngữ</label>
-              <select name="f_id" id="fnameSelection" class="form-select">
-                <option selected disabled>--- Chọn trình độ ---</option>
-                @foreach ($lang as $la)
-                  <option @if($user->foreign_language->id==$la->id) {{"selected"}} @endif value="{{$la->id}}">{{$la->f_name}}</option>
-                @endforeach
-              </select>
-            </div>
+            
             @endforeach
           </div>
         </div>
@@ -264,7 +266,7 @@
 
             <div class="col-md-12">
               <label for="coefficient_salary" class="form-label">Hệ số lương</label>
-              <input type="text" class="form-control" name="coefficient_salary" value="{{$user->position->s_id}}" readonly>
+              <input type="text" class="form-control" name="coefficient_salary" value="{{$user->position->salary->coefficient_salary}}" readonly>               
             </div>
 
             <div class="col-md-6">

@@ -53,9 +53,7 @@
         </tbody>
     </table>
     <hr>
-          <div style="float: right">
-            {{ $timeKeepings->links() }}
-          </div>
+    
 
     <form action="{{ route('timeKeeping.import') }}" method="POST" enctype="multipart/form-data" class="row g-3" style="float: left">
         @csrf
@@ -69,5 +67,9 @@
             
         </div>
     </form>
+
+    {{-- <div style="float: right">
+        {{ $timeKeepings->links() }}
+    </div> --}}
 </div>
 @endsection

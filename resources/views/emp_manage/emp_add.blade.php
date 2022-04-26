@@ -355,23 +355,23 @@
               <input type="number" class="form-control" name="l_graduation_year" min="1980" max="2022" step="1" value="2020">
             </div>
 
-            <div class="col-12">
-              <label for="l_other_major" class="form-label">Văn bằng khác (nếu có)</label>
-              <input type="text" class="form-control" name="l_other_major" placeholder="">
-            </div>
-
             <div class="col-md-12">
-              <label for="f_id" class="form-label">Trình độ ngoại ngữ</label>
-              <select name="f_id" id="f_id" class="form-select">
+              <label for="f_name" class="form-label">Trình độ ngoại ngữ</label>
+              <select name="f_name" id="add-fl" class="form-select">
                 <option selected disabled>--- Chọn trình độ ---</option>
-                @foreach ($lang as $l)
-                <option value="{{ $l->id }}">{{ $l->f_name }}</option>
+                @foreach ($lang as $la)
+                  <option value="{{ $la->id }}">{{ $la->f_name }}</option>
                 @endforeach
               </select>
             </div>
 
             <div class="col-12">
-              <label for="note" class="form-label">Ghi chú</label>
+              <label for="l_other_major" class="form-label">Văn bằng khác (nếu có)</label>
+              <input type="text" class="form-control" name="l_other_major" placeholder="">
+            </div>
+
+            <div class="col-12">
+              <label for="note" class="form-label">Ghi chú (nếu có)</label>
               <input type="text" class="form-control" name="note" placeholder="">
             </div>
           </div>
@@ -384,8 +384,8 @@
               <label for="e_name" class="form-label">Đơn vị</label>
               <select class="form-select" name="e_name" id="add-ent">
                 <option selected disabled>--- Chọn đơn vị --- </option>
-                    @foreach ($enterprises as $ent)
-                <option value="{{$ent->id}}">{{ $ent->e_name }}</option>
+                @foreach ($enterprises as $ent)
+                  <option value="{{$ent->id}}">{{ $ent->e_name }}</option>
                 @endforeach
               </select>
               <span class="text-danger">@error('e_name'){{$message}}@enderror</span>

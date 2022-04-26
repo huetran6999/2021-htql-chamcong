@@ -202,6 +202,16 @@
                     <label for="l_graduation_year" class="form-label">Năm tốt nghiệp</label>
                     <input type="number" class="form-control" name="l_graduation_year" min="1980" max="2022" step="1" value="{{$l->l_graduation_year}}">
                   </div>
+
+                  <div class="col-md-12">
+                    <label for="f_id" class="form-label">Trình độ ngoại ngữ</label>
+                    <select name="f_id" id="fnameSelection" class="form-select">
+                      <option selected disabled>--- Chọn trình độ ---</option>
+                      @foreach ($lang as $la)
+                        <option @if($user->foreign_language->id==$la->id) {{"selected"}} @endif value="{{$la->id}}">{{$la->f_name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
     
                   <div class="col-12">
                     <label for="l_other_major" class="form-label">Văn bằng khác (nếu có)</label>
@@ -209,19 +219,11 @@
                   </div>
     
                   <div class="col-12">
-                    <label for="note" class="form-label">Ghi chú</label>
+                    <label for="note" class="form-label">Ghi chú (nếu có)</label>
                     <input type="text" class="form-control" name="note" value="{{$l->note}}">
                   </div>
     
-                <div class="col-md-12">
-                  <label for="f_id" class="form-label">Trình độ ngoại ngữ</label>
-                  <select name="f_id" id="fnameSelection" class="form-select">
-                    <option selected disabled>--- Chọn trình độ ---</option>
-                    @foreach ($lang as $la)
-                      <option @if($user->foreign_language->id==$la->id) {{"selected"}} @endif value="{{$la->id}}">{{$la->f_name}}</option>
-                    @endforeach
-                  </select>
-                </div>
+                
                 @endforeach
               </div>
             </div>
