@@ -1,8 +1,9 @@
 @extends('layout.index')
 @section('content')
 <div class=" bg-light col-lg-9" style="width: 100%" id="align-table">
-  <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách đơn vị</h3>
+  
   <div class="container">
+    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách đơn vị</h3>
     <a href="{{ route('department.create') }}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
     <br>
     <div class="table-responsive-sm">

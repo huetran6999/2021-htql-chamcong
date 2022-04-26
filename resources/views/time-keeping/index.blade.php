@@ -1,8 +1,8 @@
 @extends('layout.index')
 @section('content')
 <div class="container">
-    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách chấm công</h3>
-    <form action="{{ route('timeKeeping.index')}}" method="get" class="row g-3" style="padding-top: 20px">
+    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px; position:relative">Danh sách chấm công</h3>
+    <form action="{{ route('timeKeeping.index')}}" method="get" class="row g-3 mt-1">
         @csrf
         
         <div class="col-md-5">
@@ -36,8 +36,10 @@
         <thead class="table-primary">
             <tr>
                 <th>STT</th>
-                <th>Nhân viên</th>
-                <th>Tổng ngày chấm công</th>
+                <th>Họ và tên</th>
+                <th>Phòng ban</th>
+                <th>Chức vụ</th>
+                <th>Tổng số ngày công</th>
                 <th>Thời điểm</th>
             </tr>
         </thead>
@@ -46,6 +48,8 @@
             <tr>
                 <td>{{$loop -> index + 1}}</td>
                 <td>{{ $timeKeeping->user->username }} - {{ $timeKeeping->user->u_name }}</td>
+                <td>{{$timeKeeping->user->department->d_name}}</td>
+                <td>{{$timeKeeping->user->position->p_name}}</td>
                 <td>{{ $timeKeeping->total }}</td>
                 <td>{{ $timeKeeping->month }}-{{ $timeKeeping->year }}</td>
             </tr>
@@ -68,8 +72,8 @@
         </div>
     </form>
 
-    {{-- <div style="float: right">
+    <div style="float: right">
         {{ $timeKeepings->links() }}
-    </div> --}}
+    </div>
 </div>
 @endsection

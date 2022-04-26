@@ -12,7 +12,7 @@ class TimeKeepingController extends Controller
 {
     public function index(Request $request) {
 
-        $timeKeepings = TimeKeeping::with('user')->select('u_id', 'total', 'month', 'year')->get();
+        $timeKeepings = TimeKeeping::with('user')->select('u_id', 'total', 'month', 'year')->paginate(10);
         // $timeKeepings = TimeKeeping::with('user')->select('u_id', 'total', 'month', 'year')->get();
         
         if ($request->has('years')) {
