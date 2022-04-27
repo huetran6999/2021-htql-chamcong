@@ -27,8 +27,7 @@
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/sidebar.js') }}"></script>
     <script src="{{ asset('assets/js/emp.js') }}"></script>
-
-    
+    <script src="{{ asset('assets/js/salary.js') }}"></script>
 </body>
 
 </html>
