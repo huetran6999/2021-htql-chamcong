@@ -14,13 +14,12 @@
                 @endforeach
             </select>
         </div>
-
         <div class="col-md-5">
             {{-- <label for="months" class="form label">Tháng:</label> --}}
-            <select name="months" id="months" class="form-select">
+            <select name="months" id="months" class="form-select" disabled>
                 <option disabled selected>--Chọn tháng--</option>
                 @foreach ($months as $month)
-                <option value="{{ $month }}">{{ $month }}</option>
+                <option value="{{ $month }}" >{{ $month }}</option>
                 @endforeach
             </select>
         </div>
