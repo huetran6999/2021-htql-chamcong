@@ -189,7 +189,6 @@ class UserController extends Controller
     }
     public function Emp_Update(Request $request, $id){
         $user = User::find($id);
-        
         $parent = Parents::where('u_id', $user->id)->first();
         $literacy = Literacy::where('u_id', $user->id)->first();
         
