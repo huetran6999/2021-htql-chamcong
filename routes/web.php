@@ -98,6 +98,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/time-keeping', [TimeKeepingController::class, 'index'])->name('timeKeeping.index');
     Route::post('/time-keeping/import', [TimeKeepingController::class, 'import'])->name('timeKeeping.import');
     Route::get('/salary-report', [SalaryReportController::class, 'index'])->name('salaryReport.index');
+
+    //Chấm công theo giờ
+    Route::get('/working-log', [App\Http\Controllers\WorkingLogController::class, 'index'])->name('workinglog_index');
+    Route::post('/working-log/import', [App\Http\Controllers\WorkingLogController::class, 'import'])->name('workinglog_import');
 });
+
+
 
 Route::get('fake-user',[UserController::class, 'fakeUser']);
