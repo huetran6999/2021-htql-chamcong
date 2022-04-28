@@ -33,11 +33,11 @@
             <td>{{ $dep->d_phone }}</td>
             <td>
               <div>
-                <a href="{{ route('department.edit', $dep->id) }}" class="btn btn-primary btn-sm">Sửa</a>
+                <a href="{{ route('department.edit', $dep->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
                 <form action="{{ route('department.destroy', $dep->id) }}" method="POST" style="display: inline;">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete {{$dep->e_name}}?')">Xóa</button>
+                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete {{$dep->e_name}}?')"><i class="fa fa-trash"></i></button>
                 </form>
               </div>
             </td>

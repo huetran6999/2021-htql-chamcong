@@ -49,9 +49,9 @@
         <li class="nav-item">
           <a href="{{route('department.index')}}" class="nav-link {{ (\Request::route()->getName() == 'department.index') ? 'active' : '' }}">Phòng ban</a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link" href="#">My List</a>
-        </li>
+        </li> --}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
           Báo cáo

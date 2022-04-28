@@ -63,9 +63,9 @@ class UserController extends Controller
         return view('emp_manage.employee', compact('users', 'ents', 'deps'));
     }
 
-    public function fakeUser(){
-        User::factory()->count(10)->create();
-    }
+    // public function fakeUser(){
+    //     User::factory()->count(10)->create();
+    // }
 
     public function ShowUserrole(){
         $user = User::with('role')->orderBy('id')->paginate(5);

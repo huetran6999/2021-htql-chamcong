@@ -54,6 +54,9 @@
             if ($gross_salary2 >= 10000000 || $gross_salary >= 10000000) {
                 $net_salary2 = $gross_salary2 - $tax;
                 $net_salary = $gross_salary - $tax;
+            } else {
+                $net_salary2 = $gross_salary2;
+                $net_salary = $gross_salary;
             }
             
             @endphp

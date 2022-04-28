@@ -46,7 +46,7 @@
                                 <div class="form-outline mb-4">
                                     
                                     <label class="form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control form-control-lg" name="username" />
+                                    <input type="text" class="form-control form-control-lg" name="username" required/>
 
                                     {{-- thông báo lỗi-chưa đúng yêu cầu file LoginRequest --}}
                                     @if ($errors->has('username'))
@@ -57,7 +57,7 @@
                                 </div>                    
                                 <div class="form-outline mb-4">
                                     <label class="form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control form-control-lg" name="password" />
+                                    <input type="password" class="form-control form-control-lg" name="password" required/>
 
                                     {{-- thông báo lỗi-chưa đúng yêu cầu file LoginRequest --}}
                                     @if ($errors->has('username'))

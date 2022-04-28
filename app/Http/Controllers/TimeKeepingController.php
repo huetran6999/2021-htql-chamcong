@@ -16,13 +16,13 @@ class TimeKeepingController extends Controller
         // $timeKeepings = TimeKeeping::with('user')->select('u_id', 'total', 'month', 'year')->get();
         
         if ($request->has('years')) {
-            $timeKeepings = TimeKeeping::with('user')->where('year', 'LIKE', '%' . $request->years . '%')->select('u_id', 'total', 'month', 'year')->get();
+            $timeKeepings = TimeKeeping::with('user')->where('year', 'LIKE', '%' . $request->years . '%')->select('u_id', 'total', 'month', 'year')->paginate(10);
         }
         if ($request->has('months')) {
-            $timeKeepings = TimeKeeping::with('user')->where('month', 'LIKE', '%' . $request->months . '%')->select('u_id', 'total', 'month', 'year')->get();
+            $timeKeepings = TimeKeeping::with('user')->where('month', 'LIKE', '%' . $request->months . '%')->select('u_id', 'total', 'month', 'year')->paginate(10);
         }
         if ($request->has('years') && $request->has('months')) {
-            $timeKeepings = TimeKeeping::with('user')->where([['year', 'LIKE', '%' . $request->years . '%'], ['month', 'LIKE', '%' . $request->months . '%']])->select('u_id', 'total', 'month', 'year')->get();
+            $timeKeepings = TimeKeeping::with('user')->where([['year', 'LIKE', '%' . $request->years . '%'], ['month', 'LIKE', '%' . $request->months . '%']])->select('u_id', 'total', 'month', 'year')->paginate(10);
         }
 
         $years = TimeKeeping::select('year')
