@@ -98,7 +98,7 @@ class User extends Authenticatable
         return $this->hasMany(Parents::class, 'u_id', 'id');
     }
 
-    public function workinglog()
+    public function working_log()
     {
         return $this->hasMany(TimeKeeping::class);
     }

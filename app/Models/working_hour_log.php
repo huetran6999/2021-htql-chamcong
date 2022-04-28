@@ -18,7 +18,7 @@ class working_hour_log extends Model
         'date',
     ];
 
-    public function user()
+    public function user_log()
     {
         return $this->belongsTo(User::class, 'u_id', 'id');
     }
