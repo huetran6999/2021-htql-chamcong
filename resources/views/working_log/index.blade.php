@@ -28,10 +28,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($log as $log)
-            @php
-                $am_checkin = new DateTime($log->user_log->working_log->am_in);
-            @endphp
+            @foreach ($logs as $log)
             <tr>
                 <td>{{$loop -> index + 1}}</td>
                 <td>{{ $log->user_log->username }} - {{ $log->user_log->u_name }}</td>
@@ -41,8 +38,6 @@
                 <td>{{ $log->am_out }}</td>
                 <td>{{ $log->pm_in }}</td>
                 <td>{{ $log->pm_out }}</td>
-                <td>{{ $am_checkin }}</td>
-                {{-- <td>{{ $am_out_log }}</td> --}}
                 <td>{{ $log->date }}</td>
             </tr>
             @endforeach

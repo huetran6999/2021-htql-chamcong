@@ -12,7 +12,7 @@ class WorkingLogController extends Controller
 {
     public function index(Request $request) {
 
-        $log = working_hour_log::with('user_log')->select('u_id', 'date', 'am_in', 'am_out', 'pm_in', 'pm_out')->get();
+        $logs = working_hour_log::with('user_log')->select('u_id', 'date', 'am_in', 'am_out', 'pm_in', 'pm_out')->get();
 
         $date = working_hour_log::select('date')
         ->groupBy('date')
@@ -22,7 +22,7 @@ class WorkingLogController extends Controller
 
         // $am_checkin = Carbon::parse('am_in');
 
-        return view('working_log.index', compact('log', 'date'));
+        return view('working_log.index', compact('logs', 'date'));
     }
 
     public function import(){
