@@ -42,7 +42,7 @@
                 <td>{{ $log->pm_in }}</td>
                 <td>{{ $log->pm_out }}</td>
                 <td>{{ $am_checkin }}</td>
-                {{-- <td>{{ $am_out_log }}</td> --}}
+                <td>{{ $am_out_log }}</td>
                 <td>{{ $log->date }}</td>
             </tr>
             @endforeach
