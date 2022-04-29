@@ -100,6 +100,6 @@ class User extends Authenticatable
 
     public function working_log()
     {
-        return $this->hasMany(TimeKeeping::class);
+        return $this->hasMany(working_hour_log::class);
     }
 }
