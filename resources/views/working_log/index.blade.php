@@ -15,34 +15,43 @@
             <tr>
                 <th>STT</th>
                 <th>Họ và tên</th>
-                <th>Phòng ban</th>
-                <th>Chức vụ</th>
                 <th>Vào ca sáng</th>
                 <th>Ra ca sáng</th>
                 <th>Vào ca chiều</th>
                 <th>Ra ca chiều</th>
-                <th>Thời gian làm sáng</th>
-                <th>Thời gian làm chiều</th>
+                <th>Đi trễ</th>
+                <th>Về sớm</th>
                 <th>Thời gian làm cả ngày</th>
                 <th>Ngày</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($logs as $log)
+            @php
+                $am_checkin = "07:30:00";
+                $pm_checkout = "17:00:00";
+                $am_log_in = (strtotime($am_checkin) - strtotime($log->am_in))/60;
+                $pm_log_out = (strtotime($pm_checkout) - strtotime($log->pm_out))/60;
+                $working_log = (abs(strtotime($log->am_out) - strtotime($log->am_in)) + abs(strtotime($log->pm_out) - strtotime($log->pm_in)))/3600
+            @endphp
             <tr>
                 <td>{{$loop -> index + 1}}</td>
-                <td>{{ $log->user_log->username }} - {{ $log->user_log->u_name }}</td>
-                <td>{{$log->user_log->department->d_name}}</td>
-                <td>{{$log->user_log->position->p_name}}</td>
+                <td>{{ $log->user_log->id }} - {{ $log->user_log->u_name }}</td>
                 <td>{{ $log->am_in }}</td>
                 <td>{{ $log->am_out }}</td>
                 <td>{{ $log->pm_in }}</td>
                 <td>{{ $log->pm_out }}</td>
-<<<<<<< HEAD
-                <td>{{ $am_checkin }}</td>
-                <td>{{ $am_out_log }}</td>
-=======
->>>>>>> 9073de79e815a718b016da66ebab521c14828dd6
+                @if ($am_log_in < 0)
+                    <td>Trễ {{ 0 - $am_log_in }}'</td> 
+                @else
+                    <td>x</td>
+                @endif      
+                @if ($pm_log_out < 0)
+                    <td>Sớm {{ 0 - $pm_log_out }}'</td> 
+                @else
+                    <td>x</td>
+                @endif
+                <td>{{ $working_log }}</td>
                 <td>{{ $log->date }}</td>
             </tr>
             @endforeach

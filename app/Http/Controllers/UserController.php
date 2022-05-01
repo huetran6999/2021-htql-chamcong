@@ -26,6 +26,28 @@ class UserController extends Controller
         $users = User::with('department')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'f_id', 'u_phone', 'u_status')->paginate(5);
         $ents = Enterprise::select('id', 'e_name')->get();
         $deps = Department::select('id', 'd_name')->get();
+
+        // $output = '';
+        // $data = User::where('u_name', 'LIKE', '%'.$request->keyword.'%')->get();
+        // foreach($data as $user) {
+        //     $output .=  '<tr>
+        //     <td>'
+        //       .$user->u_avatar.
+        //     '</td>
+        //     <td>'.$user->username.'</td>
+        //     <td>'.$user->u_name .'</td>
+        //     <td>'.$user->position->p_name.'}</td>
+        //     <td>'.$user->department->d_name.'</td>
+        //     <td>'.$user->department->enterprise->e_name.'</td>
+        //     <td>'.$user->u_phone.'</td>
+        //     <td>'
+        //       .$user->u_status.
+        //     '</td>
+
+        //   </tr>';
+        // }
+
+        // return response()->json($output);
         
         
         if ($request->has('username')) {
@@ -336,4 +358,8 @@ class UserController extends Controller
         // //dd($user);
         return view('emp_manage.emp_info', compact(['enterprises', 'deps', 'positions', 'lit','par', 'lang', 'user', 'salaries']));
     }
+
+    // public function search(Request $request){
+        
+    // }
 }

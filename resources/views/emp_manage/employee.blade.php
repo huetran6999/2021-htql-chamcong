@@ -9,7 +9,7 @@
   <form class="row g-3" action="{{ route('employee')}}" method="get" enctype="multipart/form-data">
     @csrf
     <!-- Vertical -->
-    <div style="padding-top: 20px; width: 30%; margin-left:auto; margin-right:auto; font-size: 11" class="row g-3">  
+    {{-- <div style="padding-top: 20px; width: 30%; margin-left:auto; margin-right:auto; font-size: 11" class="row g-3">  
       <div class="col-md-12">
         <label for="d_id" class="form-label">Phòng ban</label>
         <select name="d_id" id="d_id">
@@ -28,13 +28,23 @@
         <input type="text" name="u_name" id="u_name" placeholder="Tên người dùng">
       </div>
       <button type="submit" class="btn btn-sm btn-primary" style="width: 20%">Tìm kiếm</button>
-    </div>
+    </div> --}}
+
 
     
 
 
     <div class=" bg-light row g-3 col-lg-12" id="align-table" style="padding-top: 10px">
       <div class="container">
+        <div style="display: flex; align-item:center">
+        <div class="col-auto">
+          <input type="text" class="form-control"  id="u_name" name="u_name" placeholder="Nhập tên người dùng...">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn  btn-primary" ><i class="fa fa-search"></i></button>
+        </div>
+        </div>
+        
         <a href="{{route('Emp_Create')}}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
         <br>
         <div class="table-responsive-sm float-left">
@@ -43,7 +53,7 @@
             {{Session::get('success')}}
           </div>
           @endif
-          <table class="table table-bordered table-hover">
+          <table class="table table-bordered table-hover" id="empTable">
             <thead class="table-primary">
               <tr>
                 <th>STT</th>
@@ -59,7 +69,10 @@
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id="listEmp">
+
+                  
+              
               @foreach ($users as $user )
               <tr>
                 <td>{{ $loop-> index + 1 }}</td>
@@ -99,6 +112,8 @@
 
               </tr>
               @endforeach
+              
+
             </tbody>
           </table>
           <hr>
@@ -106,13 +121,11 @@
             {{ $users->links() }}
           </div>
         </div>
-
-
-
-
-
       </div>
 
     </div>
+
   </form>
+
 </div>
+@endsection
