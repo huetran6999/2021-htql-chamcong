@@ -38,10 +38,7 @@
       <div class="container">
         <div style="display: flex; align-item:center">
         <div class="col-auto">
-          <input type="text" class="form-control"  id="u_name" name="u_name" placeholder="Nhập tên người dùng...">
-        </div>
-        <div class="col-auto">
-          <button type="submit" class="btn  btn-primary" ><i class="fa fa-search"></i></button>
+          <input type="text" class="form-control" name="search" id="search" placeholder="Tìm kiếm">
         </div>
         </div>
         
@@ -56,7 +53,6 @@
           <table class="table table-bordered table-hover" id="empTable">
             <thead class="table-primary">
               <tr>
-                <th>STT</th>
                 <th width="8%">Avatar</th>
                 <th>Username</th>
                 <th>Họ và tên</th>
@@ -75,7 +71,6 @@
               
               @foreach ($users as $user )
               <tr>
-                <td>{{ $loop-> index + 1 }}</td>
                 <td>
                   @if ($user->u_avatar != '')
                   <img src="/uploads/{{$user->u_avatar}}" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />

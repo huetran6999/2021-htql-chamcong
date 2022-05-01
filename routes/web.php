@@ -82,7 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/update-employee/{id}', [UserController::class, 'Emp_Update'])->name('Emp_Update');
     Route::get('/delete-account/{id}', [UserController::class, 'Emp_Delete'])->name('Emp_Delete');
     Route::get('/employee-info/{id}',[App\Http\Controllers\UserController::class, 'showEmpInfo'])->name('Emp_Info');
-    // Route::get('/employee-management',[App\Http\Controllers\UserController::class, 'search'])->name('Emp_Search');
+    Route::get('employee-management/search', [UserController::class, 'search'])->name('emp-search');
 
     //Phân quyền user
     Route::get('employee-roles', [UserController::class, 'ShowUserRole'])->name('show_role');

@@ -23,63 +23,9 @@ class UserController extends Controller
 {
     public function ShowUser(Request $request){
         // lấy ra toàn bộ user
-        $users = User::with('department')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'f_id', 'u_phone', 'u_status')->paginate(5);
+        $users = User::with(['department', 'position'])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'f_id', 'u_phone', 'u_status')->paginate(5);
         $ents = Enterprise::select('id', 'e_name')->get();
         $deps = Department::select('id', 'd_name')->get();
-
-        // $output = '';
-        // $data = User::where('u_name', 'LIKE', '%'.$request->keyword.'%')->get();
-        // foreach($data as $user) {
-        //     $output .=  '<tr>
-        //     <td>'
-        //       .$user->u_avatar.
-        //     '</td>
-        //     <td>'.$user->username.'</td>
-        //     <td>'.$user->u_name .'</td>
-        //     <td>'.$user->position->p_name.'}</td>
-        //     <td>'.$user->department->d_name.'</td>
-        //     <td>'.$user->department->enterprise->e_name.'</td>
-        //     <td>'.$user->u_phone.'</td>
-        //     <td>'
-        //       .$user->u_status.
-        //     '</td>
-
-        //   </tr>';
-        // }
-
-        // return response()->json($output);
-        
-        
-        if ($request->has('username')) {
-            $users = User::with('department')->where('username', 'LIKE', '%' . $request->username . '%')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
-        }
-
-        if ($request->has('u_name')) {
-            $users = User::with('department')->where('u_name', 'LIKE', '%' . $request->u_name . '%')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
-        }
-
-        if ($request->has('d_id')) {
-            $users = User::with('department')->where('d_id', 'LIKE', '%' . $request->d_id . '%')->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
-        }
-
-        if ($request->has('username') && $request->has('u_name')) {
-            $users = User::with('department')->where([['username', 'LIKE', '%' . $request->username . '%'], ['u_name', 'LIKE', '%' . $request->u_name . '%']])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
-        }
-
-        if ($request->has('d_id') && $request->has('u_name')) {
-            $users = User::with('department')->where([['d_id', 'LIKE', '%' . $request->d_id . '%'], ['u_name', 'LIKE', '%' . $request->u_name . '%']])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
-        }
-
-        if ($request->has('d_id') && $request->has('username')) {
-            $users = User::with('department')->where([['username', 'LIKE', '%' . $request->username . '%'], ['d_id', 'LIKE', '%' . $request->d_id . '%']])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
-        }
-
-        if ($request->has('username') && $request->has('u_name') && $request->has('d_id')) {
-            $users = User::with('department')->where([['username', 'LIKE', '%' . $request->username . '%'], ['u_name', 'LIKE', '%' . $request->u_name . '%'], ['d_id', 'LIKE', '%' . $request->d_id . '%']])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'u_phone', 'u_status')->paginate(5);
-        }
-
-
-        //dd($users);
 
         // trả về view hiển thị danh sách tài khoản
         return view('emp_manage.employee', compact('users', 'ents', 'deps'));
@@ -359,7 +305,84 @@ class UserController extends Controller
         return view('emp_manage.emp_info', compact(['enterprises', 'deps', 'positions', 'lit','par', 'lang', 'user', 'salaries']));
     }
 
-    // public function search(Request $request){
-        
-    // }
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = '';
+            $users = User::with(['department', 'position'])
+                         ->where('username', 'LIKE', '%' . $request->search . '%')
+                         ->orWhere('u_name', 'LIKE', '%' . $request->search . '%')
+                         ->orWhere('u_status', 'LIKE', '%' . $request->search . '%')
+                         ->orWhere('u_phone', 'LIKE', '%' . $request->search . '%')
+                         ->orWhereHas('position', function($query) use($request) {
+                            $query->where('p_name', 'LIKE', '%' . $request->search . '%');
+                         })
+                         ->orWhereHas('department', function($query) use($request) {
+                            $query->where('d_name', 'LIKE', '%' . $request->search . '%');
+                         })
+                         ->orWhereHas('department', function($query) use($request) {
+                            $query->whereHas('enterprise', function($query) use($request) {
+                                $query->where('e_name', 'LIKE', '%' . $request->search . '%');
+                             });
+                         })
+                         ->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'f_id', 'u_phone', 'u_status')
+                         ->paginate(5);
+            if ($users) {
+                foreach ($users as $user) {
+                    if ($user->u_avatar != '') {
+                        $output .= "<tr>" .
+                                        "<td>" . "<img src='/uploads/" .$user->u_avatar. "' alt=" . $user->u_name. "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
+                                        "<td>" . $user->username . "</td>" .
+                                        "<td>" . $user->u_name . "</td>" .
+                                        "<td>" . $user->position->p_name . "</td>" .
+                                        "<td>" . $user->department->d_name . "</td>" .
+                                        "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                        "<td>" . $user->u_phone . "</td>" .
+                                        "<td class='text-right'>" .
+                                            "<a href=" . route('Emp_Info',$user->id). " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
+                                            "<a href=" . route('Emp_Edit',$user->id). " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
+                                            "<a href=" . route('Emp_Delete',$user->id). " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
+                                        "</td>" .
+                                    "</tr>";
+                    }
+                    else {
+                        if ($user->u_gender==0) {
+                            $output .= "<tr>" .
+                                        "<td>" . "<img src='/uploads/male-account-icon.png' alt=" . $user->u_name. " class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
+                                        "<td>" . $user->username . "</td>" .
+                                        "<td>" . $user->u_name . "</td>" .
+                                        "<td>" . $user->position->p_name . "</td>" .
+                                        "<td>" . $user->department->d_name . "</td>" .
+                                        "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                        "<td>" . $user->u_phone . "</td>" .
+                                        "<td class='text-right'>" .
+                                            "<a href=" . route('Emp_Info',$user->id). " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
+                                            "<a href=" . route('Emp_Edit',$user->id). " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
+                                            "<a href=" . route('Emp_Delete',$user->id). " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
+                                        "</td>" .
+                                    "</tr>";
+                        }
+                        else {
+                            $output .= "<tr>" .
+                                        "<td>" . "<img src='/uploads/female-account-icon.png' alt=" . $user->u_name. " class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
+                                        "<td>" . $user->username . "</td>" .
+                                        "<td>" . $user->u_name . "</td>" .
+                                        "<td>" . $user->position->p_name . "</td>" .
+                                        "<td>" . $user->department->d_name . "</td>" .
+                                        "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                        "<td>" . $user->u_phone . "</td>" .
+                                        "<td class='text-right'>" .
+                                            "<a href=" . route('Emp_Info',$user->id). " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
+                                            "<a href=" . route('Emp_Edit',$user->id). " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
+                                            "<a href=" . route('Emp_Delete',$user->id). " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
+                                        "</td>" .
+                                    "</tr>";
+                        }
+                    }
+                }
+            }
+            
+            return response()->json($output);
+        }
+    }
 }
