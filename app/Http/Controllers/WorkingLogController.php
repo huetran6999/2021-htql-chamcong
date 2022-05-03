@@ -18,7 +18,7 @@ class WorkingLogController extends Controller
         ->groupBy('date')
         ->pluck('date');
 
-        //dd($log);
+        // dd($date);
 
         // $am_checkin = Carbon::parse('am_in');
 

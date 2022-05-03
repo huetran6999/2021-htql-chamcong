@@ -44,27 +44,11 @@ use App\Models\Role;
 //tạo đường dẫn đến trang quản lý phòng ban
 
 
-
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'GetLogin'])->name('login');
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'PostLogin'])->name('postlogin');
 
 Route::get('/logout-account', [App\Http\Controllers\LoginController::class, 'Logout'])->name('logout');
 
-//Thêm nhân viên
-// Route::get('/create-account', [App\Http\Controllers\UserController::class, 'Create'])->name('Emp_Create');
-// Route::post('/create-account', [App\Http\Controllers\UserController::class, 'Store'])->name('Emp_Store');
-
-// Route::get('/update-account/{id}', [App\Http\Controllers\UserController::class, 'Edit']);
-// Route::post('/update-account/{id}', [App\Http\Controllers\UserController::class, 'Update']);
-
-// Route::get('/delete-account/{id}', [App\Http\Controllers\UserController::class, 'Emp_Delete'])->name('Emp_Delete');
-
-// Route::get('account-search', [App\Http\Controllers\UserController::class, 'GetSearch'])->name('search');
-
-
-//Thêm, Sửa, Xoá nhân viên
-
-// Route::get('/index', [App\Http\Controllers\UserController::class, 'Index']);
 Route::middleware('auth')->group(function () {
     Route::get('index-home', function () {
         return view('pages.dashboard');

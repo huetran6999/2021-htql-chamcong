@@ -13,7 +13,8 @@
     <table class="table table-bordered table-hover mt-3">
         <thead class="table-primary">
             <tr>
-                <th>STT</th>
+                {{-- <th>STT</th> --}}
+                <th>Ngày</th>
                 <th>Họ và tên</th>
                 <th>Vào ca sáng</th>
                 <th>Ra ca sáng</th>
@@ -22,7 +23,7 @@
                 <th>Đi trễ</th>
                 <th>Về sớm</th>
                 <th>Thời gian làm cả ngày</th>
-                <th>Ngày</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -35,7 +36,8 @@
                 $working_log = (abs(strtotime($log->am_out) - strtotime($log->am_in)) + abs(strtotime($log->pm_out) - strtotime($log->pm_in)))/3600
             @endphp
             <tr>
-                <td>{{$loop -> index + 1}}</td>
+                {{-- <td>{{$loop -> index + 1}}</td> --}}
+                <td>{{ $log->date }}</td>
                 <td>{{ $log->user_log->id }} - {{ $log->user_log->u_name }}</td>
                 <td>{{ $log->am_in }}</td>
                 <td>{{ $log->am_out }}</td>
@@ -52,7 +54,7 @@
                     <td>x</td>
                 @endif
                 <td>{{ $working_log }}</td>
-                <td>{{ $log->date }}</td>
+                
             </tr>
             @endforeach
         </tbody>

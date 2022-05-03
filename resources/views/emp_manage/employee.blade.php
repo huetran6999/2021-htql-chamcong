@@ -29,11 +29,6 @@
       </div>
       <button type="submit" class="btn btn-sm btn-primary" style="width: 20%">Tìm kiếm</button>
     </div> --}}
-
-
-    
-
-
     <div class=" bg-light row g-3 col-lg-12" id="align-table" style="padding-top: 10px">
       <div class="container">
         <div style="display: flex; align-item:center">
@@ -102,7 +97,7 @@
                   {{-- Nút sửa --}}
                   <a href="{{ route('Emp_Edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
                   {{-- Nút xoá --}}
-                  <a href="{{ route('Emp_Delete',$user->id) }}" class="btn btn-danger btn-delete btn-sm"><i class="fa fa-trash"></i></a>
+                  <a href="{{ route('Emp_Delete',$user->id) }}" class="btn btn-danger btn-delete btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xoá đơn vị {{$user->u_name}}?')"><i class="fa fa-trash"></i></a>
                 </td>
 
               </tr>
