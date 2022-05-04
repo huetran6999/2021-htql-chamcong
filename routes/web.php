@@ -86,6 +86,7 @@ Route::middleware('auth')->group(function () {
 
     //Chấm công theo giờ
     Route::get('/working-log', [App\Http\Controllers\WorkingLogController::class, 'index'])->name('workinglog_index');
+    Route::post('/working-log/update', [App\Http\Controllers\WorkingLogController::class, 'updateLog'])->name('workinglog_update');
     Route::post('/working-log/import', [App\Http\Controllers\WorkingLogController::class, 'import'])->name('workinglog_import');
 });
 

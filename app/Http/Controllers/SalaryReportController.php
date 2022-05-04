@@ -6,12 +6,16 @@ use App\Models\Department;
 use App\Models\Position;
 use App\Models\User;
 use App\Models\TimeKeeping;
+use App\Models\working_hour_log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
 class SalaryReportController extends Controller
 {
+
+
+
     public function index(Request $request) {
         $years = TimeKeeping::select('year')
         ->groupBy('year')
@@ -23,7 +27,9 @@ class SalaryReportController extends Controller
 
         $lastYear = collect($years)->last();
         $lastMonth = collect($months)->last();
-;
+
+        // dd($lastMonth, $lastYear);
+
 
         $users = TimeKeeping::with('user')->where([['year', 'LIKE', '%' . $lastYear . '%'], ['month', 'LIKE', '%' . $lastMonth . '%']])->select('u_id', 'total', 'month', 'year')->get();
         if ($request->has('years') && $request->has('months')) {
