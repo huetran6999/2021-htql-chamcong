@@ -25,6 +25,6 @@ class WorkingLogController extends Controller
 
     public function import(){
         Excel::import(new WorkingLogImport, request()->file('file'));
-        return redirect()->back()->with('success','Import dữ liệu thành công');
+        return redirect()->back()->with('success','Nhập dữ liệu thành công');
     }
 }

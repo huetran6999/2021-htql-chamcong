@@ -57,11 +57,13 @@
                 $am_checkin = "07:30:00";
                 $am_checkout = "11:30:00";
                 $pm_checkout = "17:00:00";
+                $pm_checkin = "13:00:00";
                 $am_log_in = abs(strtotime($am_checkin) - strtotime($log->am_in))/60;
+                $pm_log_in = abs(strtotime($pm_checkin) - strtotime($log->pm_in))/60;
                 $am_log_out = abs(strtotime($am_checkout) - strtotime($log->am_out))/60;
                 $pm_log_out = abs(strtotime($pm_checkout) - strtotime($log->pm_out))/60;
                 $soon = floor($am_log_out + $pm_log_out);
-                $late = floor($am_log_in);
+                $late = floor($am_log_in + $pm_log_in);
                 $working_log = round((abs(strtotime($log->am_out) - strtotime($log->am_in)) + abs(strtotime($log->pm_out) - strtotime($log->pm_in)))/3600);
 
             @endphp
@@ -73,7 +75,7 @@
                 <td>{{ $log->am_out }}</td>
                 <td>{{ $log->pm_in }}</td>
                 <td>{{ $log->pm_out }}</td>
-                @if ($log->am_in > $am_checkin)
+                @if ($log->am_in > $am_checkin || $log->pm_in > $pm_checkin)
                     <td>{{ $late }}</td> 
                 @else
                     <td>0</td>
