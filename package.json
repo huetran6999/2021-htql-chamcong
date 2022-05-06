@@ -16,6 +16,7 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "chart.js": "^3.7.1",
         "jquery-typeahead": "^2.11.1",
         "typeahead.js": "^0.11.1"
     }

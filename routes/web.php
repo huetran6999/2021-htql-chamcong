@@ -90,6 +90,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/working-log/import', [App\Http\Controllers\WorkingLogController::class, 'import'])->name('workinglog_import');
 });
 
-
+Route::get('/chart',[App\Http\Controllers\ChartController::class, 'index'])->name('chart');
 
 Route::get('fake-user',[UserController::class, 'fakeUser']);
