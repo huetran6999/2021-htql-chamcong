@@ -157,7 +157,7 @@
 @section('content')
 <div class="container">
   <div class="col-lg-12">
-    <h1 class="page-header" style="text-align:center; padding-top: 28px">Thông tin nhân viên</h1>
+    <h1 class="page-header" style="text-align:center; padding-top: 28px">Thêm nhân viên</h1>
   </div>
     <br>
     

@@ -4,7 +4,7 @@
   
   <div class="container">
     <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách đơn vị</h3>
-    <a href="{{ route('department.create') }}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
+    <a href="{{ route('enterprise.create') }}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
     <br>
     <div class="table-responsive-sm">
       @if (Session::has('message'))
@@ -15,7 +15,7 @@
       <table class="table table-bordered table-hover">
         <thead class="table-primary">
           <tr>
-            <th>ID</th>
+            <th>STT</th>
             <th>Tên đơn vị</th>
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
@@ -26,7 +26,7 @@
         <tbody>
           @foreach ($enterprises as $ent )
           <tr>
-            <td>{{ $ent->id }}</td>
+            <td>{{ $loop-> index + 1 }}</td>
             <td>{{ $ent->e_name }}</td>
             <td>{{ $ent->e_address }}</td>
             <td>{{ $ent->e_phone }}</td>

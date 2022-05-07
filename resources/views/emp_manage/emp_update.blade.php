@@ -305,7 +305,7 @@
 
         <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block; padding-bottom: 10px">
           <a href="{{route('employee')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
-          <button type="reset" class="btn btn-secondary">Làm trống</button>
+          {{-- <button type="reset" class="btn btn-secondary">Làm trống</button> --}}
           <button type="submit" class="btn btn-primary">Cập nhật <i class="fa fa-arrow-right"></i></button>
         </div>
       </div> 

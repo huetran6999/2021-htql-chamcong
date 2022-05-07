@@ -37,23 +37,39 @@
         <li class="nav-item">
           <a class="nav-link {{ (\Request::route()->getName() == 'dashboard') ? 'active' : '' }}" aria-current="page" href="{{route('dashboard')}}">Trang chủ</a>
         </li>
-        <li class="nav-item">
-          <a  href="{{route('employee')}}" class="nav-link {{ (\Request::route()->getName() == 'employee') ? 'active' : '' }}">Nhân viên</a>
-        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {{ (\Request::route()->getName() == 'employee' 
+            || \Request::route()->getName() == 'Emp_Edit' 
+            || \Request::route()->getName() == 'Emp_Info'
+            || \Request::route()->getName() == 'Emp_Create') ? 'active' : '' }}" href="#" id="navbardrop" data-toggle="dropdown">
+          Nhân viên
+          </a>
+          <div class="dropdown-menu">
+             <a class="dropdown-item" href="{{ route('Emp_Create') }}">Thêm nhân viên</a>
+             <a class="dropdown-item" href="{{ route('employee') }}">Xem danh sách nhân viên</a>
+          </div>
+       </li>
         <li class="nav-item">
           <a href="{{route('show_role')}}" class="nav-link {{ (\Request::route()->getName() == 'show_role') ? 'active' : '' }}">Phân quyền</a>
         </li>
         <li class="nav-item">
-          <a href="{{route('enterprise.index')}}" class="nav-link {{ (\Request::route()->getName() == 'enterprise.index') ? 'active' : '' }}">Đơn vị</a>
+          <a href="{{route('enterprise.index')}}" class="nav-link 
+          {{ (\Request::route()->getName() == 'enterprise.index'
+          || \Request::route()->getName() == 'enterprise.create'
+          || \Request::route()->getName() == 'enterprise.edit') ? 'active' : '' }}">Đơn vị</a>
         </li>
         <li class="nav-item">
-          <a href="{{route('department.index')}}" class="nav-link {{ (\Request::route()->getName() == 'department.index') ? 'active' : '' }}">Phòng ban</a>
+          <a href="{{route('department.index')}}" class="nav-link 
+          {{ (\Request::route()->getName() == 'department.index'
+          || \Request::route()->getName() == 'department.create'
+          || \Request::route()->getName() == 'department.edit') ? 'active' : '' }}">Phòng ban</a>
         </li>
         {{-- <li class="nav-item">
           <a class="nav-link" href="#">My List</a>
         </li> --}}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          <a class="nav-link dropdown-toggle {{ (\Request::route()->getName() == 'salaryReport.index' 
+            || \Request::route()->getName() == 'timeKeeping.index') ? 'active' : '' }}" href="#" id="navbardrop" data-toggle="dropdown">
           Báo cáo
           </a>
           <div class="dropdown-menu">

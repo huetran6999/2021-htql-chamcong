@@ -25,4 +25,9 @@ class Position extends Model
     {
         return $this->belongsTo(salary::class, 's_id', 'id');
     }
+
+    public function dep_pos()
+    {
+        return $this->belongsTo(Department::class, 'd_id', 'id');
+    }
 }

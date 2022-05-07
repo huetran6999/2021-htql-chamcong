@@ -37,7 +37,7 @@
         </div>
         </div>
         
-        <a href="{{route('Emp_Create')}}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
+        {{-- <a href="{{route('Emp_Create')}}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br> --}}
         <br>
         <div class="table-responsive-sm float-left">
           @if (Session::has('success'))
@@ -81,8 +81,9 @@
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->u_name }}</td>
                 <td>{{$user->position->p_name}}</td>
-                <td>{{$user->department->d_name}}</td>
-                <td>{{$user->department->enterprise->e_name}}</td>
+                <td>{{$user->position->dep_pos->d_name}}</td>
+                <td>{{$user->position->dep_pos->enterprise->e_name}}</td>
+                {{-- <td>{{$user->department->enterprise->e_name}}</td> --}}
                 <td>{{ $user->u_phone }}</td>
                 <td>
                   @if ($user->u_status==0)

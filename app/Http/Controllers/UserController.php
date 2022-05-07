@@ -24,12 +24,15 @@ class UserController extends Controller
     public function ShowUser(Request $request)
     {
         // lấy ra toàn bộ user
-        $users = User::with(['department', 'position'])->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'f_id', 'u_phone', 'u_status')->paginate(5);
+        $users = User::select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'f_id', 'u_phone', 'u_status', 'u_IDcode', 'u_IDcodedate')->paginate(5);
         $ents = Enterprise::select('id', 'e_name')->get();
         $deps = Department::select('id', 'd_name')->get();
+        $pos = Position::select('id', 'p_name')->get();
+
+        // dd($users);
 
         // trả về view hiển thị danh sách tài khoản
-        return view('emp_manage.employee', compact('users', 'ents', 'deps'));
+        return view('emp_manage.employee', compact('users', 'ents', 'deps', 'pos'));
     }
 
     // public function fakeUser(){
@@ -63,16 +66,16 @@ class UserController extends Controller
     }
 
 
-    public function insert(Request $request)
-    {
-        $this->validate(request(), [
-            'username' => 'required',
-            'password' => 'required'
-        ]);
+    // public function insert(Request $request)
+    // {
+    //     $this->validate(request(), [
+    //         'username' => 'required',
+    //         'password' => 'required'
+    //     ]);
 
-        User::create(request(['username', 'password']));
-        echo '<script language="javascript">alert("Thêm thành viên thành công!");</script>';
-    }
+    //     User::create(request(['username', 'password']));
+    //     echo '<script language="javascript">alert("Thêm thành viên thành công!");</script>';
+    // }
 
     public function Create()
     {
@@ -117,7 +120,6 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->p_id = $request->p_name;
-        $user->d_id = $request->d_name;
         $user->f_id = $request->f_name;
         $user->save();
 
@@ -209,7 +211,6 @@ class UserController extends Controller
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->p_id = $request->p_name;
-            $user->d_id = $request->d_name;
             $user->f_id = $request->f_name;
 
             $user->save();
@@ -247,7 +248,6 @@ class UserController extends Controller
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->p_id = $request->p_name;
-            $user->d_id = $request->d_name;
             $user->f_id = $request->f_name;
             $user->save();
 
@@ -320,7 +320,7 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $output = '';
-            $users = User::with(['department', 'position'])
+            $users = User::with(['position'])
                 ->where('username', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('u_name', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('u_status', 'LIKE', '%' . $request->search . '%')
@@ -328,12 +328,16 @@ class UserController extends Controller
                 ->orWhereHas('position', function ($query) use ($request) {
                     $query->where('p_name', 'LIKE', '%' . $request->search . '%');
                 })
-                ->orWhereHas('department', function ($query) use ($request) {
-                    $query->where('d_name', 'LIKE', '%' . $request->search . '%');
+                ->orWhereHas('position', function ($query) use ($request) {
+                    $query->whereHas('department', function ($query) use ($request) {
+                        $query->where('d_name', 'LIKE', '%' . $request->search . '%');
+                    });
                 })
-                ->orWhereHas('department', function ($query) use ($request) {
-                    $query->whereHas('enterprise', function ($query) use ($request) {
-                        $query->where('e_name', 'LIKE', '%' . $request->search . '%');
+                ->orWhereHas('position', function ($query) use ($request) {
+                    $query->whereHas('department', function ($query) use ($request) {
+                        $query->whereHas('enterprise', function ($query) use ($request) {
+                            $query->where('e_name', 'LIKE', '%' . $request->search . '%');
+                        });
                     });
                 })
                 ->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'f_id', 'u_phone', 'u_status')
@@ -347,8 +351,8 @@ class UserController extends Controller
                                 "<td>" . $user->username . "</td>" .
                                 "<td>" . $user->u_name . "</td>" .
                                 "<td>" . $user->position->p_name . "</td>" .
-                                "<td>" . $user->department->d_name . "</td>" .
-                                "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                                "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
                                 "<td>" . $user->u_phone . "</td>" .
                                 "<td><span class='badge bg-success'>Hoạt động</span></td>" .
                                 "<td class='text-right'>" .
@@ -363,8 +367,8 @@ class UserController extends Controller
                                 "<td>" . $user->username . "</td>" .
                                 "<td>" . $user->u_name . "</td>" .
                                 "<td>" . $user->position->p_name . "</td>" .
-                                "<td>" . $user->department->d_name . "</td>" .
-                                "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                                "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
                                 "<td>" . $user->u_phone . "</td>" .
                                 "<td><span class='badge bg-success'>Ngưng Hoạt động</span></td>" .
                                 "<td class='text-right'>" .
@@ -382,8 +386,8 @@ class UserController extends Controller
                                     "<td>" . $user->username . "</td>" .
                                     "<td>" . $user->u_name . "</td>" .
                                     "<td>" . $user->position->p_name . "</td>" .
-                                    "<td>" . $user->department->d_name . "</td>" .
-                                    "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                    "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                                    "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
                                     "<td>" . $user->u_phone . "</td>" .
                                     "<td><span class='badge bg-success'>Hoạt động</span></td>" .
                                     "<td class='text-right'>" .
@@ -398,8 +402,8 @@ class UserController extends Controller
                                     "<td>" . $user->username . "</td>" .
                                     "<td>" . $user->u_name . "</td>" .
                                     "<td>" . $user->position->p_name . "</td>" .
-                                    "<td>" . $user->department->d_name . "</td>" .
-                                    "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                    "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                                    "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
                                     "<td>" . $user->u_phone . "</td>" .
                                     "<td><span class='badge bg-success'>Ngưng Hoạt động</span></td>" .
                                     "<td class='text-right'>" .
@@ -416,8 +420,8 @@ class UserController extends Controller
                                     "<td>" . $user->username . "</td>" .
                                     "<td>" . $user->u_name . "</td>" .
                                     "<td>" . $user->position->p_name . "</td>" .
-                                    "<td>" . $user->department->d_name . "</td>" .
-                                    "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                    "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                                    "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
                                     "<td>" . $user->u_phone . "</td>" .
                                     "<td><span class='badge bg-success'>Hoạt động</span></td>" .
                                     "<td class='text-right'>" .
@@ -432,8 +436,8 @@ class UserController extends Controller
                                     "<td>" . $user->username . "</td>" .
                                     "<td>" . $user->u_name . "</td>" .
                                     "<td>" . $user->position->p_name . "</td>" .
-                                    "<td>" . $user->department->d_name . "</td>" .
-                                    "<td>" . $user->department->enterprise->e_name . "</td>" .
+                                    "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                                    "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
                                     "<td>" . $user->u_phone . "</td>" .
                                     "<td><span class='badge bg-success'>Ngưng Hoạt động</span></td>" .
                                     "<td class='text-right'>" .

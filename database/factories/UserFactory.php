@@ -26,15 +26,11 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            't_id' => '1',
-            'p_id' => '6',
+            'p_id' => '9',
             'f_id' => '3',
-            'l_id' => '3',
-            'd_id' => '4',
-            's_id' => '5',
             'u_name' => $this->faker->name(),
             'u_gender'=>$this->faker->randomElement([0,1]),
-            // 'u_IDcode'=>$this->faker->random_int($min=1000000000, $max=2000000000),
+            'u_IDcode'=>$this->faker->phoneNumber(),
             'u_IDcodedate'=> $this->faker->date($format = 'Y_m_d', $max = 'now', $min='2015-01-01'),
             'u_IDcodeplace'=>$this->faker->city(),
             'u_dob'=>$this->faker->date($format = 'Y_m_d', $max = '2000-12-31', $min='1975-01-01'),

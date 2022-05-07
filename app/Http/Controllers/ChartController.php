@@ -11,7 +11,8 @@ use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 class ChartController extends Controller
 {
     public function index() {
-        return view('show');
+        $user = User::all()->count();
+        return view('show', compact('user'));
     }
 
     // public function __invoke()
