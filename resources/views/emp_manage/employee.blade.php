@@ -61,20 +61,17 @@
             </thead>
 
             <tbody id="listEmp">
-
-                  
-              
               @foreach ($users as $user )
               <tr>
                 <td>
                   @if ($user->u_avatar != '')
-                  <img src="/uploads/{{$user->u_avatar}}" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+                    <img src="/uploads/{{$user->u_avatar}}" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
                   @else
-                  @if ($user->u_gender==0)
-                  <img src="/uploads/male-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
-                  @else
-                  <img src="/uploads/female-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
-                  @endif
+                    @if ($user->u_gender==0)
+                      <img src="/uploads/male-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+                    @else
+                      <img src="/uploads/female-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
+                    @endif
 
                   @endif
                 </td>

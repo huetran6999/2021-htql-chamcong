@@ -432,7 +432,7 @@ class UserController extends Controller
                                     "</tr>";
                             } else {
                                 $output .= "<tr>" .
-                                    "<td>" . "<img src='/uploads/male-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
+                                    "<td>" . "<img src='/uploads/female-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
                                     "<td>" . $user->username . "</td>" .
                                     "<td>" . $user->u_name . "</td>" .
                                     "<td>" . $user->position->p_name . "</td>" .

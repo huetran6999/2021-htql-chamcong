@@ -236,7 +236,7 @@
                   <select class="form-select" name="e_name" id="add-ent">
                     <option selected disabled>--- Chọn đơn vị --- </option>
                     @foreach ($enterprises as $ent)
-                      <option @if($user->department->e_id==$ent->id) {{"selected"}} @endif value="{{$ent->id}}">{{$ent->e_name}}</option>
+                      <option @if($user->position->dep_pos->enterprise->e_id==$ent->id) {{"selected"}} @endif value="{{$ent->id}}">{{$ent->e_name}}</option>
                     @endforeach
                   </select>
                   <span class="text-danger">@error('e_name'){{$message}}@enderror</span>
@@ -247,7 +247,7 @@
                   <select class="form-select" name="d_name" id="add-dep">
                     <option disabled selected hidden>--- Chọn phòng ban --- </option>
                     @foreach ($deps as $dep)
-                      <option @if($user->d_id == $dep->id) {{"selected"}} @endif value="{{$dep->id}}">{{$dep->d_name}}</option>
+                      <option @if($user->position->d_id == $dep->id) {{"selected"}} @endif value="{{$dep->id}}">{{$dep->d_name}}</option>
                     @endforeach
                   </select>
                   <span class="text-danger">@error('d_name'){{$message}}@enderror</span>
