@@ -34,7 +34,7 @@
                     </td>
                     <td>{{$u->u_email}}</td>
                     <td>{{$u->position->p_name}}</td>
-                    <td>{{$u->department->d_name}}</td>
+                    <td>{{$u->position->dep_pos->d_name}}</td>
                     <td><input type="checkbox" name="manager_role" {{$u->hasRole(['manager']) ? 'checked' : ''}}></td>
                     <td><input type="checkbox" name="userleader_role" {{$u->hasRole(['userleader']) ? 'checked' : ''}}></td>
                     <td><input type="checkbox" name="salaryleader_role" {{$u->hasRole(['salaryleader']) ? 'checked' : ''}}></td>

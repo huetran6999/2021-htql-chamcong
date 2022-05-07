@@ -116,6 +116,8 @@ class UserController extends Controller
             $filename = time() . '.' . $extension;
             $file->move('uploads', $filename);
             $user->u_avatar = $filename;
+        } else {
+            $user->u_avatar = 'male-account-icon.png';
         }
         $user->username = $request->username;
         $user->password = bcrypt($request->password);

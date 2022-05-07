@@ -12,7 +12,7 @@ class WorkingLogController extends Controller
 {
     public function index(Request $request) {
 
-        $logs = working_hour_log::with('user_log')->select('u_id', 'date', 'am_in', 'am_out', 'pm_in', 'pm_out', 'total_time')->get();
+        $logs = working_hour_log::with('user_log')->select('u_id', 'date', 'am_in', 'am_out', 'pm_in', 'pm_out')->get();
 
         $dates = working_hour_log::select('date')
         ->groupBy('date')

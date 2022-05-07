@@ -49,7 +49,7 @@ Route::post('/login', [App\Http\Controllers\LoginController::class, 'PostLogin']
 
 Route::get('/logout-account', [App\Http\Controllers\LoginController::class, 'Logout'])->name('logout');
 
-// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('index-home', function () {
         return view('pages.dashboard');
     })->name('dashboard');
@@ -57,8 +57,8 @@ Route::get('/logout-account', [App\Http\Controllers\LoginController::class, 'Log
     //Xem hồ sơ nhân viên đăng nhập
     Route::get('/account-info', [App\Http\Controllers\AccountController::class, 'showAccountInfo'])->name('Account_Info');
 
-    //Employee management ->middleware('rolechecker')
-    Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee'); 
+    //Employee management 
+    Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee')->middleware('rolechecker'); 
     Route::post('/dep', [UserController::class, 'getDep'])->name('emp.getDep');
     Route::get('/create-account', [UserController::class, 'Create'])->name('Emp_Create');
     Route::post('/create-account', [UserController::class, 'Store'])->name('Emp_Store');
@@ -79,6 +79,9 @@ Route::get('/logout-account', [App\Http\Controllers\LoginController::class, 'Log
     //Quản lý phòng ban
     Route::resource('department', DepController::class);
 
+    //Quản lý chức vụ
+    Route::resource('position', App\Http\Controllers\PositionController::class);
+
     //Chấm công - Tính lương
     Route::get('/time-keeping', [TimeKeepingController::class, 'index'])->name('timeKeeping.index');
     Route::post('/time-keeping/import', [TimeKeepingController::class, 'import'])->name('timeKeeping.import');
@@ -88,7 +91,7 @@ Route::get('/logout-account', [App\Http\Controllers\LoginController::class, 'Log
     Route::get('/working-log', [App\Http\Controllers\WorkingLogController::class, 'index'])->name('workinglog_index');
     Route::post('/working-log/update', [App\Http\Controllers\WorkingLogController::class, 'updateLog'])->name('workinglog_update');
     Route::post('/working-log/import', [App\Http\Controllers\WorkingLogController::class, 'import'])->name('workinglog_import');
-// });
+});
 
 Route::get('/chart',[App\Http\Controllers\ChartController::class, 'index'])->name('chart');
 

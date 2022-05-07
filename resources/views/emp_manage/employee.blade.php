@@ -33,7 +33,7 @@
       <div class="container">
         <div style="display: flex; align-item:center">
         <div class="col-auto">
-          <input type="text" class="form-control" name="search" id="search" placeholder="Tìm kiếm">
+          <input type="text" class="form-control" name="search" id="search" placeholder="Tìm kiếm" autocomplete="off">
         </div>
         </div>
         
@@ -64,16 +64,16 @@
               @foreach ($users as $user )
               <tr>
                 <td>
-                  @if ($user->u_avatar != '')
+                  {{-- @if ($user->u_avatar != '') --}}
                     <img src="/uploads/{{$user->u_avatar}}" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
-                  @else
+                  {{-- @else
                     @if ($user->u_gender==0)
                       <img src="/uploads/male-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
                     @else
                       <img src="/uploads/female-account-icon.png" alt="{{$user->u_name}}" class="card-img-top" style="cursor: zoom-in;" width="60" />
                     @endif
 
-                  @endif
+                  @endif --}}
                 </td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->u_name }}</td>
