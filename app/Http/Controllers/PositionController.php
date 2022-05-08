@@ -31,15 +31,27 @@ class PositionController extends Controller
         return redirect()->route('position.index')->with('message','Thêm chức vụ mới thành công');
     }
 
-    public function edit(){
-        
+    public function edit($id){
+        $deps = Department::select('id', 'd_name')->get();
+        $salaries = Salary::select('id', 'coefficient_salary')->get();
+        $enterprises = Enterprise::select('id', 'e_name')->get();
+        $position = Position::find($id);
+
+        return view('position_manage.create', compact(['deps', 'salaries', 'enterprises', 'position']));
     }
 
-    public function update(){
-        
+    public function update(Request $request){
+        $position = Position::find($request->id);
+        $param = $request->all();
+        $position->update($param);
+
+        return redirect()->route('position.index')->with('message','Cập nhật chức vụ thành công');
     }
 
-    public function destroy(){
-        
+    public function destroy($id){
+        $position = Position::find($id);
+        $position->delete();
+
+        return redirect()->route('position.index')->with('message','Xoá chức vụ thành công');
     }
 }

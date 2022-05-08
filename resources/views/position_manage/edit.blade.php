@@ -2,19 +2,20 @@
 @section('content')
 <div class="container">
     <div class="col-lg-12">
-        <h1 class="page-header" style="text-align:center; padding-top: 28px">Thêm chức vụ</h1>
+        <h1 class="page-header" style="text-align:center; padding-top: 28px">Cập nhật chức vụ</h1>
     </div>
     <br> 
-    <form action="{{ route('position.store')}}" class="row g-3" style="border-radius: 25px; box-shadow: 0 0 50px #ccc;" method="post">
+    <form action="{{ route('position.update', $position->id)}}" class="row g-3" style="border-radius: 25px; box-shadow: 0 0 50px #ccc;" method="post">
         @csrf
+        @method('PUT')
+        <input type="hidden" name="id" value="{{$position->id}}">
         <div class="row mt-5">
             {{-- <div class="col-12 col-sm-6"> --}}
                 <div class="col-md-6">
                     <label for="e_name" class="form-label">Đơn vị</label>
                     <select class="form-select" name="e_name" id="add-ent">
-                      <option selected disabled>--- Chọn đơn vị --- </option>
                       @foreach ($enterprises as $ent)
-                        <option value="{{$ent->id}}">{{ $ent->e_name }}</option>
+                        <option value="{{$ent->id}}" @if ($position->dep_pos->e_id == $ent->id) {{"selected"}} @endif>{{ $ent->e_name }}</option>
                       @endforeach
                     </select>
                     <span class="text-danger">@error('e_name'){{$message}}@enderror</span>
@@ -23,21 +24,23 @@
                   <div class="col-md-12">
                     <label for="d_name" class="form-label">Phòng ban</label>
                     <select class="form-select" name="d_name" id="add-dep">
-                      <option disabled selected hidden>--- Chọn phòng ban --- </option>
+                        @foreach ($deps as $dep)
+                            <option value="{{$dep->id}}" @if ($position->d_id == $dep->id) {{"selected"}} @endif>{{ $dep->d_name }}</option>
+                        @endforeach  
                     </select>
                     <span class="text-danger">@error('d_name'){{$message}}@enderror</span>
                   </div>
                 <div class="form-group">
                     <div class="controls">
                         <label>Tên chức vụ</label>
-                        <input type="text" class="form-control" placeholder="Nhập tên chức vụ mới..." name="p_name" required autocomplete="off">
+                        <input type="text" class="form-control" name="p_name" value="{{ $position->p_name }}" required autocomplete="off">
                         <span class="text-danger">@error('p_name'){{$message}}@enderror</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="controls">
                         <label>Lương cơ bản</label>
-                        <input type="number" class="form-control" name="basic_salary" autocomplete="off" min="5000000" step="50000" value="10000000">
+                        <input type="number" class="form-control" name="basic_salary" autocomplete="off" min="5000000" step="50000" value="10000000" value="{{$position->basic_salary}}">
                         <span class="text-danger">@error('d_phone'){{$message}}@enderror</span>
                     </div>
                 </div>
@@ -58,7 +61,7 @@
             </div> --}}
         </div>
         <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block; padding-bottom: 10px">
-            <a href="{{route('department.index')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
+            <a href="{{route('position.index')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
             <button type="reset" class="btn btn-secondary">Làm trống</button>
             <button type="submit" class="btn btn-primary">Thêm <i class="fa fa-arrow-right"></i></button>
         </div>
