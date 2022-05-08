@@ -29,7 +29,7 @@ class EnterpriseController extends Controller
         $params = $request->all();
         Enterprise::create($params);
 
-        return redirect()->route('enterprise.index')->with('message', 'New data successfully added');
+        return redirect()->route('enterprise.index')->with('message', 'Thêm đơn vị mới thành công');
     }
 
     public function destroy($id) // 
