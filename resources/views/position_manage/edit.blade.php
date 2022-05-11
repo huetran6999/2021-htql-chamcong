@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <div class="controls">
                         <label>Lương cơ bản</label>
-                        <input type="number" class="form-control" name="basic_salary" autocomplete="off" min="5000000" step="50000" value="10000000" value="{{$position->basic_salary}}">
+                        <input type="number" class="form-control" name="basic_salary" autocomplete="off" min="5000000" step="50000"  value="{{ $position->basic_salary }}">
                         <span class="text-danger">@error('d_phone'){{$message}}@enderror</span>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <select class="form-select" name="s_id">
                         <option disabled selected>--- Chọn HSL ---</option>
                         @foreach ($salaries as $salary)
-                        <option value="{{$salary->id}}">{{ $salary->coefficient_salary }}</option>
+                        <option value="{{$salary->id}}" @if ($position->s_id == $salary->id) {{"selected"}} @endif>{{ $salary->coefficient_salary }}</option>
                         @endforeach
                     </select>
                     <span class="text-danger">@error('s_id'){{$message}}@enderror</span>
@@ -61,9 +61,8 @@
             </div> --}}
         </div>
         <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block; padding-bottom: 10px">
-            <a href="{{route('position.index')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
-            <button type="reset" class="btn btn-secondary">Làm trống</button>
-            <button type="submit" class="btn btn-primary">Thêm <i class="fa fa-arrow-right"></i></button>
+            <a href="{{ route('position.index') }}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
+            <button type="submit" class="btn btn-primary">Cập nhật <i class="fa fa-arrow-right"></i></button>
         </div>
     </form>
 </div>

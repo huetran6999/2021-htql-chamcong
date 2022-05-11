@@ -236,7 +236,7 @@
                   <select class="form-select" name="e_name" id="add-ent">
                     <option selected disabled>--- Chọn đơn vị --- </option>
                     @foreach ($enterprises as $ent)
-                      <option @if($user->position->dep_pos->enterprise->e_id==$ent->id) {{"selected"}} @endif value="{{$ent->id}}">{{$ent->e_name}}</option>
+                      <option @if($user->position->dep_pos->e_id==$ent->id) {{"selected"}} @endif value="{{$ent->id}}">{{$ent->e_name}}</option>
                     @endforeach
                   </select>
                   <span class="text-danger">@error('e_name'){{$message}}@enderror</span>
@@ -303,10 +303,8 @@
               </div>
             </div>
     
-            <div class="btn-group"  style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block; padding-bottom: 10px">
+            <div class="btn-group" role="group" style="text-align:center; float:right; margin-top: 15px; margin-left:auto; margin-right:auto; padding-bottom: 10px">
               <a href="{{route('employee')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
-              {{-- <button type="reset" class="btn btn-secondary">Làm trống</button>
-              <button type="submit" class="btn btn-primary">Cập nhật <i class="fa fa-arrow-right"></i></button> --}}
             </div>
           </div> 
         </div>

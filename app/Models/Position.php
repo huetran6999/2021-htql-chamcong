@@ -14,6 +14,7 @@ class Position extends Model
         'p_name',
         'basic_salary',
         's_id',
+        'd_id',
     ];
 
     public function users()
@@ -29,5 +30,10 @@ class Position extends Model
     public function dep_pos()
     {
         return $this->belongsTo(Department::class, 'd_id', 'id');
+    }
+
+    public function role()
+    {
+        return $this->belongsToMany(Role::class);
     }
 }

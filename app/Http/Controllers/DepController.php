@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DepartmentRequest;
 use App\Models\Department;
 use App\Models\Enterprise;
+use App\Models\Position;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DepController extends Controller
@@ -36,9 +38,15 @@ class DepController extends Controller
     public function destroy($id) // 
     {
         $department = Department::find($id);
-        $department->delete();
+        $positions = Position::where('d_id', $id);
 
-        return redirect()->route('department.index')->with('message', 'Data successfully removed');
+        if ($positions != null) {
+            return redirect()->route('department.index')->with('failed', 'Không thể xoá do tồn tại chức vụ trong phòng ban');
+        } else {
+            $department->delete();
+
+            return redirect()->route('department.index')->with('message', 'Xoá phòng ban thành công');
+        }   
     }
 
     public function edit($id)

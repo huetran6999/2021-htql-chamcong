@@ -45,8 +45,8 @@
           Nhân viên
           </a>
           <div class="dropdown-menu">
-             <a class="dropdown-item" href="{{ route('Emp_Create') }}">Thêm nhân viên</a>
-             <a class="dropdown-item" href="{{ route('employee') }}">Xem danh sách nhân viên</a>
+             <a class="dropdown-item {{ (\Request::route()->getName() == 'Emp_Create') ? 'active' : '' }}" href="{{ route('Emp_Create') }}">Thêm nhân viên</a>
+             <a class="dropdown-item {{ (\Request::route()->getName() == 'employee') ? 'active' : '' }}" href="{{ route('employee') }}">Xem danh sách nhân viên</a>
           </div>
        </li>
         <li class="nav-item">
@@ -76,8 +76,8 @@
           Báo cáo
           </a>
           <div class="dropdown-menu">
-             <a class="dropdown-item" href="{{ route('salaryReport.index') }}">Báo cáo lương</a>
-             <a class="dropdown-item" href="{{ route('timeKeeping.index') }}">Báo cáo chấm công</a>
+             <a class="dropdown-item {{(\Request::route()->getName() == 'salaryReport.index') ? 'active' : ''}}" href="{{ route('salaryReport.index') }}">Báo cáo lương</a>
+             <a class="dropdown-item {{(\Request::route()->getName() == 'timeKeeping.index') ? 'active' : ''}}" href="{{ route('timeKeeping.index') }}">Báo cáo chấm công</a>
           </div>
        </li>
       </ul>
@@ -98,7 +98,7 @@
               <img src="{{ asset('assets/images/logo-ctu.png') }}" height="30" alt="ctu-logo" loading="lazy" /> {{ Auth::user()->u_name }}
             </a>
             <div class="dropdown-menu">
-               <a class="dropdown-item" href="{{route('Account_Info')}}">Xem hồ sơ</a>
+               <a class="dropdown-item {{ (\Request::route()->getName() == 'Account_Info') ? 'active' : '' }}" href="{{route('Account_Info')}}">Xem hồ sơ</a>
                <a class="dropdown-item" href="#">Xem lịch sử chấm công</a>
                <a class="dropdown-item" href="#">Xem báo cáo</a>
                <hr class="dropdown-divider" />

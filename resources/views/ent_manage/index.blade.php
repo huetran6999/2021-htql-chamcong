@@ -9,9 +9,16 @@
     <div class="table-responsive-sm">
       @if (Session::has('message'))
       <div class="alert alert-success">
-        {{Session::get('message')}}
+        <strong>{{Session::get('message')}}</strong>
       </div>
       @endif
+
+      @if (Session::has('failed'))
+      <div class="alert alert-danger">
+        <strong>{{Session::get('failed')}}</strong>
+      </div>
+      @endif
+
       <table class="table table-bordered table-hover">
         <thead class="table-primary">
           <tr>

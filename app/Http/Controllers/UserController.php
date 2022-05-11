@@ -14,6 +14,7 @@ use App\Models\Parents;
 use App\Models\Position;
 use App\Models\Foreign_Language;
 use App\Models\Salary;
+use App\Models\Work_contract;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,43 +40,32 @@ class UserController extends Controller
     //     User::factory()->count(10)->create();
     // }
 
-    public function ShowUserrole()
-    {
-        $user = User::with('role')->orderBy('id')->paginate(5);
-        return view('emp_manage.role_assign', compact('user'));
-    }
-
-    public function AssignRole(Request $request)
-    { {
-            $user = User::where('username', $request->username)->first();
-            $user->role()->detach();
-            if ($request->manager_role) {
-                $user->role()->attach(Role::where('r_name', 'manager')->first());
-            }
-            if ($request->userleader_role) {
-                $user->role()->attach(Role::where('r_name', 'userleader')->first());
-            }
-            if ($request->salaryleader_role) {
-                $user->role()->attach(Role::where('r_name', 'salaryleader')->first());
-            }
-            if ($request->employee_role) {
-                $user->role()->attach(Role::where('r_name', 'employee')->first());
-            }
-            return redirect()->back()->with('message', 'Cấp quyền thành công!');
-        }
-    }
-
-
-    // public function insert(Request $request)
+    // public function ShowUserrole()
     // {
-    //     $this->validate(request(), [
-    //         'username' => 'required',
-    //         'password' => 'required'
-    //     ]);
-
-    //     User::create(request(['username', 'password']));
-    //     echo '<script language="javascript">alert("Thêm thành viên thành công!");</script>';
+    //     $user = User::with('role')->orderBy('id')->paginate(5);
+    //     return view('emp_manage.role_assign', compact('user'));
     // }
+
+    // public function AssignRole(Request $request)
+    // { {
+    //         $user = User::where('username', $request->username)->first();
+    //         $user->role()->detach();
+    //         if ($request->manager_role) {
+    //             $user->role()->attach(Role::where('r_name', 'manager')->first());
+    //         }
+    //         if ($request->userleader_role) {
+    //             $user->role()->attach(Role::where('r_name', 'userleader')->first());
+    //         }
+    //         if ($request->salaryleader_role) {
+    //             $user->role()->attach(Role::where('r_name', 'salaryleader')->first());
+    //         }
+    //         if ($request->employee_role) {
+    //             $user->role()->attach(Role::where('r_name', 'employee')->first());
+    //         }
+    //         return redirect()->back()->with('message', 'Cấp quyền thành công!');
+    //     }
+    // }
+
 
     public function Create()
     {
@@ -346,7 +336,7 @@ class UserController extends Controller
                 ->paginate(5);
             if ($users) {
                 foreach ($users as $user) {
-                    if ($user->u_avatar != '') {
+                    // if ($user->u_avatar != '') {
                         if ($user->u_status == 0) {
                             $output .= "<tr>" .
                                 "<td>" . "<img src='/uploads/" . $user->u_avatar . "' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
@@ -380,77 +370,77 @@ class UserController extends Controller
                                 "</td>" .
                                 "</tr>";
                         }
-                    } else {
-                        if ($user->u_gender == 0) {
-                            if ($user->u_status == 0) {
-                                $output .= "<tr>" .
-                                    "<td>" . "<img src='/uploads/male-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
-                                    "<td>" . $user->username . "</td>" .
-                                    "<td>" . $user->u_name . "</td>" .
-                                    "<td>" . $user->position->p_name . "</td>" .
-                                    "<td>" . $user->position->dep_pos->d_name . "</td>" .
-                                    "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
-                                    "<td>" . $user->u_phone . "</td>" .
-                                    "<td><span class='badge bg-success'>Hoạt động</span></td>" .
-                                    "<td class='text-right'>" .
-                                    "<a href=" . route('Emp_Info', $user->id) . " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
-                                    "<a href=" . route('Emp_Edit', $user->id) . " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
-                                    "<a href=" . route('Emp_Delete', $user->id) . " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
-                                    "</td>" .
-                                    "</tr>";
-                            } else {
-                                $output .= "<tr>" .
-                                    "<td>" . "<img src='/uploads/male-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
-                                    "<td>" . $user->username . "</td>" .
-                                    "<td>" . $user->u_name . "</td>" .
-                                    "<td>" . $user->position->p_name . "</td>" .
-                                    "<td>" . $user->position->dep_pos->d_name . "</td>" .
-                                    "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
-                                    "<td>" . $user->u_phone . "</td>" .
-                                    "<td><span class='badge bg-success'>Ngưng Hoạt động</span></td>" .
-                                    "<td class='text-right'>" .
-                                    "<a href=" . route('Emp_Info', $user->id) . " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
-                                    "<a href=" . route('Emp_Edit', $user->id) . " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
-                                    "<a href=" . route('Emp_Delete', $user->id) . " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
-                                    "</td>" .
-                                    "</tr>";
-                            }
-                        } else {
-                            if ($user->u_status == 0) {
-                                $output .= "<tr>" .
-                                    "<td>" . "<img src='/uploads/female-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
-                                    "<td>" . $user->username . "</td>" .
-                                    "<td>" . $user->u_name . "</td>" .
-                                    "<td>" . $user->position->p_name . "</td>" .
-                                    "<td>" . $user->position->dep_pos->d_name . "</td>" .
-                                    "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
-                                    "<td>" . $user->u_phone . "</td>" .
-                                    "<td><span class='badge bg-success'>Hoạt động</span></td>" .
-                                    "<td class='text-right'>" .
-                                    "<a href=" . route('Emp_Info', $user->id) . " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
-                                    "<a href=" . route('Emp_Edit', $user->id) . " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
-                                    "<a href=" . route('Emp_Delete', $user->id) . " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
-                                    "</td>" .
-                                    "</tr>";
-                            } else {
-                                $output .= "<tr>" .
-                                    "<td>" . "<img src='/uploads/female-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
-                                    "<td>" . $user->username . "</td>" .
-                                    "<td>" . $user->u_name . "</td>" .
-                                    "<td>" . $user->position->p_name . "</td>" .
-                                    "<td>" . $user->position->dep_pos->d_name . "</td>" .
-                                    "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
-                                    "<td>" . $user->u_phone . "</td>" .
-                                    "<td><span class='badge bg-success'>Ngưng Hoạt động</span></td>" .
-                                    "<td class='text-right'>" .
-                                    "<a href=" . route('Emp_Info', $user->id) . " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
-                                    "<a href=" . route('Emp_Edit', $user->id) . " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
-                                    "<a href=" . route('Emp_Delete', $user->id) . " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
-                                    "</td>" .
-                                    "</tr>";
-                            }
-                        }
-                    }
+                    // } else {
+                    //     if ($user->u_gender == 0) {
+                    //         if ($user->u_status == 0) {
+                    //             $output .= "<tr>" .
+                    //                 "<td>" . "<img src='/uploads/male-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
+                    //                 "<td>" . $user->username . "</td>" .
+                    //                 "<td>" . $user->u_name . "</td>" .
+                    //                 "<td>" . $user->position->p_name . "</td>" .
+                    //                 "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                    //                 "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
+                    //                 "<td>" . $user->u_phone . "</td>" .
+                    //                 "<td><span class='badge bg-success'>Hoạt động</span></td>" .
+                    //                 "<td class='text-right'>" .
+                    //                 "<a href=" . route('Emp_Info', $user->id) . " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
+                    //                 "<a href=" . route('Emp_Edit', $user->id) . " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
+                    //                 "<a href=" . route('Emp_Delete', $user->id) . " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
+                    //                 "</td>" .
+                    //                 "</tr>";
+                    //         } else {
+                    //             $output .= "<tr>" .
+                    //                 "<td>" . "<img src='/uploads/male-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
+                    //                 "<td>" . $user->username . "</td>" .
+                    //                 "<td>" . $user->u_name . "</td>" .
+                    //                 "<td>" . $user->position->p_name . "</td>" .
+                    //                 "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                    //                 "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
+                    //                 "<td>" . $user->u_phone . "</td>" .
+                    //                 "<td><span class='badge bg-success'>Ngưng Hoạt động</span></td>" .
+                    //                 "<td class='text-right'>" .
+                    //                 "<a href=" . route('Emp_Info', $user->id) . " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
+                    //                 "<a href=" . route('Emp_Edit', $user->id) . " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
+                    //                 "<a href=" . route('Emp_Delete', $user->id) . " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
+                    //                 "</td>" .
+                    //                 "</tr>";
+                    //         }
+                    //     } else {
+                    //         if ($user->u_status == 0) {
+                    //             $output .= "<tr>" .
+                    //                 "<td>" . "<img src='/uploads/female-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
+                    //                 "<td>" . $user->username . "</td>" .
+                    //                 "<td>" . $user->u_name . "</td>" .
+                    //                 "<td>" . $user->position->p_name . "</td>" .
+                    //                 "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                    //                 "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
+                    //                 "<td>" . $user->u_phone . "</td>" .
+                    //                 "<td><span class='badge bg-success'>Hoạt động</span></td>" .
+                    //                 "<td class='text-right'>" .
+                    //                 "<a href=" . route('Emp_Info', $user->id) . " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
+                    //                 "<a href=" . route('Emp_Edit', $user->id) . " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
+                    //                 "<a href=" . route('Emp_Delete', $user->id) . " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
+                    //                 "</td>" .
+                    //                 "</tr>";
+                    //         } else {
+                    //             $output .= "<tr>" .
+                    //                 "<td>" . "<img src='/uploads/female-account-icon.png' alt=" . $user->u_name . "class='card-img-top' style='cursor: zoom-in;' width='60' />" . "</td>" .
+                    //                 "<td>" . $user->username . "</td>" .
+                    //                 "<td>" . $user->u_name . "</td>" .
+                    //                 "<td>" . $user->position->p_name . "</td>" .
+                    //                 "<td>" . $user->position->dep_pos->d_name . "</td>" .
+                    //                 "<td>" . $user->position->dep_pos->enterprise->e_name . "</td>" .
+                    //                 "<td>" . $user->u_phone . "</td>" .
+                    //                 "<td><span class='badge bg-success'>Ngưng Hoạt động</span></td>" .
+                    //                 "<td class='text-right'>" .
+                    //                 "<a href=" . route('Emp_Info', $user->id) . " class='btn btn-info btn-sm'><i class='fa fa-eye'></i></a>" .
+                    //                 "<a href=" . route('Emp_Edit', $user->id) . " class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>" .
+                    //                 "<a href=" . route('Emp_Delete', $user->id) . " class='btn btn-danger btn-delete btn-sm'><i class='fa fa-trash'></i></a>" .
+                    //                 "</td>" .
+                    //                 "</tr>";
+                    //         }
+                    //     }
+                    // }
                 }
             }
 

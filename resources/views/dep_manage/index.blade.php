@@ -10,9 +10,16 @@
     <div class="table-responsive-sm">
       @if (Session::has('message'))
       <div class="alert alert-success">
-        {{Session::get('message')}}
+        <strong>{{Session::get('message')}}</strong>
       </div>
       @endif
+
+      @if (Session::has('failed'))
+      <div class="alert alert-danger">
+        <strong>{{Session::get('failed')}}</strong>
+      </div>
+      @endif
+
       <table class="table table-bordered table-hover">
         <thead class="table-primary">
           <tr>
@@ -37,7 +44,7 @@
                 <form action="{{ route('department.destroy', $dep->id) }}" method="POST" style="display: inline;">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete {{$dep->e_name}}?')"><i class="fa fa-trash"></i></button>
+                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xoá phòng {{$dep->e_name}} không?')"><i class="fa fa-trash"></i></button>
                 </form>
               </div>
             </td>

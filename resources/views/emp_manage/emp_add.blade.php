@@ -335,7 +335,7 @@
 
             <div class="col-12">
               <label for="l_grading" class="form-label">Xếp loại</label>
-              <select name="l_name" class="form-select" id="lnameSelection">
+              <select name="l_grading" class="form-select" id="lnameSelection">
                 <option selected disabled>--- Chọn xếp loại ---</option>
                 <option value="0">Xuất sắc</option>
                 <option value="4">Giỏi</option>

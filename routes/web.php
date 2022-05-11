@@ -57,8 +57,8 @@ Route::middleware('auth')->group(function () {
     //Xem hồ sơ nhân viên đăng nhập
     Route::get('/account-info', [App\Http\Controllers\AccountController::class, 'showAccountInfo'])->name('Account_Info');
 
-    //Employee management 
-    Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee')->middleware('rolechecker'); 
+    //Employee management ->middleware('rolechecker')
+    Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee'); 
     Route::post('/dep', [UserController::class, 'getDep'])->name('emp.getDep');
     Route::get('/create-account', [UserController::class, 'Create'])->name('Emp_Create');
     Route::post('/create-account', [UserController::class, 'Store'])->name('Emp_Store');

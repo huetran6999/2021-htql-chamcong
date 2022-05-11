@@ -2343,7 +2343,7 @@ textarea.form-control-lg {
 
 .form-check-input:disabled~.form-check-label,
 .form-check-input[disabled]~.form-check-label {
-    opacity: .5
+    opacity: .5;
 }
 
 .form-switch {
