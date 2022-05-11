@@ -38,6 +38,7 @@ class User extends Authenticatable
         'u_avatar',
         'username',
         'password',
+        'age'
     ];
 
     protected $hidden = [
@@ -100,5 +101,8 @@ class User extends Authenticatable
         return $this->hasMany(working_hour_log::class);
     }
 
-
+    public function getAgeAttribute()
+    {
+        return \Carbon\Carbon::parse($this->u_dob)->diff(\Carbon\Carbon::now())->format('%y');
+    }
 }

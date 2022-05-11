@@ -50,9 +50,7 @@ Route::post('/login', [App\Http\Controllers\LoginController::class, 'PostLogin']
 Route::get('/logout-account', [App\Http\Controllers\LoginController::class, 'Logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('index-home', function () {
-        return view('pages.dashboard');
-    })->name('dashboard');
+    Route::get('index-home', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
     //Xem hồ sơ nhân viên đăng nhập
     Route::get('/account-info', [App\Http\Controllers\AccountController::class, 'showAccountInfo'])->name('Account_Info');
