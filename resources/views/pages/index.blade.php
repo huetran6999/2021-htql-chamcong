@@ -40,6 +40,8 @@
 
     <script src="dashboards/assets/js/main.js"></script>
     
+    @yield('js')
+    @stack('js')
 </body>
 
 </html>

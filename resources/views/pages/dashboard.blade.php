@@ -1,7 +1,7 @@
 @extends('pages.index')
 @section('content')
 <div class="container">
-  <div class="page-heading mt-5">
+  <!-- <div class="page-heading mt-5">
               <h3>Profile Statistics</h3>
           </div>
   <div class="page-content mt-5">
@@ -266,6 +266,25 @@
               </div>
           </div>
       </section>
+  </div> -->
+  <div class="row mt-5">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div id="statistic-positon" style="width: 100%; height: 400px"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div id="statistic-age" style="width: 100%; height: 400px"></div>
+            </div>
+        </div>
+    </div>
   </div>
 
   <footer>
@@ -281,3 +300,35 @@
   </footer>
   </div>
 @endsection
+
+@push('js')
+    <script src="{{ asset('js\anychart-core.min.js') }}"></script>
+    <script src="{{ asset('js\anychart-pie.min.js') }}"></script>
+
+    <script>
+        let data_positions = JSON.parse(`<?= $positions ?>`);
+        anychart.onDocumentReady(function() {
+            // var data = [
+            //     {x: "Có việc làm", value: 1},
+            //     {x: "Chưa có việc làm", value: 38929319},
+            //     {x: "Chưa có nhu cầu", value: 38929319},
+            //     {x: "Đang vừa học vừa làm", value: 38929319},
+            //     {x: "Đang đi học", value: 38929319},
+            // ];
+            var chart = anychart.pie();
+            chart.title("Biểu đồ thống kê chức vụ nhân viên công ty");
+            chart.data(data_positions);
+            chart.container('statistic-positon');
+            chart.draw();
+        });
+
+        let data_statistic_age = JSON.parse(`<?= $statistic_age ?>`);
+        anychart.onDocumentReady(function() {
+            var chart = anychart.pie();
+            chart.title("Biểu đồ thống kê tuổi nhân viên công ty");
+            chart.data(data_statistic_age);
+            chart.container('statistic-age');
+            chart.draw();
+        });
+    </script>
+@endpush
