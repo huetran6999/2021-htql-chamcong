@@ -49,9 +49,9 @@
              <a class="dropdown-item {{ (\Request::route()->getName() == 'employee') ? 'active' : '' }}" href="{{ route('employee') }}">Xem danh sách nhân viên</a>
           </div>
        </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a href="{{route('show_role')}}" class="nav-link {{ (\Request::route()->getName() == 'show_role') ? 'active' : '' }}">Phân quyền</a>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a href="{{route('enterprise.index')}}" class="nav-link 
           {{ (\Request::route()->getName() == 'enterprise.index'

@@ -26,6 +26,7 @@
             <th>Phòng ban</th>
             <th>Đơn vị</th>
             <th>Lương cơ bản</th>
+            <th>Hệ số lương</th>
             <th>Hành động</th>
           </tr>
         </thead>
@@ -38,6 +39,7 @@
             <td>{{ $pos->dep_pos->d_name }}</td>
             <td>{{ $pos->dep_pos->enterprise->e_name }}</td>
             <td>{{ $pos->basic_salary }}</td>
+            <td>{{ $pos->salary->coefficient_salary }}</td>
             <td>
               <div>
                 <a href="{{ route('position.edit', $pos->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>

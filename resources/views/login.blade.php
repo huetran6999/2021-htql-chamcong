@@ -30,7 +30,7 @@
 
             {{-- thông báo đăng xuất thành công --}}
             @if (session('success'))           
-                <div class="alert alert-success text-center" role="alert">
+                <div class="alert alert-success" role="alert">
                     <strong>{{session('success')}}</strong>
                 </div>
                     
@@ -77,48 +77,5 @@
           </div>
         </div>
     </div>
-{{-- <div    style="background-image: url('assets/images/bg-01.jpg');">
-    <div class="container-fluid">
-        @if (session('thongbao'))           
-            <div class="alert alert-danger" role="alert">
-                <strong>{{session('thongbao')}}</strong>
-            </div>
-                    
-        @endif
-        <div class="row">
-            <div class="col-md-4 offset-md-4">
-                <div class="login-form bg-light mt-4 p-4">
-                    <form method="post" class="row g-3">
-                        @csrf
-                        <h4>ĐĂNG NHẬP HỆ THỐNG</h4>
-                        <div class="col-12">
-                            <label>Tên đăng nhập</label>
-                            <input type="text" name="username" class="form-control" placeholder="Nhập tên đăng nhập...">
-                        </div>
-                        @if ($errors->has('username'))
-                            <div class="alert alert-danger" role="alert">
-                                <strong>{{$errors->first('username')}}</strong>
-                            </div>
-                        @endif
-                        <div class="col-12">
-                            <label>Mật khẩu</label>
-                            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu...">
-                        </div>
-                        @if ($errors->has('username'))
-                            <div class="alert alert-danger" role="alert">
-                                <strong>{{$errors->first('password')}}</strong>
-                            </div>
-                        @endif
-
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-dark ">Đăng nhập</button>
-                        </div>
-                    </form>
-                    <hr class="mt-4">
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 </body>
 </html>

@@ -21,7 +21,7 @@
         <div class="table-responsive-sm float-left">
           @if (Session::has('success'))
           <div class="alert alert-success">
-            {{Session::get('success')}}
+            <strong>{{Session::get('success')}}</strong>
           </div>
           @endif
           <table class="table table-bordered table-hover" id="empTable">

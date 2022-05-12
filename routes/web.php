@@ -63,6 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/update-employee/{id}', [UserController::class, 'Emp_Edit'])->name('Emp_Edit');
     Route::post('/update-employee/{id}', [UserController::class, 'Emp_Update'])->name('Emp_Update');
     Route::get('/delete-account/{id}', [UserController::class, 'Emp_Delete'])->name('Emp_Delete');
+    Route::get('/create-contract/{id}', [App\Http\Controllers\UserController::class, 'createContract'])->name('Contract_Create');
+    Route::post('/store-contract/{id}', [App\Http\Controllers\UserController::class, 'storeContract'])->name('Contract_Store');
     Route::get('/employee-info/{id}',[App\Http\Controllers\UserController::class, 'showEmpInfo'])->name('Emp_Info');
     Route::get('employee-management/search', [UserController::class, 'search'])->name('emp-search');
 
@@ -72,7 +74,6 @@ Route::middleware('auth')->group(function () {
 
     // Quản lý Đơn vị
     Route::resource('enterprise', EnterpriseController::class);
-
 
     //Quản lý phòng ban
     Route::resource('department', DepController::class);
@@ -93,4 +94,4 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/chart',[App\Http\Controllers\ChartController::class, 'index'])->name('chart');
 
-Route::get('fake-user',[UserController::class, 'fakeUser']);
+// Route::get('fake-user',[UserController::class, 'fakeUser']);

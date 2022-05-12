@@ -163,7 +163,7 @@
     
   <form class="row g-3" action="{{route('Emp_Store')}}" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="card" style="box-shadow: 0 0 50px #ccc">
+    <div class="card mb-5" style="box-shadow: 0 0 50px #ccc">
       <ul class="nav nav-tabs" role="tablist" style="padding-top: 10px;">
           <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#home" id="home-tab" aria-controls="home" aria-selected="true" role="tab">Thông Tin Chính</a></li>
           <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#menu1" id="menu1-tab" aria-controls="menu1"  role="tab">Thông Tin Liên Hệ</a></li>

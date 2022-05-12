@@ -14,7 +14,9 @@ use Illuminate\Http\Request;
 class PositionController extends Controller
 {
     public function index(){
-        $positions = Position::with('dep_pos')->select('id', 'd_id', 'p_name', 's_id', 'basic_salary')->paginate(5);
+        // $positions = Position::with('dep_pos')->select('id', 'd_id', 'p_name', 's_id', 'basic_salary')->paginate(5);
+        $positions = Position::with('dep_pos')->select('id', 'd_id', 'p_name', 's_id', 'basic_salary')->orderBy('d_id')->get();
+        $positions = Position::paginate(5);
 
         return view('position_manage.index', compact('positions'));
     }
@@ -33,6 +35,8 @@ class PositionController extends Controller
         $position->p_name = $request->p_name;
         $position->basic_salary = $request->basic_salary;
         $position->s_id = $request->s_id;
+        $position->d_id = $request->d_id;
+ 
 
         $position->save();
 
@@ -55,14 +59,41 @@ class PositionController extends Controller
         $salaries = Salary::select('id', 'coefficient_salary')->get();
         $enterprises = Enterprise::select('id', 'e_name')->get();
         $position = Position::find($id);
+        $roles = Role::all();
+        $pos_role = Position_Role::where('p_id', $id)->pluck('r_id');
 
-        return view('position_manage.edit', compact(['deps', 'salaries', 'enterprises', 'position']));
+        return view('position_manage.edit', compact(['deps', 'salaries', 'enterprises', 'position', 'roles', 'pos_role']));
     }
 
-    public function update(Request $request){
-        $position = Position::find($request->id);
-        $param = $request->all();
-        $position->update($param);
+    public function update(Request $request, $id){
+        $position = Position::find($id);
+        if($request->r_name == $position->r_name) {
+            $this->validate($request,
+            ['r_name' => 'unique:position'],
+            ['r_name' => 'Tên chức vụ đã tồn tại.']
+        );
+        }
+
+        $position->p_name = $request->p_name;
+        $position->basic_salary = $request->basic_salary;
+        $position->s_id = $request->s_id;
+        $position->d_id = $request->d_id;
+
+        $position->save();
+
+        if(Position_Role::where('p_id',$id)->exists()) {
+            Position_Role::where('p_id',$id)->delete();
+        }
+
+        $roles = $request->role;
+        foreach($roles as $roleID) {
+            $pos_role = new Position_Role;
+            $pos_role->p_id = $position->id;
+            $pos_role->r_id = (int)$roleID;
+
+            $pos_role->save();
+        }
+        
 
         return redirect()->route('position.index')->with('message','Cập nhật chức vụ thành công');
     }

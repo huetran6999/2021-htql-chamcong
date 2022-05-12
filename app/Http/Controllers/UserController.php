@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // use App\Http\Requests\LoginRequest;
 
+use App\Models\Allowance;
 use App\Models\Department;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -103,11 +104,11 @@ class UserController extends Controller
         if ($request->hasFile('u_avatar')) {
             $file = $request->file('u_avatar');
             $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
+            $filename = $request->u_name . '.' . $extension;
             $file->move('uploads', $filename);
             $user->u_avatar = $filename;
         } else {
-            $user->u_avatar = 'male-account-icon.png';
+            $user->u_avatar = 'female-account-icon.png';
         }
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
@@ -157,6 +158,7 @@ class UserController extends Controller
         //dd($p);
         return view('emp_manage.emp_update', compact(['enterprises', 'deps', 'positions', 'lit', 'par', 'lang', 'user', 'salaries']));
     }
+
     public function Emp_Update(Request $request, $id)
     {
         $user = User::find($id);
@@ -167,10 +169,13 @@ class UserController extends Controller
 
         if ($request->hasFile('u_avatar')) {
             //Xoá ảnh cũ của user
-            $desPath = 'uploads/' . $user->u_avatar;
-            if (file_exists($desPath)) {
-                unlink($desPath);
+            if($user->u_avatar != 'female-account-icon.png') {
+                $desPath = 'uploads/' . $user->u_avatar;
+                if (file_exists($desPath)) {
+                    unlink($desPath);
+                }
             }
+            
 
             $extension = $image->getClientOriginalExtension();
             $filename = $request->u_name . '.' . $extension;
@@ -280,6 +285,49 @@ class UserController extends Controller
             }
             return redirect()->back()->with('del-success', 'Xoá người dùng thành công');
         }
+    }
+
+    public function createContract($id)
+    {
+        $user = User::find($id);
+        $contract = Work_contract::where('u_id', $user->id)->get();
+
+        return view('emp_manage.contract_create', compact(['user', 'contract']));
+    }
+
+    public function storeContract(Request $request, $id)
+    {
+        $user = User::find($id);
+        $allowance = Allowance::where('p_id', $user->p_id)->get();
+        $contract = Work_contract::where('u_id', $user->id)->get();
+
+        $count_contract = Work_contract::latest()->first();
+        
+        $arrName = explode("-", $count_contract->id);    
+        
+        $number = $arrName[0]+1;
+
+        foreach($contract as $contract){
+            if(isset($contract)){
+                $contract->w_status=0;
+                $contract->save();
+            }
+        }
+
+        $contract = new Work_contract;
+        $contract->id = $number .'-HDLD-ABC';
+        $contract->w_type = $request->w_type;
+        $contract->start_date = $request->start_date;
+        $contract->end_date = $request->end_date;
+        $contract->a_id = $allowance->id;
+        $contract->allowance = $allowance->total;
+        $contract->w_status = 1;
+        $contract->u_id = $user->id;
+        $contract->creator = Auth::user()->user->u_name;
+
+        $contract->save();
+        
+        
     }
 
     public function getDep(Request $request)

@@ -79,12 +79,10 @@ class User extends Authenticatable
         return $this->belongsTo(Position::class, 'p_id', 'id');
     }
 
-    // public function salary()
-    // {
-    //     return $this->belongsTo(Salary::class, 's_id', 'id');
-    // }
-
-
+    public function contract()
+    {
+        return $this->hasOne(Work_contract::class, 'wc_id', 'id');
+    }
 
     public function literacy()
     {
