@@ -37,8 +37,8 @@ class Position extends Model
         return $this->belongsToMany(Role::class);
     }
 
-    // public function allowance()
-    // {
-    //     return $this->hasOne(Allowance::class);
-    // }
+    public function allowance()
+    {
+        return $this->belongsTo(Allowance::class);
+    }
 }

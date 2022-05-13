@@ -93,6 +93,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/create-contract/{id}', [App\Http\Controllers\UserController::class, 'createContract'])->name('Contract_Create');
     Route::post('/store-contract/{id}', [App\Http\Controllers\UserController::class, 'storeContract'])->name('Contract_Store');
     Route::get('/contract-info/user/{id}', [App\Http\Controllers\UserController::class, 'getContractInfo'])->name('contractUser_info');
+
+    //Quản lý phụ cấp
+    Route::get('edit-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'edit']);
+    Route::post('update-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'update']);
+    Route::get('/list-allowance',  [App\Http\Controllers\AllowanceController::class, 'list']);
 });
 
 Route::get('/chart',[App\Http\Controllers\ChartController::class, 'index'])->name('chart');

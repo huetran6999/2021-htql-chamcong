@@ -4,7 +4,7 @@
 <div class="container">
   <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Lập hợp đồng</h3>
     <div class="container bg-light" style="width: 100%" id="align-table">
-        <form action="{{ url('contract-create'.$user->id)}}" class="row g-3" style="border-radius: 25px; box-shadow: 0 0 50px #ccc;" method="post">
+        <form action="{{ url('store-contract/'.$user->id)}}" class="row g-3" style="border-radius: 25px; box-shadow: 0 0 50px #ccc;" method="post">
             @csrf
             <div class="row mt-5">
                 {{-- <div class="col-12 col-sm-6"> --}}

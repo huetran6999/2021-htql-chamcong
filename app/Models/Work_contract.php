@@ -16,6 +16,6 @@ class Work_contract extends Model
     }
 
     public function allowance() {
-        return $this->belongsTo(Allowance::class, 'a_id', 'id');
+        return $this->hasOne(Allowance::class, 'a_id', 'id');
     }
 }
