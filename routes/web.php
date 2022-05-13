@@ -63,8 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/update-employee/{id}', [UserController::class, 'Emp_Edit'])->name('Emp_Edit');
     Route::post('/update-employee/{id}', [UserController::class, 'Emp_Update'])->name('Emp_Update');
     Route::get('/delete-account/{id}', [UserController::class, 'Emp_Delete'])->name('Emp_Delete');
-    Route::get('/create-contract/{id}', [App\Http\Controllers\UserController::class, 'createContract'])->name('Contract_Create');
-    Route::post('/store-contract/{id}', [App\Http\Controllers\UserController::class, 'storeContract'])->name('Contract_Store');
     Route::get('/employee-info/{id}',[App\Http\Controllers\UserController::class, 'showEmpInfo'])->name('Emp_Info');
     Route::get('employee-management/search', [UserController::class, 'search'])->name('emp-search');
 
@@ -90,6 +88,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/working-log', [App\Http\Controllers\WorkingLogController::class, 'index'])->name('workinglog_index');
     Route::post('/working-log/update', [App\Http\Controllers\WorkingLogController::class, 'updateLog'])->name('workinglog_update');
     Route::post('/working-log/import', [App\Http\Controllers\WorkingLogController::class, 'import'])->name('workinglog_import');
+
+    //Quản lý hợp đồng
+    Route::get('/create-contract/{id}', [App\Http\Controllers\UserController::class, 'createContract'])->name('Contract_Create');
+    Route::post('/store-contract/{id}', [App\Http\Controllers\UserController::class, 'storeContract'])->name('Contract_Store');
+    Route::get('/contract-info/user/{id}', [App\Http\Controllers\UserController::class, 'getContractInfo'])->name('contractUser_info');
 });
 
 Route::get('/chart',[App\Http\Controllers\ChartController::class, 'index'])->name('chart');

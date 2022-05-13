@@ -14,4 +14,8 @@ class Work_contract extends Model
     public function user(){
         return $this->belongsTo(User::class,'u_id','id');
     }
+
+    public function allowance() {
+        return $this->belongsTo(Allowance::class, 'a_id', 'id');
+    }
 }

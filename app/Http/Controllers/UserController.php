@@ -140,7 +140,7 @@ class UserController extends Controller
         $parent->save();
         $literacy->save();
 
-        return redirect()->route('employee')->with('success', 'Đăng ký thành công');
+        return view('contract_manage.contract_create')->with('success', 'Bạn đã đăng ký nhân viên thành công. Tiếp theo, hãy lập hợp đồng nhân viên!');
     }
 
     public function Emp_Edit($id)
@@ -292,7 +292,7 @@ class UserController extends Controller
         $user = User::find($id);
         $contract = Work_contract::where('u_id', $user->id)->get();
 
-        return view('emp_manage.contract_create', compact(['user', 'contract']));
+        return view('contract_manage.contract_create', compact(['user', 'contract']));
     }
 
     public function storeContract(Request $request, $id)
@@ -327,7 +327,14 @@ class UserController extends Controller
 
         $contract->save();
         
-        
+        return redirect()->route('contractUser_info')->with('success','Lập hợp đồng thành công!');
+    }
+
+    public function getContractInfo($id) {
+        $user = User::find($id);
+        $contract = Work_contract::where('u_id', $id)->get();
+
+        return view('contract_manage.contractUser_info', compact(['user', 'contract']));
     }
 
     public function getDep(Request $request)
