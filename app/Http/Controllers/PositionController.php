@@ -51,7 +51,7 @@ class PositionController extends Controller
             }
         }
 
-        return redirect()->route('position.index')->with('message','Thêm chức vụ mới thành công');
+        return redirect()->route('edit_allowance', $position->id)->with('message','Thêm chức vụ mới thành công. Hãy tiếp tục nhập phụ cấp theo chức vụ.');
     }
 
     public function edit($id){

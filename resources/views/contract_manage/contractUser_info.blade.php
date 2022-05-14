@@ -17,7 +17,7 @@
                 <h5>Hợp đồng đang sử dụng</h5>
                 <table class="table table-bordered table-hover">
                     <thead>
-                        <tr align="center">
+                        <tr align="center" class="table-primary">
                             <th>Số hợp đồng</th>
                             <th>Ngày lập hợp đồng</th>
                             <th>Loại hợp đồng</th>

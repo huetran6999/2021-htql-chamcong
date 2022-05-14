@@ -49,9 +49,6 @@
              <a class="dropdown-item {{ (\Request::route()->getName() == 'employee') ? 'active' : '' }}" href="{{ route('employee') }}">Xem danh sách nhân viên</a>
           </div>
        </li>
-        {{-- <li class="nav-item">
-          <a href="{{route('show_role')}}" class="nav-link {{ (\Request::route()->getName() == 'show_role') ? 'active' : '' }}">Phân quyền</a>
-        </li> --}}
         <li class="nav-item">
           <a href="{{route('enterprise.index')}}" class="nav-link 
           {{ (\Request::route()->getName() == 'enterprise.index'
@@ -69,6 +66,11 @@
           {{ (\Request::route()->getName() == 'position.index'
           || \Request::route()->getName() == 'position.create'
           || \Request::route()->getName() == 'position.edit') ? 'active' : '' }}">Chức vụ</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('list_allowance')}}" class="nav-link 
+          {{ (\Request::route()->getName() == 'list_allowance'
+          || \Request::route()->getName() == 'edit_allowance') ? 'active' : '' }}">Phụ cấp</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ (\Request::route()->getName() == 'salaryReport.index' 

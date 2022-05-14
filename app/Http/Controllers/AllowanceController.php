@@ -18,18 +18,21 @@ class AllowanceController extends Controller
 
     public function edit($id)
     {
-        $allowance =Allowance::where('p_id',$id)->first();
-        return view('allowance_manage.edit',compact('allowance'));
+        $position = Position::find($id);
+        $allowance =Allowance::where('p_id', $position->id)->get();
+        dd($allowance, $position);
+        // return view('allowance_manage.edit',compact('allowance'));
     }
 
     public function update(Request $request, $id)
     {
-        $allowance=Allowance::where('p_id',$id)->first();
+        $position = Position::find($id);
+        $allowance=Allowance::where('p_id',$position->id)->first();
         $allowance->lunch_fee = $request->lunch_fee;
         $allowance->gas_fee = $request->gas_fee;
         $allowance->others=$request->others;
         $allowance->total=$request->others+$request->lunch_fee+$request->gas_fee;
         $allowance->save();
-        return redirect('private/phucap/danhsach')->with('thongbao','Thành Công');
+        return redirect()->route('list_allowance')->with('success','Thành Công');
     }
 }

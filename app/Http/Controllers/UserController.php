@@ -155,7 +155,7 @@ class UserController extends Controller
         $par = Parents::where('u_id', $user->id)->get();
         $lit = Literacy::where('u_id', $user->id)->get();
 
-        //dd($p);
+        //dd($par);
         return view('emp_manage.emp_update', compact(['enterprises', 'deps', 'positions', 'lit', 'par', 'lang', 'user', 'salaries']));
     }
 
