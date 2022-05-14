@@ -11,13 +11,13 @@ class Allowance extends Model
     protected $table = 'allowance';
 
     public function position(){
-        return $this->hasOne(Position::class,'p_id','id');
+        return $this->belongsTo(Position::class, 'p_id', 'id');
     }
     public function tbl_phongban(){
         return $this->hasManyThrough(Department::class, Position::class,'id','p_id','d_id');
     }
 
     public function contract(){
-        return $this->belongsTo(Work_contract::class);
+        return $this->hasOne(Work_contract::class);
     }
 }

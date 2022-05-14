@@ -39,6 +39,6 @@ class Position extends Model
 
     public function allowance()
     {
-        return $this->belongsTo(Allowance::class);
+        return $this->hasMany(Allowance::class);
     }
 }

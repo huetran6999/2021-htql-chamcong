@@ -381,18 +381,18 @@ class UserController extends Controller
                     $query->where('p_name', 'LIKE', '%' . $request->search . '%');
                 })
                 ->orWhereHas('position', function ($query) use ($request) {
-                    $query->whereHas('department', function ($query) use ($request) {
+                    $query->whereHas('dep_pos', function ($query) use ($request) {
                         $query->where('d_name', 'LIKE', '%' . $request->search . '%');
                     });
                 })
                 ->orWhereHas('position', function ($query) use ($request) {
-                    $query->whereHas('department', function ($query) use ($request) {
+                    $query->whereHas('dep_pos', function ($query) use ($request) {
                         $query->whereHas('enterprise', function ($query) use ($request) {
                             $query->where('e_name', 'LIKE', '%' . $request->search . '%');
                         });
                     });
                 })
-                ->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'd_id', 'f_id', 'u_phone', 'u_status')
+                ->select('id', 'u_avatar', 'username', 'u_name', 'p_id', 'f_id', 'u_phone', 'u_status')
                 ->paginate(5);
             if ($users) {
                 foreach ($users as $user) {
