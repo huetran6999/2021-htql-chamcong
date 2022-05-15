@@ -353,6 +353,17 @@ class UserController extends Controller
         echo $html;
     }
 
+    public function getPos(Request $request)
+    {
+        $depId = $request->post('depId');
+        $pos = Position::where('d_id', $depId)->select('id', 'p_name')->get();
+        $html = '<option value="" disabled selected hidden>---> Chọn chức vụ <---</option>';
+        foreach ($pos as $p) {
+            $html .= '<option value="' . $p->id . '">' . $p->p_name . '</option>';
+        }
+        echo $html;
+    }
+
     public function showEmpInfo($id)
     {
         $user = User::find($id);

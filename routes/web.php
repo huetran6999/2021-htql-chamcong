@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
     //Employee management ->middleware('rolechecker')
     Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee'); 
     Route::post('/dep', [UserController::class, 'getDep'])->name('emp.getDep');
+    Route::post('/pos', [UserController::class, 'getPos'])->name('emp.getPos');
     Route::get('/create-account', [UserController::class, 'Create'])->name('Emp_Create');
     Route::post('/create-account', [UserController::class, 'Store'])->name('Emp_Store');
     Route::get('/update-employee/{id}', [UserController::class, 'Emp_Edit'])->name('Emp_Edit');

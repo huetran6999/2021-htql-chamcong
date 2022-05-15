@@ -28,14 +28,15 @@
             <thead class="table-primary">
               <tr>
                 <th width="8%">Avatar</th>
-                <th>Username</th>
+                
                 <th>Họ và tên</th>
                 <th>Chức vụ</th>
                 <th>Phòng ban</th>
                 <th>Đơn vị</th>
-                <th>Số điện thoại</th>
+                {{-- <th>Số điện thoại</th> --}}
                 <th>Trạng thái</th>
                 <th class="text-right">Hành động</th>
+                <th>Tác vụ</th>
               </tr>
             </thead>
 
@@ -54,13 +55,13 @@
 
                   @endif --}}
                 </td>
-                <td>{{ $user->username }}</td>
+                
                 <td>{{ $user->u_name }}</td>
                 <td>{{$user->position->p_name}}</td>
                 <td>{{$user->position->dep_pos->d_name}}</td>
                 <td>{{$user->position->dep_pos->enterprise->e_name}}</td>
                 {{-- <td>{{$user->department->enterprise->e_name}}</td> --}}
-                <td>{{ $user->u_phone }}</td>
+                {{-- <td>{{ $user->u_phone }}</td> --}}
                 <td>
                   @if ($user->u_status==0)
                   <span class="badge bg-success">Hoạt động</span>
@@ -76,7 +77,8 @@
                   {{-- Nút xoá --}}
                   <a href="{{ route('Emp_Delete',$user->id) }}" class="btn btn-danger btn-delete btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xoá người dùng {{$user->u_name}} không?')"><i class="fa fa-trash"></i></a>
                 </td>
-
+                <td><a href="{{ route('contractUser_info',$user->id) }}" class="btn btn-primary btn-sm">Xem hợp đồng</td>
+ 
               </tr>
               @endforeach
               
