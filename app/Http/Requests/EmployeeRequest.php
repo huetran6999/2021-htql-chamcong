@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DepartmentRequest extends FormRequest
+class EmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class DepartmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,19 +24,14 @@ class DepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'e_id' => 'required|numeric',
-            'd_name' => 'required',
-            'd_phone' => 'numeric',
+            'u_name'=>'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'e_id.required'=>'Vui lòng chọn đơn vị',
-            'd_name.required'=>'Vui lòng nhập tên phòng ban mới',
-            'd_phone.numeric'=>'Số điện thoại phải là một số'
+            'u_name.required'=>'Vui lòng nhập thông tin họ tên'
         ];
-        
     }
 }
