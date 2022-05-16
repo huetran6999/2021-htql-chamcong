@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PositionRequest;
 use App\Models\Department;
 use App\Models\Enterprise;
 use App\Models\Position;
@@ -30,7 +31,7 @@ class PositionController extends Controller
         return view('position_manage.create', compact(['deps', 'roles', 'salaries', 'enterprises']));
     }
 
-    public function store(Request $request){
+    public function store(PositionRequest $request){
         $position = new Position;
         $position->p_name = $request->p_name;
         $position->basic_salary = $request->basic_salary;
@@ -65,14 +66,14 @@ class PositionController extends Controller
         return view('position_manage.edit', compact(['deps', 'salaries', 'enterprises', 'position', 'roles', 'pos_role']));
     }
 
-    public function update(Request $request, $id){
+    public function update(PositionRequest $request, $id){
         $position = Position::find($id);
-        if($request->r_name == $position->r_name) {
-            $this->validate($request,
-            ['r_name' => 'unique:position'],
-            ['r_name' => 'Tên chức vụ đã tồn tại.']
-        );
-        }
+        // if($request->p_name == $position->p_name) {
+        //     $this->validate($request,
+        //     ['p_name' => 'unique:position'],
+        //     ['p_name' => 'Tên chức vụ đã tồn tại.']
+        // );
+        // }
 
         $position->p_name = $request->p_name;
         $position->basic_salary = $request->basic_salary;

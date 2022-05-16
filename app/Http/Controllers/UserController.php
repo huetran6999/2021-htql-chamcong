@@ -292,19 +292,23 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $contract = Work_contract::where('u_id', $user->id)->get();
+        $allowance = Allowance::where('p_id', $user->p_id)->first();
 
-        return view('contract_manage.contract_create', compact(['user', 'contract']));
+        //dd($allowance);
+
+       return view('contract_manage.contract_create', compact(['user', 'contract', 'allowance']));
     }
 
     public function storeContract(Request $request, $id)
     {
         $user = User::where('id', $id)->first();
-        $allowance = Allowance::where('p_id', $user->p_id)->get();
+        $count_contract = Work_contract::latest()->first();
+        $allowance = Allowance::where('p_id', $user->p_id)->first();
 
         
         $contract = Work_contract::where('u_id', $user->id)->get();
 
-        $count_contract = Work_contract::latest()->first();
+        
         
         $arrName = explode("-", $count_contract->id);    
         
@@ -324,6 +328,8 @@ class UserController extends Controller
         $contract->end_date = $request->end_date; 
         $contract->w_status = 1;
         $contract->u_id = $user->id;
+        $contract->a_id = $allowance->id;
+        $contract->allowance_total = $allowance->total;
         $contract->save();
 
         // $contract->creator = Auth::user()->user->u_name;
@@ -331,7 +337,7 @@ class UserController extends Controller
         // $contract->a_id = $allowance->id;
 
         
-        //dd($allowance, $user, $contract);
+       // dd($allowance, $user, $contract);
         
         return redirect(url('/contract-info/user/'.$id))->with('success','Lập hợp đồng thành công!');
     }

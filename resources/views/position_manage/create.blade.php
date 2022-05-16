@@ -67,6 +67,7 @@
 
                     <div class=" form-group col-md-12">
                         <label><strong>Chọn các quyền cho chức vụ mới</strong></label>
+                        <span class="text-danger">@error('role'){{$message}}@enderror</span>
                         <div class="wrap" style="display:flex">
                             <div class="form-check" id="grid-checkbox">
                                 @foreach($roles as $role)
@@ -78,6 +79,7 @@
                                     
                                 @endforeach
                             </div>
+                            
                         </div>
                     </div>
                 </div>

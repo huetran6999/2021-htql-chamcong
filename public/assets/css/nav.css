@@ -1,3 +1,12 @@
+#start_date,
+#end_date,
+#luong,
+#dem1,
+#dem2,
+#dem3 {
+    display: none;
+}
+
 #grid-checkbox {
     display: grid;
     /* display: flex; */

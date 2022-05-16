@@ -78,19 +78,32 @@ $(document).ready(function() {
 
     $('#w_type').on('change', function() {
 
-        if (this.value == "1") {
+        if (this.value == "0") {
             $('#start_date').show();
             $('#end_date').show();
+            $('#luong').show();
+            $('#dem1').hide();
+            $('#dem2').show();
+            $('#dem3').hide();
 
         } else if (this.value == "2") {
             $('#start_date').show();
             $('#end_date').show();
+            $('#luong').show();
         } else if (this.value == "3") {
             $('#start_date').show();
             $('#end_date').hide();
+            $('#luong').show();
+            $('#dem1').hide();
+            $('#dem2').hide();
+            $('#dem3').show();
         } else {
             $('#start_date').hide();
             $('#end_date').hide();
+            $('#luong').hide();
+            $('#dem1').hide();
+            $('#dem2').hide();
+            $('#dem3').hide();
         }
 
     });
