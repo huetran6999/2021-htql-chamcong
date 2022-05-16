@@ -218,21 +218,21 @@
               <label for="u_IDcode" class="form-label">Số CCCD/CMND</label>
               <input type="text" class="form-control" name="u_IDcode" id="u_IDcode">
               <span id="u_IDcodev"></span>
-              <span class="text-danger">@error('IDcode'){{$message}}@enderror</span>
+              <span class="text-danger">@error('u_IDcode'){{$message}}@enderror</span>
             </div>
 
             <div class="col-md-4">
               <label for="u_IDcodedate" class="form-label">Ngày cấp</label>
               <input type="date" class="form-control" name="u_IDcodedate" id="u_IDcodedate">
               <span id="u_IDcodedatev"></span>
-              <span class="text-danger">@error('IDcodedate'){{$message}}@enderror</span>
+              <span class="text-danger">@error('u_IDcodedate'){{$message}}@enderror</span>
             </div>
 
             <div class="col-md-4">
               <label for="u_IDcodeplace" class="form-label">Nơi cấp</label>
               <input type="text" class="form-control" name="u_IDcodeplace" placeholder="Công an thành phố Cần Thơ..." id="u_IDcodeplace">
               <span id="u_IDcodeplacev"></span>
-              <span class="text-danger">@error('IDcodeplace'){{$message}}@enderror</span>
+              <span class="text-danger">@error('u_IDcodeplace'){{$message}}@enderror</span>
             </div>
 
             <div class="col-md-4">

@@ -26,7 +26,15 @@ class EnterpriseRequest extends FormRequest
         return [
             'e_name' => 'required',
             'e_address' => 'required',
-            'e_phone' => 'numeric',
+            
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'e_name.required'=>'Vui lòng nhập tên đơn vị',
+            'e_address.required'=>'Vui lòng nhập địa chỉ đơn vị'
         ];
     }
 }

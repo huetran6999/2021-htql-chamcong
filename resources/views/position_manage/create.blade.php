@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="e_name" class="form-label">Đơn vị</label>
-                            <select class="form-select" name="e_name" id="add-ent">
+                            <select class="form-select" name="e_name" id="add_ent">
                             <option selected disabled>--- Chọn đơn vị --- </option>
                             @foreach ($enterprises as $ent)
                                 <option value="{{$ent->id}}">{{ $ent->e_name }}</option>
@@ -32,7 +32,7 @@
                     
                         <div class="col-md-12">
                             <label for="d_name" class="form-label">Phòng ban</label>
-                            <select class="form-select" name="d_id" id="add-dep">
+                            <select class="form-select" name="d_id" id="add_dep">
                             <option disabled selected hidden>--- Chọn phòng ban --- </option>
                             </select>
                             <span class="text-danger">@error('d_name'){{$message}}@enderror</span>

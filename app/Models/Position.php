@@ -37,6 +37,13 @@ class Position extends Model
         return $this->belongsToMany(Role::class);
     }
 
+    public function hasAnyRole($roles){
+        return null != $this->role()->whereIn('r_name', $roles) ->first();
+    }
+    public function hasRole($role){
+        return null != $this->role()->whereIn('r_name', $role) ->first();
+    }
+
     public function allowance()
     {
         return $this->hasMany(Allowance::class);

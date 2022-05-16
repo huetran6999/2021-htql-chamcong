@@ -8,6 +8,7 @@ use App\Models\Allowance;
 use App\Models\Department;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Http\Requests\EmployeeRequest;
 use App\Models\User;
 use App\Models\Enterprise;
 use App\Models\Literacy;
@@ -80,7 +81,7 @@ class UserController extends Controller
         $par = Parents::all();
         return view('emp_manage.emp_add', compact(['enterprises', 'deps', 'positions', 'lit', 'par', 'lang', 'users', 'salaries']));
     }
-    public function Store(Request $request)
+    public function Store(EmployeeRequest $request)
     {
         $user = new User;
         // User::create($user);

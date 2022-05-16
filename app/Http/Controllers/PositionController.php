@@ -77,7 +77,7 @@ class PositionController extends Controller
         $position->p_name = $request->p_name;
         $position->basic_salary = $request->basic_salary;
         $position->s_id = $request->s_id;
-        $position->d_id = $request->d_id;
+        // $position->d_id = $request->d_id;
 
         $position->save();
 
