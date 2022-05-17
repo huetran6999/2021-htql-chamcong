@@ -9,7 +9,7 @@ class Work_contract extends Model
 {
     use HasFactory;
     protected $table = 'work_contract';
-    public $incrementing = false;
+    // public $incrementing = false;
 
     public function user(){
         return $this->belongsTo(User::class,'u_id','id');

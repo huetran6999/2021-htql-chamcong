@@ -23,17 +23,17 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                             
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-12">
                                     <label for="p_name">Số tiền ăn trưa</label>
                                 <input type="text" class="form-control" id="lunch_fee" name="lunch_fee" placeholder="Tiền ăn trưa"  value="{{$allowance->lunch_fee}}">
                                 <span id="tienantrua"></span>
                             </div> 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-12">
                                     <label for="ten_chuc_vu">Số tiền xăng xe</label>
                                 <input type="text" class="form-control" id="gas_fee" name="gas_fee" placeholder="Tiền xăng"  value="{{$allowance->gas_fee}}"  >
                                 <span id="tienxang"></span>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-12">
                                 <label for="ten_chuc_vu">Số tiền khác(...)</label>
                                 <input type="text" class="form-control" id="others" name="others" placeholder="Tiền khác(nếu có)..."  value="{{$allowance->others}}"  >
                                 <span id="tienkhac"></span>

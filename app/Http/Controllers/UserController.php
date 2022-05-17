@@ -302,7 +302,7 @@ class UserController extends Controller
     public function storeContract(Request $request, $id)
     {
         $user = User::where('id', $id)->first();
-        $count_contract = Work_contract::latest()->first();
+        // $count_contract = Work_contract::latest()->first();
         $allowance = Allowance::where('p_id', $user->p_id)->first();
 
         
@@ -310,29 +310,30 @@ class UserController extends Controller
 
         
         
-        $arrName = explode("-", $count_contract->id);    
+        // $arrName = explode("-", $count_contract->id);    
         
-        $number = $arrName[0]+1;
+        // $number = $arrName[0]+1;
 
-        foreach($contract as $contract){
-            if(isset($contract)){
-                $contract->w_status=0;
-                $contract->save();
+        foreach($contract as $ct){
+            if(isset($ct)){
+                $ct->w_status=1;
+                $ct->save();
             }
         }
 
         $contract = new Work_contract;
-        $contract->id = $number .'-HDLD-ABC';
+        // $contract->id = $number .'-HDLD-ABC';
         $contract->w_type = $request->w_type;
         $contract->start_date = $request->start_date;
         $contract->end_date = $request->end_date; 
-        $contract->w_status = 1;
+        $contract->w_status = 0;
         $contract->u_id = $user->id;
         $contract->a_id = $allowance->id;
         $contract->allowance_total = $allowance->total;
+        $contract->creator = Auth::user()->u_name;
         $contract->save();
 
-        // $contract->creator = Auth::user()->user->u_name;
+        
         // $contract->allowance = $allowance->total;
         // $contract->a_id = $allowance->id;
 
@@ -347,6 +348,12 @@ class UserController extends Controller
         $contract = Work_contract::where('u_id', $id)->get();
 
         return view('contract_manage.contractUser_info', compact(['user', 'contract']));
+    }
+
+    public function getContract(){
+        $contracts = Work_contract::all();
+
+        return view('contract_manage.list', compact('contracts'));
     }
 
     public function getDep(Request $request)

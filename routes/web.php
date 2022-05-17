@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/create-contract/{id}', [App\Http\Controllers\UserController::class, 'createContract'])->name('Contract_Create');
     Route::post('/store-contract/{id}', [App\Http\Controllers\UserController::class, 'storeContract'])->name('Contract_Store');
     Route::get('/contract-info/user/{id}', [App\Http\Controllers\UserController::class, 'getContractInfo'])->name('contractUser_info');
+    Route::get('/contract-list', [App\Http\Controllers\UserController::class, 'getContract'])->name('contract_list');
 
     //Quản lý phụ cấp
     Route::get('create-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'edit'])->name('create_allowance');

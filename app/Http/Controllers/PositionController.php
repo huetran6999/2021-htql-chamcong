@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PositionRequest;
+use App\Models\Allowance;
 use App\Models\Department;
 use App\Models\Enterprise;
 use App\Models\Position;
@@ -27,6 +28,7 @@ class PositionController extends Controller
         $enterprises = Enterprise::all();
         $salaries = Salary::all();
         $roles = Role::all();
+        $allowance = Allowance::all();
 
         return view('position_manage.create', compact(['deps', 'roles', 'salaries', 'enterprises']));
     }
@@ -35,8 +37,8 @@ class PositionController extends Controller
         $position = new Position;
         $position->p_name = $request->p_name;
         $position->basic_salary = $request->basic_salary;
-        $position->s_id = $request->s_id;
-        $position->d_id = $request->d_id;
+        $position->s_id = $request->coefficient_salary;
+        $position->d_id = $request->d_name;
  
 
         $position->save();
@@ -52,7 +54,15 @@ class PositionController extends Controller
             }
         }
 
-        return redirect()->route('edit_allowance', $position->id)->with('message','Thêm chức vụ mới thành công. Hãy tiếp tục nhập phụ cấp theo chức vụ.');
+        $allowance = new Allowance;
+        $allowance->p_id = $position->id;
+        $allowance->lunch_fee = $request->lunch_fee;
+        $allowance->gas_fee = $request->gas_fee;
+        $allowance->others = $request->others;
+        $allowance->total=$request->others+$request->lunch_fee+$request->gas_fee;
+        $allowance->save();
+
+        return redirect()->route('position.index')->with('message','Thêm chức vụ thành công');
     }
 
     public function edit($id){

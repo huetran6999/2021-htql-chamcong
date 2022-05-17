@@ -11,7 +11,7 @@
             <ul class="nav nav-tabs" role="tablist" style="padding-top: 10px;">
                 <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#home" id="home-tab" aria-controls="home" aria-selected="true" role="tab">Thông Tin Chính</a></li>
                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#menu1" id="menu1-tab" aria-controls="menu1"  role="tab">Phân quyền cho chức vụ mới</a></li>
-                {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu5" >Sửa Đổi Thông Tin Tài Khoản Tại Công Ty</a></li> --}}
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#menu2" id="menu2-tab" role="tab">Phụ cấp</a></li>
             </ul>
 
             <div class=" tab-content">
@@ -80,6 +80,38 @@
                                 @endforeach
                             </div>
                             
+                        </div>
+                    </div>
+                </div>
+
+                <div id="menu2" class="tab-pane" role="tabpanel" aria-labelledby="menu2-tab">
+
+                    <div class=" form-group col-md-12">
+                        <label><strong>Nhập phụ cấp cho chức vụ mới</strong></label>
+                        <span class="text-danger">@error('role'){{$message}}@enderror</span>
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="p_name">Số tiền ăn trưa</label>
+                                        <input type="text" class="form-control" id="lunch_fee" name="lunch_fee" placeholder="Tiền ăn trưa">
+                                        <span class="text-danger">@error('lunch_fee'){{$message}}@enderror</span>
+                                    </div> 
+                                
+                                    <div class="form-group col-md-12">
+                                        <label for="ten_chuc_vu">Số tiền xăng xe</label>
+                                        <input type="text" class="form-control" id="gas_fee" name="gas_fee" placeholder="Tiền xăng">
+                                        <span class="text-danger">@error('gas_fee'){{$message}}@enderror</span>
+                                    </div>
+                            
+                                    <div class="form-group col-md-12">
+                                        <label for="ten_chuc_vu">Số tiền khác(...)</label>
+                                        <input type="text" class="form-control" id="others" name="others" placeholder="Tiền khác(nếu có)...">
+                                        <span class="text-danger">@error('others'){{$message}}@enderror</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

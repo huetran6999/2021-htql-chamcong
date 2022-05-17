@@ -18,7 +18,7 @@
   <div class="container">
     <!-- Navbar brand -->
     <a class="navbar-brand" href="{{route('dashboard')}}">
-      <img src="{{ asset('assets/images/logo-ctu.png') }}" height="50" alt="ctu-logo" loading="lazy" /> Hệ thống quản lý
+      <img src="{{ asset('assets/images/mbf-logo.png') }}" height="25" alt="ctu-logo" loading="lazy" /> Hệ thống quản lý
     </a>
 
     <!-- Toggle button -->
@@ -41,12 +41,15 @@
           <a class="nav-link dropdown-toggle {{ (\Request::route()->getName() == 'employee' 
             || \Request::route()->getName() == 'Emp_Edit' 
             || \Request::route()->getName() == 'Emp_Info'
-            || \Request::route()->getName() == 'Emp_Create') ? 'active' : '' }}" href="#" id="navbardrop" data-toggle="dropdown">
+            || \Request::route()->getName() == 'Emp_Create'
+            || \Request::route()->getName() == 'contract_list'
+            || \Request::route()->getName() == 'contractUser_info') ? 'active' : '' }}" href="#" id="navbardrop" data-toggle="dropdown">
           Nhân viên
           </a>
           <div class="dropdown-menu">
              <a class="dropdown-item {{ (\Request::route()->getName() == 'Emp_Create') ? 'active' : '' }}" href="{{ route('Emp_Create') }}">Thêm nhân viên</a>
              <a class="dropdown-item {{ (\Request::route()->getName() == 'employee') ? 'active' : '' }}" href="{{ route('employee') }}">Xem danh sách nhân viên</a>
+             <a class="dropdown-item {{ (\Request::route()->getName() == 'contract_list') ? 'active' : '' }}" href="{{ route('contract_list') }}">Xem danh sách hợp đồng</a>
           </div>
        </li>
         <li class="nav-item">
@@ -93,11 +96,10 @@
         </button>
       </form> --}}
       <ul class="navbar-nav mb-2 mb-lg-0">
-        @if (Auth::check())
-          
+        @if (Auth::check())          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              <img src="{{ asset('assets/images/logo-ctu.png') }}" height="30" alt="ctu-logo" loading="lazy" /> {{ Auth::user()->u_name }}
+              <img src="{{ asset('uploads/'.Auth::user()->u_avatar) }}" style="width: 40px; height: 40px;" class="user-avatar-md rounded-circle" alt="ctu-logo" loading="lazy" /> {{ Auth::user()->u_name }}
             </a>
             <div class="dropdown-menu">
                <a class="dropdown-item {{ (\Request::route()->getName() == 'Account_Info') ? 'active' : '' }}" href="{{route('Account_Info')}}">Xem hồ sơ</a>
