@@ -89,6 +89,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/working-log', [App\Http\Controllers\WorkingLogController::class, 'index'])->name('workinglog_index');
     Route::post('/working-log/update', [App\Http\Controllers\WorkingLogController::class, 'updateLog'])->name('workinglog_update');
     Route::post('/working-log/import', [App\Http\Controllers\WorkingLogController::class, 'import'])->name('workinglog_import');
+
+    Route::get('/working-log/edit/{id}', [App\Http\Controllers\WorkingLogController::class, 'edit'])->name('workinglog.edit');
+    // Checkin, checkout
+    Route::post('/working-log/checkin-am/{id}', [App\Http\Controllers\WorkingLogController::class, 'checkinAm'])->name('checkin-am');
+    Route::post('/working-log/checkout-am/{id}', [App\Http\Controllers\WorkingLogController::class, 'checkoutAm'])->name('checkout-am');
+    Route::post('/working-log/checkin-pm/{id}', [App\Http\Controllers\WorkingLogController::class, 'checkinPm'])->name('checkin-pm');
+    Route::post('/working-log/checkout-pm/{id}', [App\Http\Controllers\WorkingLogController::class, 'checkoutPm'])->name('checkout-pm');
+    // Tạo ngày nghỉ phép
+    Route::get('/working-log/create-leave-absence', [App\Http\Controllers\WorkingLogController::class, 'createLeaveAbsence'])->name('create-leave-absence');
+    Route::post('/working-log/store-leave-absence', [App\Http\Controllers\WorkingLogController::class, 'storeLeaveAbsence'])->name('store-leave-absence');
 });
 
 Route::get('/chart',[App\Http\Controllers\ChartController::class, 'index'])->name('chart');
