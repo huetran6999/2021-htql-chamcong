@@ -47,17 +47,12 @@ class User extends Authenticatable
     ];
 
 
-    public function role()
-    {
-        return $this->belongsToMany(Role::class);
-    }
+    // public function role()
+    // {
+    //     return $this->belongsToMany(Role::class);
+    // }
 
-    public function hasAnyRole($roles){
-        return null != $this->role()->whereIn('r_name', $roles) ->first();
-    }
-    public function hasRole($role){
-        return null != $this->role()->whereIn('r_name', $role) ->first();
-    }
+
 
     public function foreign_language()
     {
@@ -79,12 +74,10 @@ class User extends Authenticatable
         return $this->belongsTo(Position::class, 'p_id', 'id');
     }
 
-    // public function salary()
-    // {
-    //     return $this->belongsTo(Salary::class, 's_id', 'id');
-    // }
-
-
+    public function contract()
+    {
+        return $this->hasOne(Work_contract::class, 'wc_id', 'id');
+    }
 
     public function literacy()
     {

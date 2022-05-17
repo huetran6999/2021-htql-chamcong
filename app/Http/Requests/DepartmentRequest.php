@@ -26,7 +26,17 @@ class DepartmentRequest extends FormRequest
         return [
             'e_id' => 'required|numeric',
             'd_name' => 'required',
-            'd_phone' => 'required|numeric',
+            'd_phone' => 'numeric',
         ];
+    }
+
+    public function messages()
+    {
+        return [
+            'e_id.required'=>'Vui lòng chọn đơn vị',
+            'd_name.required'=>'Vui lòng nhập tên phòng ban mới',
+            'd_phone.numeric'=>'Số điện thoại phải là một số'
+        ];
+        
     }
 }

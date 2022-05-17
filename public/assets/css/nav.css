@@ -1,3 +1,20 @@
+#start_date,
+#end_date,
+#luong,
+#dem1,
+#dem2,
+#dem3 {
+    display: none;
+}
+
+#grid-checkbox {
+    display: grid;
+    /* display: flex; */
+    grid-template-columns: auto auto auto;
+    grid-template-areas: "left right";
+    width: 100%;
+}
+
 .navbar-dark .nav-item .nav-link {
     color: #fff;
 }

@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <div class="controls">
                         <label>Tên phòng ban</label>
-                        <input type="text" class="form-control" placeholder="Nhập tên phòng ban..." name="d_name" required autocomplete="off">
+                        <input type="text" class="form-control" placeholder="Nhập tên phòng ban..." name="d_name"  autocomplete="off">
                         <span class="text-danger">@error('d_name'){{$message}}@enderror</span>
                     </div>
                 </div>

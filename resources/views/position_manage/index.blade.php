@@ -9,7 +9,13 @@
     <div class="table-responsive-sm">
       @if (Session::has('message'))
       <div class="alert alert-success">
-        {{Session::get('message')}}
+        <strong>{{Session::get('message')}}</strong>
+      </div>
+      @endif
+
+      @if (Session::has('failed'))
+      <div class="alert alert-danger">
+        <strong>{{Session::get('failed')}}</strong>
       </div>
       @endif
       <table class="table table-bordered table-hover">
@@ -20,6 +26,7 @@
             <th>Phòng ban</th>
             <th>Đơn vị</th>
             <th>Lương cơ bản</th>
+            <th>Hệ số lương</th>
             <th>Hành động</th>
           </tr>
         </thead>
@@ -32,13 +39,14 @@
             <td>{{ $pos->dep_pos->d_name }}</td>
             <td>{{ $pos->dep_pos->enterprise->e_name }}</td>
             <td>{{ $pos->basic_salary }}</td>
+            <td>{{ $pos->salary->coefficient_salary }}</td>
             <td>
               <div>
                 <a href="{{ route('position.edit', $pos->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
                 <form action="{{ route('position.destroy', $pos->id) }}" method="POST" style="display: inline;">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xoá đơn vị {{$pos->p_name}}?')"><i class="fa fa-trash"></i></button>
+                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xoá chức vụ {{$pos->p_name}} không?')"><i class="fa fa-trash"></i></button>
                 </form>
               </div>
             </td>

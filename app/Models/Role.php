@@ -11,7 +11,7 @@ class Role extends Model
     protected $fillable = ['r_name'];
     protected $table = 'role';
 
-    public function user(){
-        return $this->belongsToMany(User::class);
+    public function position(){
+        return $this->belongsToMany(Position::class);
     }
 }

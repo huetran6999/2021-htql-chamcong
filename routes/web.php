@@ -55,9 +55,14 @@ Route::middleware('auth')->group(function () {
     //Xem hồ sơ nhân viên đăng nhập
     Route::get('/account-info', [App\Http\Controllers\AccountController::class, 'showAccountInfo'])->name('Account_Info');
 
-    //Employee management 
-    Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee')->middleware('rolechecker'); 
+    Route::group(['prefix'=>'read_emp','middleware'=>'check:read_emp'],function(){
+        Route::get('employee-management', [App\Http\Controllers\UserController::class, 'ShowUser'])->name('employee'); 
+    });
+
+    //Employee management ->middleware('rolechecker')
+    
     Route::post('/dep', [UserController::class, 'getDep'])->name('emp.getDep');
+    Route::post('/pos', [UserController::class, 'getPos'])->name('emp.getPos');
     Route::get('/create-account', [UserController::class, 'Create'])->name('Emp_Create');
     Route::post('/create-account', [UserController::class, 'Store'])->name('Emp_Store');
     Route::get('/update-employee/{id}', [UserController::class, 'Emp_Edit'])->name('Emp_Edit');
@@ -72,7 +77,6 @@ Route::middleware('auth')->group(function () {
 
     // Quản lý Đơn vị
     Route::resource('enterprise', EnterpriseController::class);
-
 
     //Quản lý phòng ban
     Route::resource('department', DepController::class);
@@ -99,8 +103,17 @@ Route::middleware('auth')->group(function () {
     // Tạo ngày nghỉ phép
     Route::get('/working-log/create-leave-absence', [App\Http\Controllers\WorkingLogController::class, 'createLeaveAbsence'])->name('create-leave-absence');
     Route::post('/working-log/store-leave-absence', [App\Http\Controllers\WorkingLogController::class, 'storeLeaveAbsence'])->name('store-leave-absence');
+    //Quản lý hợp đồng
+    Route::get('/create-contract/{id}', [App\Http\Controllers\UserController::class, 'createContract'])->name('Contract_Create');
+    Route::post('/store-contract/{id}', [App\Http\Controllers\UserController::class, 'storeContract'])->name('Contract_Store');
+    Route::get('/contract-info/user/{id}', [App\Http\Controllers\UserController::class, 'getContractInfo'])->name('contractUser_info');
+
+    //Quản lý phụ cấp
+    Route::get('edit-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'edit'])->name('edit_allowance');
+    Route::post('update-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'update'])->name('update_allowance');
+    Route::get('/list-allowance',  [App\Http\Controllers\AllowanceController::class, 'list'])->name('list_allowance');
 });
 
 Route::get('/chart',[App\Http\Controllers\ChartController::class, 'index'])->name('chart');
 
-Route::get('fake-user',[UserController::class, 'fakeUser']);
+// Route::get('fake-user',[UserController::class, 'fakeUser']);

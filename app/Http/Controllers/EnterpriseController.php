@@ -35,9 +35,18 @@ class EnterpriseController extends Controller
     public function destroy($id) // 
     {
         $enterprise = Enterprise::find($id);
-        $enterprise->delete();
+        $deps = Department::where('e_id', $id);
 
-        return redirect()->route('enterprise.index')->with('message', 'Data successfully removed');
+        if ($deps != null) {
+            return redirect()->route('enterprise.index')->with('failed', 'Không thể xoá do tồn tại phòng ban trong đơn vị');
+        } else {
+            $enterprise->delete();
+
+            return redirect()->route('enterprise.index')->with('message', 'Xoá đơn vị thành công');
+        }
+        
+
+        
     }
 
     public function edit($id)

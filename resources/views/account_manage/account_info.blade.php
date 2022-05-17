@@ -5,7 +5,7 @@
     <br>
     <form class="row g-3"  method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="card" style="box-shadow: 0 0 50px #ccc">
+        <div class="card mb-5" style="box-shadow: 0 0 50px #ccc">
           <ul class="nav nav-tabs" role="tablist" style="padding-top: 10px;">
               <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#home" id="home-tab" aria-controls="home" aria-selected="true" role="tab">Thông Tin Chính</a></li>
               <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#menu1" id="menu1-tab" aria-controls="menu1"  role="tab">Thông Tin Liên Hệ</a></li>
@@ -205,7 +205,7 @@
     
                   <div class="col-12">
                     <label for="l_other_major" class="form-label">Văn bằng khác (nếu có)</label>
-                    <input type="text" class="form-control" name="l_other_major" value="{{$l->l_ohter_major}}">
+                    <input type="text" class="form-control" name="l_other_major" value="{{$l->l_other_major}}">
                   </div>
     
                   <div class="col-12">
@@ -234,7 +234,7 @@
                   <select class="form-select" name="e_name" id="add-ent">
                     <option selected disabled>--- Chọn đơn vị --- </option>
                     @foreach ($enterprises as $ent)
-                      <option @if($user->department->e_id==$ent->id) {{"selected"}} @endif value="{{$ent->id}}">{{$ent->e_name}}</option>
+                      <option @if($user->position->dep_pos->e_id==$ent->id) {{"selected"}} @endif value="{{$ent->id}}">{{$ent->e_name}}</option>
                     @endforeach
                   </select>
                   <span class="text-danger">@error('e_name'){{$message}}@enderror</span>
@@ -245,7 +245,7 @@
                   <select class="form-select" name="d_name" id="add-dep">
                     <option disabled selected hidden>--- Chọn phòng ban --- </option>
                     @foreach ($deps as $dep)
-                      <option @if($user->d_id == $dep->id) {{"selected"}} @endif value="{{$dep->id}}">{{$dep->d_name}}</option>
+                      <option @if($user->position->d_id == $dep->id) {{"selected"}} @endif value="{{$dep->id}}">{{$dep->d_name}}</option>
                     @endforeach
                   </select>
                   <span class="text-danger">@error('d_name'){{$message}}@enderror</span>
@@ -301,10 +301,8 @@
               </div>
             </div>
     
-            <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block; padding-bottom: 10px">
+            <div class="btn-group" role="group" style="text-align:center; float:right; margin-top: 15px; margin-left:auto; margin-right:auto; padding-bottom: 10px">
               <a href="{{route('employee')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
-              <button type="reset" class="btn btn-secondary">Làm trống</button>
-              <button type="submit" class="btn btn-primary">Cập nhật <i class="fa fa-arrow-right"></i></button>
             </div>
           </div> 
         </div>

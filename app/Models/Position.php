@@ -14,6 +14,7 @@ class Position extends Model
         'p_name',
         'basic_salary',
         's_id',
+        'd_id',
     ];
 
     public function users()
@@ -30,4 +31,21 @@ class Position extends Model
     {
         return $this->belongsTo(Department::class, 'd_id', 'id');
     }
+
+    public function role()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasAnyRole($roles){
+        return null != $this->role()->whereIn('r_name', $roles) ->first();
+    }
+    public function hasRole($role){
+        return null != $this->role()->whereIn('r_name', $role) ->first();
+    }
+
+    // public function allowance()
+    // {
+    //     return $this->hasMany(Allowance::class);
+    // }
 }
