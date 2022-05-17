@@ -100,6 +100,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/contract-info/user/{id}', [App\Http\Controllers\UserController::class, 'getContractInfo'])->name('contractUser_info');
 
     //Quản lý phụ cấp
+    Route::get('create-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'edit'])->name('create_allowance');
+    Route::post('store-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'store'])->name('update_allowance');
     Route::get('edit-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'edit'])->name('edit_allowance');
     Route::post('update-allowance/{id}',  [App\Http\Controllers\AllowanceController::class, 'update'])->name('update_allowance');
     Route::get('/list-allowance',  [App\Http\Controllers\AllowanceController::class, 'list'])->name('list_allowance');

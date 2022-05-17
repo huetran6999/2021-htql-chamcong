@@ -23,9 +23,9 @@ class PositionController extends Controller
     }
 
     public function create(){
-        $deps = Department::select('id', 'd_name')->get();
-        $salaries = Salary::select('id', 'coefficient_salary')->get();
-        $enterprises = Enterprise::select('id', 'e_name')->get();
+        $deps = Department::all();
+        $enterprises = Enterprise::all();
+        $salaries = Salary::all();
         $roles = Role::all();
 
         return view('position_manage.create', compact(['deps', 'roles', 'salaries', 'enterprises']));

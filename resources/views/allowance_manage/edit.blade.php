@@ -12,10 +12,10 @@
         <div class="card">
             <div class="card-header">
             <h3 >Phụ cấp</h3>
-            {{-- <p>Vị trí: {{$allowance->position->p_name}} - {{$allowance->position->dep_pos->d_name}}</p> --}}
+            <p>Vị trí: {{$allowance->position->p_name}} - {{$allowance->position->dep_pos->d_name}}</p>
             </div>
             <div class="card-body">
-                <form  action="{{url('update-allowance/'.$position->id)}}"  method="post">
+                <form  action="{{url('update-allowance/'.$allowance->p_id)}}"  method="post">
 
                     @csrf
                     @method('POST')
@@ -25,25 +25,25 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="p_name">Số tiền ăn trưa</label>
-                                <input type="text" class="form-control" id="lunch_fee" name="lunch_fee" placeholder="Tiền ăn trưa"  required>
+                                <input type="text" class="form-control" id="lunch_fee" name="lunch_fee" placeholder="Tiền ăn trưa"  value="{{$allowance->lunch_fee}}">
                                 <span id="tienantrua"></span>
                             </div> 
                                 <div class="form-group col-md-4">
                                     <label for="ten_chuc_vu">Số tiền xăng xe</label>
-                                <input type="text" class="form-control" id="gas_fee" name="gas_fee" placeholder="Tiền xăng"  required>
+                                <input type="text" class="form-control" id="gas_fee" name="gas_fee" placeholder="Tiền xăng"  value="{{$allowance->gas_fee}}"  >
                                 <span id="tienxang"></span>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="ten_chuc_vu">Số tiền khác(...)</label>
-                                <input type="text" class="form-control" id="others" name="others" placeholder="Tiền khác(nếu có)..."  required>
+                                <input type="text" class="form-control" id="others" name="others" placeholder="Tiền khác(nếu có)..."  value="{{$allowance->others}}"  >
                                 <span id="tienkhac"></span>
                             </div>
                             </div>
                         </div>
                             <div class="btn-group" role="group" style="width: 25%; margin-top: 15px; margin-left:auto; margin-right:auto; display:block; padding-bottom: 10px">
                                 <a href="{{route('list_allowance')}}" class="btn btn-success"><i class="fa fa-arrow-left"></i> Trở về</a>
-                                <button type="reset" class="btn btn-secondary">Làm trống</button>
-                                <button type="submit" class="btn btn-primary">Thêm <i class="fa fa-arrow-right"></i></button>
+                                {{-- <button type="reset" class="btn btn-secondary">Làm trống</button> --}}
+                                <button type="submit" class="btn btn-primary">Cập nhật <i class="fa fa-arrow-right"></i></button>
                               </div>
                             
                         </div>

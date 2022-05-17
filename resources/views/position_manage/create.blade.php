@@ -32,15 +32,15 @@
                     
                         <div class="col-md-12">
                             <label for="d_name" class="form-label">Phòng ban</label>
-                            <select class="form-select" name="d_id" id="add_dep">
-                            <option disabled selected hidden>--- Chọn phòng ban --- </option>
+                            <select class="form-select" name="d_name" id="add_dep">
+                            <option disabled selected>--- Chọn phòng ban --- </option>
                             </select>
                             <span class="text-danger">@error('d_name'){{$message}}@enderror</span>
                         </div>
                         <div class="form-group">
                             <div class="controls">
                                 <label>Tên chức vụ</label>
-                                <input type="text" class="form-control" placeholder="Nhập tên chức vụ mới..." name="p_name" required autocomplete="off">
+                                <input type="text" class="form-control" placeholder="Nhập tên chức vụ mới..." name="p_name"  autocomplete="off">
                                 <span class="text-danger">@error('p_name'){{$message}}@enderror</span>
                             </div>
                         </div>
@@ -48,18 +48,18 @@
                             <div class="controls">
                                 <label>Lương cơ bản</label>
                                 <input type="number" class="form-control" name="basic_salary" autocomplete="off" min="5000000" step="50000" value="10000000">
-                                <span class="text-danger">@error('d_phone'){{$message}}@enderror</span>
+                                <span class="text-danger">@error('basic_salary'){{$message}}@enderror</span>
                             </div>
                         </div>
                         <div class="controls">
                             <label>Chọn hệ số lương</label>
-                            <select class="form-select" name="s_id">
+                            <select class="form-select" name="coefficient_salary">
                                 <option disabled selected>--- Chọn HSL ---</option>
                                 @foreach ($salaries as $salary)
                                 <option value="{{$salary->id}}">{{ $salary->coefficient_salary }}</option>
                                 @endforeach
                             </select>
-                            <span class="text-danger">@error('s_id'){{$message}}@enderror</span>
+                            <span class="text-danger">@error('coefficient_salary'){{$message}}@enderror</span>
                         </div>
                     </div>
                 </div>

@@ -18,21 +18,21 @@ class AllowanceController extends Controller
 
     public function edit($id)
     {
-        $position = Position::find($id);
-        $allowance =Allowance::where('p_id', $position->id)->get();
-        //dd($allowance, $position);
-        return view('allowance_manage.edit',compact(['allowance', 'position']));
+        // $position = Position::find($id);
+        $allowance =Allowance::where('p_id', $id)->first();
+        //dd($allowance);
+       return view('allowance_manage.edit',compact(['allowance']));
     }
 
     public function update(Request $request, $id)
     {
        
-        $position = Position::where('id', $id)->first();
+        // $position = Position::where('id', $id)->first();
 
-        $allowance = Allowance::where('p_id', $position->id)->get();
+        $allowance = Allowance::where('p_id', $id)->first();
 
-        $allowance = new Allowance;
-        $allowance->p_id = $position->id;
+        // $allowance = new Allowance;
+        // $allowance->p_id = $position->id;
         $allowance->lunch_fee = $request->lunch_fee;
         $allowance->gas_fee = $request->gas_fee;
         $allowance->others=$request->others;
