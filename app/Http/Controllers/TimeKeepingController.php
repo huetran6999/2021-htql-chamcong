@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TimeKeeping;
+use App\Models\working_hour_log;
 use App\Imports\TimeKeepingImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -11,29 +12,33 @@ use Illuminate\Support\Facades\DB;
 class TimeKeepingController extends Controller
 {
     public function index(Request $request) {
+        $timeKeepings = working_hour_log::with('user_log')->select(
+            'working_hour_log.*',
+            DB::raw('SUM(late) as total_late'),
+            DB::raw('SUM(soon) as total_soon'),
+            DB::raw('SUM(leave_absence) as total_leave_absence'),
+            DB::raw('SUM(unauthorized_absence) as total_unauthorized_absence'),
+            DB::raw('SUM(amount_timekeeping) as total_amount_timekeeping')
+        );
 
-        $timeKeepings = TimeKeeping::with('user')->select('u_id', 'total', 'month', 'year')->paginate(10);
-        // $timeKeepings = TimeKeeping::with('user')->select('u_id', 'total', 'month', 'year')->get();
-        
-        if ($request->has('years')) {
-            $timeKeepings = TimeKeeping::with('user')->where('year', 'LIKE', '%' . $request->years . '%')->select('u_id', 'total', 'month', 'year')->paginate(10);
+        if (isset($request->month)) {
+            $array_month = explode('-', $request->month);
+            $month = $array_month[1];
+            $year = $array_month[0];
+
+            $timeKeepings = $timeKeepings->whereMonth('date', $month)->whereYear('date', $year);
         }
-        if ($request->has('months')) {
-            $timeKeepings = TimeKeeping::with('user')->where('month', 'LIKE', '%' . $request->months . '%')->select('u_id', 'total', 'month', 'year')->paginate(10);
-        }
-        if ($request->has('years') && $request->has('months')) {
-            $timeKeepings = TimeKeeping::with('user')->where([['year', 'LIKE', '%' . $request->years . '%'], ['month', 'LIKE', '%' . $request->months . '%']])->select('u_id', 'total', 'month', 'year')->paginate(10);
+        else {
+            $timeKeepings = $timeKeepings->whereMonth('date', date('m'))->whereYear('date', date('Y'));
         }
 
-        $years = TimeKeeping::select('year')
-        ->groupBy('year')
-        ->pluck('year');
+        $timeKeepings = $timeKeepings
+        ->groupBy('u_id')
+        // ->orderBy('date', 'desc')
+        ->paginate(50)
+        ->appends(['month' => $request->month]);
 
-        $months = TimeKeeping::select('month')
-        ->groupBy('month')
-        ->pluck('month');
-
-        return view('time-keeping.index', compact('timeKeepings', 'months', 'years'));
+        return view('time-keeping.index', compact('timeKeepings'));
     }
 
     
