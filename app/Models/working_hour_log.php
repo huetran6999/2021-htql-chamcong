@@ -17,7 +17,12 @@ class working_hour_log extends Model
         'pm_in',
         'pm_out',
         'date',
-        'total_time',
+        // 'total_time',
+        'late',
+        'soon',
+        'leave_absence',
+        'unauthorized_absence',
+        'amount_timekeeping',
     ];
 
     public function getYears() {
