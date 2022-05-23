@@ -3,6 +3,7 @@
 <div class=" bg-light col-lg-9" style="width: 100%" id="align-table">
   
   <div class="container">
+    
     <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px">Danh sách đơn vị</h3>
     <a href="{{ route('enterprise.create') }}" class="btn btn-success btn-add" style="float: right"><i class="fa fa-plus"></i> Thêm mới</a> <br>
     <br>
@@ -19,6 +20,9 @@
       </div>
       @endif
 
+      <div class="card">
+
+      <div class="card-body">
       <table class="table table-bordered table-hover">
         <thead class="table-primary">
           <tr>
@@ -52,6 +56,8 @@
           @endforeach
         </tbody>
       </table>
+      </div>
+      </div>
       <hr>
           <div style="float: right">
             {{ $enterprises->links() }}

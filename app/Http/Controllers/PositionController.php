@@ -76,7 +76,7 @@ class PositionController extends Controller
         return view('position_manage.edit', compact(['deps', 'salaries', 'enterprises', 'position', 'roles', 'pos_role']));
     }
 
-    public function update(PositionRequest $request, $id){
+    public function update(Request $request, $id){
         $position = Position::find($id);
         // if($request->p_name == $position->p_name) {
         //     $this->validate($request,
@@ -85,7 +85,7 @@ class PositionController extends Controller
         // );
         // }
 
-        $position->p_name = $request->p_name;
+        // $position->p_name = $request->p_name;
         $position->basic_salary = $request->basic_salary;
         $position->s_id = $request->s_id;
         // $position->d_id = $request->d_id;

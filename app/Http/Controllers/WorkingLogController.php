@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LogRequest;
 use App\Imports\WorkingLogImport;
 use App\Models\working_hour_log;
 use App\Models\User;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Carbon;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class WorkingLogController extends Controller
 {
@@ -32,6 +34,7 @@ class WorkingLogController extends Controller
 
     public function import(){
         Excel::import(new WorkingLogImport, request()->file('file'));
+       
         return redirect()->back()->with('success','Nhập dữ liệu thành công');
     }
 
@@ -189,7 +192,7 @@ class WorkingLogController extends Controller
         return view('working_log.create', $data);
     }
 
-    public function storeLeaveAbsence(Request $request)
+    public function storeLeaveAbsence(LogRequest $request)
     {
         try {
             DB::beginTransaction();

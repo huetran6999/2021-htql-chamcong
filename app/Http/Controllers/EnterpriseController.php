@@ -37,16 +37,13 @@ class EnterpriseController extends Controller
         $enterprise = Enterprise::find($id);
         $deps = Department::where('e_id', $id);
 
-        if ($deps != null) {
+        if ($deps == null) {
             return redirect()->route('enterprise.index')->with('failed', 'Không thể xoá do tồn tại phòng ban trong đơn vị');
         } else {
             $enterprise->delete();
 
             return redirect()->route('enterprise.index')->with('message', 'Xoá đơn vị thành công');
-        }
-        
-
-        
+        }     
     }
 
     public function edit($id)
@@ -62,6 +59,6 @@ class EnterpriseController extends Controller
         $params = $request->all();
         $enterprise->update($params);
 
-        return redirect()->route('enterprise.index')->with('message', 'Data successfully updated');
+        return redirect()->route('enterprise.index')->with('message', 'Cập nhật dữ liệu thành công');
     }   
 }

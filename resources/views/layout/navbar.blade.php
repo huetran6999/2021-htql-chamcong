@@ -77,12 +77,14 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ (\Request::route()->getName() == 'salaryReport.index' 
-            || \Request::route()->getName() == 'timeKeeping.index') ? 'active' : '' }}" href="#" id="navbardrop" data-toggle="dropdown">
-          Báo cáo
+            || \Request::route()->getName() == 'timeKeeping.index'
+            || \Request::route()->getName() == 'workinglog_index') ? 'active' : '' }}" href="#" id="navbardrop" data-toggle="dropdown">
+          Chấm công
           </a>
           <div class="dropdown-menu">
-             <a class="dropdown-item {{(\Request::route()->getName() == 'salaryReport.index') ? 'active' : ''}}" href="{{ route('salaryReport.index') }}">Báo cáo lương</a>
+            <a class="dropdown-item {{(\Request::route()->getName() == 'workinglog_index') ? 'active' : ''}}" href="{{ route('workinglog_index') }}">Điểm danh</a>
              <a class="dropdown-item {{(\Request::route()->getName() == 'timeKeeping.index') ? 'active' : ''}}" href="{{ route('timeKeeping.index') }}">Báo cáo chấm công</a>
+             <a class="dropdown-item {{(\Request::route()->getName() == 'salaryReport.index') ? 'active' : ''}}" href="{{ route('salaryReport.index') }}">Báo cáo lương</a>
           </div>
        </li>
       </ul>
@@ -103,7 +105,7 @@
             </a>
             <div class="dropdown-menu">
                <a class="dropdown-item {{ (\Request::route()->getName() == 'Account_Info') ? 'active' : '' }}" href="{{route('Account_Info')}}">Xem hồ sơ</a>
-               <a class="dropdown-item" href="#">Xem lịch sử chấm công</a>
+               <a class="dropdown-item {{ (\Request::route()->getName() == 'Timekeeping_Info') ? 'active' : '' }}"" href="{{route('Timekeeping_Info')}}">Xem lịch sử chấm công</a>
                <a class="dropdown-item" href="#">Xem báo cáo</a>
                <hr class="dropdown-divider" />
                <a class="dropdown-item" href="{{route('logout')}}">Đăng xuất</a>

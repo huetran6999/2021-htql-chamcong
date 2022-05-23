@@ -10,6 +10,7 @@ use App\Models\Parents;
 use App\Models\Position;
 use App\Models\Foreign_Language;
 use App\Models\Salary;
+use App\Models\working_hour_log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,5 +31,23 @@ class AccountController extends Controller
         //dd($p);
         return view('account_manage.account_info', compact(['enterprises', 'deps', 'positions', 'lit','par', 'lang', 'user', 'salaries']));
         
+    }
+
+    public function showTimekeepingInfo(Request $request){
+        $user = User::where('id', Auth::user()->id)->first();
+        $query = working_hour_log::with('user_log');
+        
+        if (isset($request->month)) {
+            $array_month = explode('-', $request->month);
+            $month = $array_month[1];
+            $year = $array_month[0];
+
+            $logs = $query->whereMonth('date', $month)->whereYear('date', $year);
+        }
+
+        $logs = $query->where('u_id', $user->id)->orderBy('date')->paginate(50)->appends(['month' => $request->month]);
+
+        //dd($user, $log);
+        return view('account_manage.timekeeping_info', compact(['user', 'logs']));
     }
 }

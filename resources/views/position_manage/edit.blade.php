@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <div class="controls">
                                 <label>Tên chức vụ</label>
-                                <input type="text" class="form-control" name="p_name" value="{{ $position->p_name }}" required autocomplete="off">
+                                <input type="text" class="form-control" name="p_name1" value="{{ $position->p_name }}" required autocomplete="off">
                                 <span class="text-danger">@error('p_name'){{$message}}@enderror</span>
                             </div>
                         </div>

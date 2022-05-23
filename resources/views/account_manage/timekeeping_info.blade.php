@@ -2,9 +2,12 @@
 @section('content')
 <div class="container">
     
-    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px; position:relative">Danh sách chấm công theo giờ</h3>
+    <h3 class="border-start border-end border-danger" style="text-align:center; padding-top: 28px; position:relative">Lịch sử chấm công</h3>
     
     <div class="card">
+        <div class="card-header">
+            <h5> Nhân viên: <strong>{{Auth::user()->id}} - {{Auth::user()->u_name}}</strong> </h5>
+        </div>
         <div class="card-body">
             @if (session('success'))
                 <h6 class="alert alert-success"><strong>{{ session('success') }}</strong></h6>
@@ -18,7 +21,7 @@
                 <h6 class="alert alert-danger"><strong>{{ session('failed') }}</strong></h6>
             @endif
             
-            <form action="{{ route('workinglog_index') }}" method="GET" enctype="multipart/form-data">
+            <form action="{{ route('Timekeeping_Info') }}" method="GET" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-5">
                         <input type="month" class="form-control" name="month">
@@ -31,21 +34,6 @@
                 </div>
             </form>
 
-            <form action="{{ route('workinglog_import') }}" method="POST" enctype="multipart/form-data" class="row g-3" style="float: left">
-                @csrf
-                <div class="form-group col-md-10 mb-5">
-                    {{-- <label for="file">Chọn file chấm công</label> --}}
-                    <input type="file" name="file" id="file" class="form-control">
-                    
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-file-import"></i></button>
-                    
-                </div>
-                <span class="text-danger">@error('file'){{$message}}@enderror</span>
-                <a href="{{ route('create-leave-absence') }}" class="btn btn-success mt-3">+ Tạo ngày nghỉ phép</a>
-            </form>
-
             
 
             <div class="col-md-12">
@@ -54,7 +42,6 @@
                         <tr>
                             {{-- <th>STT</th> --}}
                             <th>Ngày</th>
-                            <th>Họ và tên</th>
                             <th>Vào ca sáng</th>
                             <th>Ra ca sáng</th>
                             <th>Vào ca chiều</th>
@@ -66,14 +53,11 @@
                             <th>Nghỉ phép</th>
                             <th>Nghỉ không phép</th>
                             <th>Số chấm công</th>
-                            <th>Thao tác</th>
-                            {{-- <th>Thời gian làm cả ngày</th> --}}
 
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($logs as $log)
-
+                        @foreach($logs as $log)
                         @php
                         $am_checkin = "07:30:00";
                         $am_checkout = "11:30:00";
@@ -120,7 +104,6 @@
                         <tr>
                             {{-- <td>{{$loop -> index + 1}}</td> --}}
                             <td>{{ $log->getDays() }}/{{ $log->getMonths() }}/{{ $log->getYears() }}</td>
-                            <td>{{ $log->user_log->id }} - {{ $log->user_log->u_name }}</td>
                             <td>{{ $log->am_in }}</td>
                             <td>{{ $log->am_out }}</td>
                             <td>{{ $log->pm_in }}</td>
@@ -140,14 +123,10 @@
                             <td>{{ $log->leave_absence }}</td>
                             <td>{{ $log->unauthorized_absence }}</td>
                             <td>{{ $log->amount_timekeeping }}</td>
-                            <td>
-                                <a href="{{ route('workinglog.edit', $log->id) }}" class="btn btn-success">Cập nhật</a>
-                            </td>
-                            {{-- <td>{{ $working_log }}h</td> --}}
 
                         </tr>
-                        @endforeach
                     </tbody>
+                    @endforeach
                 </table>
             </div>
         </div>
@@ -155,10 +134,7 @@
 
     <hr>
 
-    
-    <div style="float: right;">
-        {{ $logs->links() }}
-    </div>
+
 
 
 

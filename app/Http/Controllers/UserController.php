@@ -276,14 +276,15 @@ class UserController extends Controller
             return redirect()->back()->with('fail', 'Không thể xoá chính mình!!!');
         } else {
             $user = User::find($id);
-            if ($user) {
-                // $desPath = 'uploads/'.$user->u_avatar;
-                // if(file_exists($desPath)){
-                //     unlink($desPath); //xoá ảnh ứng với user
-                // }
-                $user->role()->detach(); //gỡ role ứng với user
-                $user->delete();
-            }
+            $user->delete();
+            // if ($user) {
+            //     // $desPath = 'uploads/'.$user->u_avatar;
+            //     // if(file_exists($desPath)){
+            //     //     unlink($desPath); //xoá ảnh ứng với user
+            //     // }
+            //     $user->role()->detach(); //gỡ role ứng với user
+            //     $user->delete();
+            // }
             return redirect()->back()->with('del-success', 'Xoá người dùng thành công');
         }
     }

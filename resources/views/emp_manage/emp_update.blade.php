@@ -3,7 +3,7 @@
 <div class="container">
   <h4 class="border-start border-danger" style="text-align:center;background: #ebf5fb; padding-top: 56px">Cập nhật nhân viên</h4>
 
-  <form class="row g-3" action="{{route('Emp_Update', $user->id)}}" method="POST" enctype="multipart/form-data">
+  <form class="row g-3" action="{{url('employee/update-employee/'.$user->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="card mb-5" style="box-shadow: 0 0 50px #ccc">
       <ul class="nav nav-tabs" role="tablist" style="padding-top: 10px;">

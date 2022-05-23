@@ -32,7 +32,7 @@ class DepController extends Controller
         $params = $request->all();
         Department::create($params);
 
-        return redirect()->route('department.index')->with('message', 'New data successfully added');
+        return redirect()->route('department.index')->with('message', 'Thêm dữ liệu mới thành công');
     }
 
     public function destroy($id) // 
@@ -40,7 +40,7 @@ class DepController extends Controller
         $department = Department::find($id);
         $positions = Position::where('d_id', $id);
 
-        if ($positions != null) {
+        if ($positions == null) {
             return redirect()->route('department.index')->with('failed', 'Không thể xoá do tồn tại chức vụ trong phòng ban');
         } else {
             $department->delete();
@@ -63,6 +63,6 @@ class DepController extends Controller
         $params = $request->all();
         $department->update($params);
 
-        return redirect()->route('department.index')->with('message', 'Data successfully updated');
+        return redirect()->route('department.index')->with('message', 'Cập nhật dữ liệu thành công');
     }
 }

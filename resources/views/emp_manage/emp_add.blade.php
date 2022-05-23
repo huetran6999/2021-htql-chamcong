@@ -161,7 +161,7 @@
   </div>
     <br>
     
-  <form class="row g-3 needs-validation" action="{{route('Emp_Store')}}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validateuser()">
+  <form class="row g-3 needs-validation" action="{{ url('employee/create-account')}}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validateuser()">
     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
     <div class="card mb-5" style="box-shadow: 0 0 50px #ccc">
       <ul class="nav nav-tabs" role="tablist" style="padding-top: 10px;">
